@@ -1,0 +1,10 @@
+{
+  "alert_id": 1,
+  "frame_number": 7,
+  "timestamp": "2025-09-13T00:56:04.331291",
+  "time_in_video": "00:00:00",
+  "confidence": 0.92,
+  "message": "SAFE\n\nThere are no clear visual indicators of harassment or threatening behavior in the image. The individuals' body language and spatial relationships appear normal for people traveling on public transport. No one is blocking another's path, showing aggressive gestures, or in unusually close or unwanted physical proximity that would suggest an alert.",
+  "evidence_file": "alert_001_frame_000007.jpg",
+  "ai_analysis": "Real AI analysis detected harassment behavior at 00:00"
+}

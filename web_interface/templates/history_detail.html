@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Details - Safety Detector{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('history_page') }}">History</a></li>
+                <li class="breadcrumb-item active">Upload #{{ upload.id }}</li>
+            </ol>
+        </nav>
+        
+        <h1 class="mb-4">
+            <i class="fas fa-file-video text-primary"></i>
+            {{ upload.original_filename }}
+            <span class="badge bg-secondary ms-2">#{{ upload.id }}</span>
+        </h1>
+    </div>
+</div>
+
+<!-- Upload Information -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Upload Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>File Details</h6>
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Original Name:</strong></td>
+                                <td>{{ upload.original_filename }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stored As:</strong></td>
+                                <td>{{ upload.filename }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>File Size:</strong></td>
+                                <td>{{ "%.2f"|format(upload.file_size / 1024 / 1024) }} MB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Upload Date:</strong></td>
+                                <td>{{ upload.upload_date[:19].replace('T', ' ') }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Analysis Status</h6>
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Status:</strong></td>
+                                <td>
+                                    {% if upload.analysis_status == 'completed' %}
+                                        <span class="badge bg-success">Completed</span>
+                                    {% elif upload.analysis_status == 'running' %}
+                                        <span class="badge bg-primary">Running</span>
+                                    {% elif upload.analysis_status == 'error' %}
+                                        <span class="badge bg-danger">Error</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Pending</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Completion:</strong></td>
+                                <td>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar" style="width: {{ upload.analysis_results.completion_percentage }}%">
+                                            {{ upload.analysis_results.completion_percentage }}%
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Duration:</strong></td>
+                                <td>{{ upload.analysis_results.analysis_duration }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alerts Found:</strong></td>
+                                <td>
+                                    {% if upload.alerts %}
+                                        <span class="badge bg-warning">{{ upload.alerts|length }}</span>
+                                    {% else %}
+                                        <span class="badge bg-success">0</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-cog"></i> Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    {% if upload.analysis_status == 'pending' %}
+                        <a href="{{ url_for('analyze_video', filename=upload.filename) }}" 
+                           class="btn btn-primary">
+                            <i class="fas fa-play"></i> Start Analysis
+                        </a>
+                    {% endif %}
+                    
+                    {% if upload.analysis_status == 'completed' %}
+                        <a href="{{ url_for('download_report', upload_id=upload.id) }}" class="btn btn-success">
+                            <i class="fas fa-download"></i> Download Report
+                        </a>
+                    {% endif %}
+                    
+                    <button class="btn btn-info" onclick="exportLogs()">
+                        <i class="fas fa-file-export"></i> Export Logs
+                    </button>
+                    
+                    <button class="btn btn-danger" onclick="confirmDelete()">
+                        <i class="fas fa-trash"></i> Delete Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analysis Results Summary -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-bar"></i> Analysis Results</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <h4 class="text-primary">{{ upload.analysis_results.frames_processed }}</h4>
+                        <small class="text-muted">Frames Processed</small>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h4 class="text-info">{{ upload.analysis_results.ai_checks }}</h4>
+                        <small class="text-muted">AI Checks</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alerts Section -->
+{% if upload.alerts %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5><i class="fas fa-exclamation-triangle"></i> Alerts Detected ({{ upload.alerts|length }})</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for alert in upload.alerts %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border-warning">
+                                <div class="card-header bg-warning text-dark">
+                                    <h6 class="mb-0">
+                                        Alert #{{ loop.index }}
+                                        <span class="badge bg-dark ms-2">{{ alert.time_in_video }}</span>
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Message:</strong> {{ alert.message }}</p>
+                                    <p><strong>Frame:</strong> {{ alert.frame }}</p>
+                                    <p><strong>Confidence:</strong> {{ "%.1f"|format(alert.confidence * 100) }}%</p>
+                                    <p><strong>Time:</strong> {{ alert.timestamp[:19].replace('T', ' ') }}</p>
+                                    {% if alert.evidence_file %}
+                                        <p><strong>Evidence:</strong></p>
+                                        <div class="mt-2">
+                                            <img src="{{ url_for('view_evidence', upload_id=upload.id, filename=alert.evidence_file) }}" 
+                                                 class="img-thumbnail" style="max-width: 200px; max-height: 150px;" 
+                                                 alt="Evidence">
+                                            <br>
+                                            <a href="{{ url_for('download_evidence', upload_id=upload.id, filename=alert.evidence_file) }}" 
+                                               class="btn btn-sm btn-outline-primary mt-2">
+                                                <i class="fas fa-download"></i> Download
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Logs Section -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list-alt"></i> Analysis Logs ({{ upload.logs|length }} entries)</h5>
+            </div>
+            <div class="card-body">
+                {% if upload.logs %}
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="20%">Timestamp</th>
+                                    <th width="10%">Type</th>
+                                    <th width="70%">Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in upload.logs %}
+                                    <tr>
+                                        <td>
+                                            <small>{{ log.timestamp[:19].replace('T', ' ') }}</small>
+                                        </td>
+                                        <td>
+                                            {% if log.type == 'error' %}
+                                                <span class="badge bg-danger">{{ log.type|title }}</span>
+                                            {% elif log.type == 'warning' %}
+                                                <span class="badge bg-warning text-dark">{{ log.type|title }}</span>
+                                            {% elif log.type == 'alert' %}
+                                                <span class="badge bg-danger">{{ log.type|title }}</span>
+                                            {% else %}
+                                                <span class="badge bg-info">{{ log.type|title }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <small>{{ log.message }}</small>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-inbox fa-2x text-muted mb-2"></i>
+                        <p class="text-muted">No logs available for this upload.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-trash"></i> Confirm Delete
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <h5>Delete Upload #{{ upload.id }}?</h5>
+                    <p>Are you sure you want to delete <strong>{{ upload.original_filename }}</strong>?</p>
+                    <div class="alert alert-warning">
+                        <small>
+                            <i class="fas fa-warning"></i>
+                            This will permanently delete the video file, all logs, and analysis results.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="POST" action="{{ url_for('delete_upload', upload_id=upload.id) }}" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete Permanently
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    function confirmDelete() {
+        const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        modal.show();
+    }
+    
+    function downloadReport() {
+        // Use the backend route for real file download
+        window.location.href = `/download_report/{{ upload.id }}`;
+    }
+    
+    function exportLogs() {
+        try {
+            const upload = {{ upload|tojson }};
+            const logsData = {
+                upload_id: upload.id,
+                filename: upload.original_filename,
+                export_date: new Date().toISOString(),
+                logs: upload.logs,
+                alerts: upload.alerts,
+                analysis_results: upload.analysis_results
+            };
+            
+            const dataStr = JSON.stringify(logsData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `logs_${upload.id}_${upload.original_filename}.json`;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+            
+        } catch (error) {
+            alert('Error exporting logs: ' + error.message);
+        }
+    }
+    
+    // Make functions globally available
+    window.confirmDelete = confirmDelete;
+    window.downloadReport = downloadReport;
+    window.exportLogs = exportLogs;
+});
+</script>
+{% endblock %}

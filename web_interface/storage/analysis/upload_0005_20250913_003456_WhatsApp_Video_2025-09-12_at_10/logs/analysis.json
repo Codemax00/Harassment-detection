@@ -1,0 +1,377 @@
+[
+  {
+    "timestamp": "2025-09-13T00:34:56.245179",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-13T00:34:56.260082",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:00.012333",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:00.042217",
+    "type": "info",
+    "message": "PARALLEL AI analysis started for 20250913_003456_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:00.060938",
+    "type": "info",
+    "message": "Using REAL AI sequential processing for accuracy"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:00.097067",
+    "type": "info",
+    "message": "Video info: 1455 frames, 30 FPS"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:01.209163",
+    "type": "info",
+    "message": "AI models loaded: GEMINI"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:01.226540",
+    "type": "info",
+    "message": "Analysis mode: standard (checking every 1 frames)"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:04.166476",
+    "type": "info",
+    "message": "AI analyzing frame 3 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:06.777289",
+    "type": "info",
+    "message": "Frame 3: Normal behavior detected - SAFE\n\nThe image shows a crowded public transport environment. The individuals appear to be standing or sitting in close proximity due to the limited space, which is typical in such settings. There is no clear indication of aggressive body language, following, blocking, cornering, threatening behavior, unwanted contact, or stalking."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:07.016857",
+    "type": "info",
+    "message": "AI analyzing frame 4 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:09.570412",
+    "type": "info",
+    "message": "Frame 4: Normal behavior detected - SAFE\nThe image shows people on a train. The individuals are standing and sitting in a typical manner for public transportation. There are no clear indications of following, blocking, aggressive body language, cornering, threatening behavior, unwanted physical contact, or stalking. The context appears to be a normal commute."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:10.010558",
+    "type": "info",
+    "message": "AI analyzing frame 7 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:12.197841",
+    "type": "info",
+    "message": "Frame 7: Normal behavior detected - SAFE.\nThe image shows people in a subway car. There is no indication of any of the warning signs of harassment or threatening behavior. The individuals appear to be standing or sitting normally, and there are no signs of aggressive body language or physical proximity issues."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:12.594194",
+    "type": "info",
+    "message": "AI analyzing frame 10 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:14.870331",
+    "type": "info",
+    "message": "Frame 10: Normal behavior detected - SAFE\n\nThe image shows people on a crowded subway train. The individuals in the foreground appear to be interacting, but their body language and proximity do not indicate any harassment or threatening behavior. It appears to be a normal interaction within a crowded public space."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:15.072799",
+    "type": "info",
+    "message": "AI analyzing frame 11 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:18.284773",
+    "type": "info",
+    "message": "Frame 11: Normal behavior detected - SAFE\n\nThe image shows people in a train car. While there is some proximity between individuals, there is no clear indication of following, blocking, aggressive body language, cornering, threatening behavior, unwanted physical contact, or stalking. The scene appears to be a normal commute."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:18.919550",
+    "type": "info",
+    "message": "AI analyzing frame 16 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:21.246312",
+    "type": "info",
+    "message": "Frame 16: Normal behavior detected - SAFE\n\nThe image shows people on a crowded subway. There is no indication of harassment or threatening behavior. The individuals are spaced apart, and there is no aggressive body language."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:21.443395",
+    "type": "info",
+    "message": "AI analyzing frame 17 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:24.047957",
+    "type": "info",
+    "message": "Frame 17: Normal behavior detected - SAFE\nThe image shows individuals on a train. There is no visual evidence of any of the listed warning signs of harassment or threatening behavior. The individuals appear to be in their own spaces, and there is no indication of any aggression or unwanted interaction."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:24.227881",
+    "type": "info",
+    "message": "AI analyzing frame 18 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:28.191751",
+    "type": "info",
+    "message": "Frame 18: Normal behavior detected - SAFE. The image depicts a public transportation setting with multiple individuals. There is no visual evidence of any of the specified warning signs of harassment or threatening behavior. The body language and spatial relationships appear normal for such an environment."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:29.161617",
+    "type": "info",
+    "message": "AI analyzing frame 26 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:31.435787",
+    "type": "info",
+    "message": "Frame 26: Normal behavior detected - SAFE. The image depicts a crowded subway car. While individuals are in close proximity, there's no clear indication of any of the listed warning signs of harassment or threatening behavior. The body language and spatial relationships appear consistent with normal public transport interactions."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:31.631015",
+    "type": "info",
+    "message": "AI analyzing frame 27 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:33.886400",
+    "type": "info",
+    "message": "Frame 27: Normal behavior detected - SAFE.\nThe image shows people on a crowded subway car. While some individuals are standing, there is no indication of anyone following, blocking, or cornering another person. Body language and spatial relationships appear to be normal for a public transit environment."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:34.042963",
+    "type": "info",
+    "message": "AI analyzing frame 28 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:36.309355",
+    "type": "info",
+    "message": "Frame 28: Normal behavior detected - SAFE\nThe image depicts a normal scene on public transport. The individuals are seated or standing in a manner consistent with commuting, and there are no visible signs of harassment or threatening behavior. The spatial relationships and body language appear to be casual and non-confrontational."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:36.394337",
+    "type": "info",
+    "message": "AI analyzing frame 29 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:38.751686",
+    "type": "info",
+    "message": "Frame 29: Normal behavior detected - SAFE.\n\nThe image shows people on a subway train. The individuals are standing or sitting in a crowded environment. There is no visual indication of any of the listed warning signs of harassment or threatening behavior. The spatial relationships and body language appear normal for a public transportation setting."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:38.861956",
+    "type": "info",
+    "message": "AI analyzing frame 30 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:41.510981",
+    "type": "info",
+    "message": "Frame 30: Normal behavior detected - SAFE.\n\nThe image shows people on a subway. The man in the foreground is standing and facing away from the camera. The woman in the background is standing and appears to be interacting with someone off-camera or looking for a seat. The men sitting on the bench are looking forward. There is no indication of any aggressive body language, close following, blocking, cornering, or unwanted contact. The scene appears to be typical for public transportation."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:41.611843",
+    "type": "info",
+    "message": "AI analyzing frame 31 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:44.086562",
+    "type": "info",
+    "message": "Frame 31: Normal behavior detected - SAFE\n\nThe image depicts individuals in a public transportation setting. The spatial relationships and body language observed do not indicate any clear signs of harassment or threatening behavior. The individuals are in close proximity, which is common in crowded public transport. There is no clear indication of one person following another, blocking paths, or engaging in aggressive gestures."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:44.247732",
+    "type": "info",
+    "message": "AI analyzing frame 33 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:46.491968",
+    "type": "info",
+    "message": "Frame 33: Normal behavior detected - SAFE\nThe image depicts individuals in what appears to be a public transport setting, likely a train or metro car. The individuals are standing and sitting, and their body language does not suggest any of the listed warning signs of harassment or threatening behavior. The spatial relationships between individuals appear normal for this type of environment, and there is no indication of any aggressive or unwanted interactions."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:46.589737",
+    "type": "info",
+    "message": "AI analyzing frame 34 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:48.741995",
+    "type": "info",
+    "message": "Frame 34: Normal behavior detected - SAFE. The image shows people on a subway train. The individuals are maintaining normal personal space, and there is no indication of aggressive body language, following, blocking, or unwanted physical contact."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:48.841397",
+    "type": "info",
+    "message": "AI analyzing frame 35 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:51.332643",
+    "type": "info",
+    "message": "Frame 35: Normal behavior detected - SAFE\nThe image depicts a public setting (a train) with several individuals. There is no visual evidence of any of the listed warning signs of harassment or threatening behavior. People are maintaining personal space, and there is no indication of aggressive body language, following, blocking, or unwanted contact. The context appears to be that of normal public transit."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:51.441324",
+    "type": "info",
+    "message": "AI analyzing frame 36 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:53.238694",
+    "type": "info",
+    "message": "Frame 36: Normal behavior detected - SAFE. The image shows people on a subway. There is no indication of any of the warning signs of harassment or threatening behavior. The individuals appear to be minding their own business, and the spatial relationships do not suggest any discomfort or coercion."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:53.346708",
+    "type": "info",
+    "message": "AI analyzing frame 37 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:55.838229",
+    "type": "info",
+    "message": "Frame 37: Normal behavior detected - SAFE\n\nThe image shows people on a train. The man in the foreground is standing, and the woman in the foreground is also standing. There is a group of people sitting down behind them. There is no indication of any of the warning signs of harassment or threatening behavior. The people appear to be minding their own business and traveling in a normal manner for a public transportation setting."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:55.965984",
+    "type": "info",
+    "message": "AI analyzing frame 38 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:35:58.557432",
+    "type": "info",
+    "message": "Frame 38: Normal behavior detected - SAFE\nThe image shows a crowded subway car. The individuals are standing or sitting in typical public transit proximity to each other, with no indication of aggressive body language, blocking, following, or unwanted contact."
+  },
+  {
+    "timestamp": "2025-09-13T00:35:58.893374",
+    "type": "info",
+    "message": "AI analyzing frame 43 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:36:00.286811",
+    "type": "alert",
+    "message": "HARASSMENT DETECTED at frame 43: ALERT.\n\nThe man in the grey shirt and backpack appears to be standing uncomfortably close to the woman in the white top and mask. His posture and the proximity suggest it could be unwanted attention or harassment."
+  },
+  {
+    "timestamp": "2025-09-13T00:36:00.309760",
+    "type": "alert",
+    "message": "Alert #1 detected: ALERT.\n\nThe man in the grey shirt and backpack appears to be standing uncomfortably close to the woman in the white top and mask. His posture and the proximity suggest it could be unwanted attention or harassment."
+  },
+  {
+    "timestamp": "2025-09-13T00:36:00.332503",
+    "type": "info",
+    "message": "Auto-stopping analysis due to REAL alert detection (cost-saving)"
+  },
+  {
+    "timestamp": "2025-09-13T00:36:00.365085",
+    "type": "alert",
+    "message": "Analysis completed with 1 REAL harassment alerts detected"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:39.196370",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:39.196370",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:41.920772",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:41.963504",
+    "type": "info",
+    "message": "CHUNKED PARALLEL AI analysis started for 20250913_011139_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:41.981153",
+    "type": "info",
+    "message": "Using sequential processing (chunking disabled)"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:42.014046",
+    "type": "info",
+    "message": "Video info: 1455 frames, 30 FPS"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:42.130528",
+    "type": "error",
+    "message": "Failed to load AI models: 'ai_model_settings'"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:42.167851",
+    "type": "error",
+    "message": "REAL AI analysis failed: AI model initialization failed: 'ai_model_settings'"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:51.759548",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:51.780728",
+    "type": "info",
+    "message": "CHUNKED PARALLEL AI analysis started for 20250913_011139_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:51.814609",
+    "type": "info",
+    "message": "Using sequential processing (chunking disabled)"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:51.831266",
+    "type": "info",
+    "message": "Video info: 1455 frames, 30 FPS"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:51.946805",
+    "type": "error",
+    "message": "Failed to load AI models: 'ai_model_settings'"
+  },
+  {
+    "timestamp": "2025-09-13T01:11:51.979230",
+    "type": "error",
+    "message": "REAL AI analysis failed: AI model initialization failed: 'ai_model_settings'"
+  },
+  {
+    "timestamp": "2025-09-13T01:12:08.782451",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-13T01:12:08.814697",
+    "type": "info",
+    "message": "CHUNKED PARALLEL AI analysis started for 20250913_011139_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-13T01:12:08.831950",
+    "type": "info",
+    "message": "Using sequential processing (chunking disabled)"
+  },
+  {
+    "timestamp": "2025-09-13T01:12:08.864701",
+    "type": "info",
+    "message": "Video info: 1455 frames, 30 FPS"
+  },
+  {
+    "timestamp": "2025-09-13T01:12:08.951151",
+    "type": "error",
+    "message": "Failed to load AI models: 'ai_model_settings'"
+  },
+  {
+    "timestamp": "2025-09-13T01:12:08.995572",
+    "type": "error",
+    "message": "REAL AI analysis failed: AI model initialization failed: 'ai_model_settings'"
+  },
+  {
+    "timestamp": "2025-09-13T06:44:14.436908",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-13T06:44:14.460305",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)"
+  }
+]

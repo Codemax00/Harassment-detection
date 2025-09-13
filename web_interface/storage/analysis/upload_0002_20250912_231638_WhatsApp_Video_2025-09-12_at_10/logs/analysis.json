@@ -1,0 +1,622 @@
+[
+  {
+    "timestamp": "2025-09-12T23:16:38.835702",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-12T23:16:38.835702",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.12.24_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-12T23:17:08.465483",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-12T23:17:08.485249",
+    "type": "info",
+    "message": "REAL AI analysis started for 20250912_231638_WhatsApp_Video_2025-09-12_at_10.12.24_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-12T23:17:08.519051",
+    "type": "info",
+    "message": "Video info: 420 frames, 12 FPS"
+  },
+  {
+    "timestamp": "2025-09-12T23:17:11.518326",
+    "type": "info",
+    "message": "AI models loaded: GEMINI"
+  },
+  {
+    "timestamp": "2025-09-12T23:17:11.537005",
+    "type": "info",
+    "message": "Analysis mode: standard (checking every 1 frames)"
+  },
+  {
+    "timestamp": "2025-09-12T23:18:39.696682",
+    "type": "info",
+    "message": "Analysis completed - No harassment detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:05.603235",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:05.618954",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:09.888170",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:09.902726",
+    "type": "info",
+    "message": "REAL AI analysis started for 20250913_001505_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:09.936923",
+    "type": "info",
+    "message": "Video info: 1455 frames, 30 FPS"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:10.454438",
+    "type": "info",
+    "message": "AI models loaded: GEMINI"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:10.480780",
+    "type": "info",
+    "message": "Analysis mode: standard (checking every 1 frames)"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:12.604046",
+    "type": "info",
+    "message": "AI analyzing frame 3 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:17.094952",
+    "type": "info",
+    "message": "Frame 3: Normal behavior detected - SAFE. The image depicts a crowded public transportation setting. The individuals are in close proximity due to the environment, and there are no clear indicators of harassment or threatening behavior based on the provided criteria. The body language and spatial relationships appear consistent with normal public transit conditions."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:17.247157",
+    "type": "info",
+    "message": "AI analyzing frame 4 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:19.638979",
+    "type": "info",
+    "message": "Frame 4: Normal behavior detected - SAFE\nThe image shows people on a crowded subway. The individuals are standing and sitting, holding onto poles and bags. There is no indication of any following, blocking, aggressive body language, cornering, threatening, intimidating behavior, unwanted contact, or stalking. The scene appears to be a normal commute."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:20.147069",
+    "type": "info",
+    "message": "AI analyzing frame 7 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:22.169792",
+    "type": "info",
+    "message": "Frame 7: Normal behavior detected - SAFE\nThe image depicts a crowded subway car. People are standing and sitting, holding onto poles for support. There is no indication of any individual following another, blocking a path, or exhibiting aggressive or threatening behavior. The spatial relationships appear normal for a public transport environment."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:22.624165",
+    "type": "info",
+    "message": "AI analyzing frame 10 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:25.278977",
+    "type": "info",
+    "message": "Frame 10: Normal behavior detected - SAFE. The image depicts people on a crowded train. The woman in the foreground appears to be holding a bag and looking to her right, while the man in the foreground is walking away from her. There is no clear indication of following, blocking, aggressive body language, cornering, threatening behavior, unwanted contact, or stalking. The spatial relationships and body language suggest normal interactions in a public transit environment."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:25.469531",
+    "type": "info",
+    "message": "AI analyzing frame 11 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:28.725316",
+    "type": "info",
+    "message": "Frame 11: Normal behavior detected - SAFE. The image shows people on a train, with no clear indication of harassment or threatening behavior. The individuals are standing and sitting in a crowded public space, and their body language does not suggest any of the warning signs mentioned."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:29.103028",
+    "type": "info",
+    "message": "AI analyzing frame 16 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:31.437085",
+    "type": "info",
+    "message": "Frame 16: Normal behavior detected - SAFE. The image depicts a crowded public space, likely a subway train. People are standing and sitting, and there is no indication of any individual exhibiting aggressive or threatening behavior towards another. The body language and spatial relationships appear normal for such an environment."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:31.536325",
+    "type": "info",
+    "message": "AI analyzing frame 17 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:35.068803",
+    "type": "info",
+    "message": "Frame 17: Normal behavior detected - SAFE\n\nThe image shows people on a crowded subway car. There is no indication of harassment or threatening behavior. The people appear to be in a normal public space, and their body language does not suggest any of the warning signs mentioned."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:35.152240",
+    "type": "info",
+    "message": "AI analyzing frame 18 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:38.234895",
+    "type": "info",
+    "message": "Frame 18: Normal behavior detected - SAFE\n\nThe image depicts people on a crowded subway. There is no indication of anyone following, blocking, or exhibiting aggressive body language. The individuals are in close proximity due to the environment, but there is no evidence of unwanted contact or threatening behavior."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:38.784416",
+    "type": "info",
+    "message": "AI analyzing frame 26 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:40.984589",
+    "type": "info",
+    "message": "Frame 26: Normal behavior detected - SAFE\nThe image depicts people on a subway. There is no indication of harassment or threatening behavior. The individuals appear to be going about their daily commute."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:41.068104",
+    "type": "info",
+    "message": "AI analyzing frame 27 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:43.719102",
+    "type": "info",
+    "message": "Frame 27: Normal behavior detected - SAFE.\nThe image depicts a crowded public transport setting (likely a subway train). There is no visual evidence of any of the listed warning signs of harassment or threatening behavior. People are standing and sitting in close proximity, which is typical for such an environment. Body language and spatial relationships appear normal for the context."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:43.918524",
+    "type": "info",
+    "message": "AI analyzing frame 28 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:45.935085",
+    "type": "info",
+    "message": "Frame 28: Normal behavior detected - SAFE\nThe image shows people on a subway train. There is no indication of harassment or threatening behavior. The individuals appear to be minding their own business, and there is no close following, blocking, aggressive body language, or unwanted contact."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:46.068177",
+    "type": "info",
+    "message": "AI analyzing frame 29 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:48.184574",
+    "type": "info",
+    "message": "Frame 29: Normal behavior detected - SAFE\n\nThe image depicts a crowded subway car with several passengers. There is no clear indication of anyone following another person closely, blocking their path, or exhibiting aggressive body language. The individuals appear to be in a normal commuting environment."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:48.334427",
+    "type": "info",
+    "message": "AI analyzing frame 30 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:50.023667",
+    "type": "info",
+    "message": "Frame 30: Normal behavior detected - SAFE\nThe image shows a crowded subway car with several people standing and sitting. There is no indication of anyone following, blocking, cornering, or exhibiting aggressive body language or gestures towards another individual. The interactions appear to be typical for a public transportation environment."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:50.232058",
+    "type": "info",
+    "message": "AI analyzing frame 31 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:52.504778",
+    "type": "info",
+    "message": "Frame 31: Normal behavior detected - SAFE. The image depicts a crowded subway car. The individuals are in close proximity due to the environment, and there is no clear indication of following, blocking, aggressive body language, cornering, or unwanted contact. The scene appears to be a normal public transport situation."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:52.881449",
+    "type": "info",
+    "message": "AI analyzing frame 33 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:56.001144",
+    "type": "info",
+    "message": "Frame 33: Normal behavior detected - SAFE\nThe image shows people on a train. There is no indication of harassment or threatening behavior. The individuals are in close proximity, which is typical for public transportation. Their body language does not suggest any discomfort or aggression."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:56.090193",
+    "type": "info",
+    "message": "AI analyzing frame 34 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:15:58.249101",
+    "type": "info",
+    "message": "Frame 34: Normal behavior detected - SAFE. The image shows people in a subway car. There is no indication of harassment or threatening behavior. The individuals appear to be minding their own business and the spatial relationships are normal for a public transport setting."
+  },
+  {
+    "timestamp": "2025-09-13T00:15:58.333505",
+    "type": "info",
+    "message": "AI analyzing frame 35 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:16:01.629073",
+    "type": "info",
+    "message": "Frame 35: Normal behavior detected - SAFE. The image depicts a crowded public space (likely a train carriage) with several individuals present. There is no indication of anyone following another person closely, blocking their path, exhibiting aggressive body language, cornering someone, or engaging in any form of threatening, intimidating, or unwanted physical contact or proximity. The scene appears to be that of normal public transportation."
+  },
+  {
+    "timestamp": "2025-09-13T00:16:01.716254",
+    "type": "info",
+    "message": "AI analyzing frame 36 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:16:04.168674",
+    "type": "info",
+    "message": "Frame 36: Normal behavior detected - SAFE\n\nThe image shows several people on what appears to be a train. There are no clear indicators of harassment or threatening behavior. The individuals are in a public space, and their interactions, as far as can be seen, appear normal. There is no indication of someone following, blocking, cornering, or making aggressive gestures towards another person."
+  },
+  {
+    "timestamp": "2025-09-13T00:16:04.267806",
+    "type": "info",
+    "message": "AI analyzing frame 37 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:16:06.489832",
+    "type": "info",
+    "message": "Frame 37: Normal behavior detected - SAFE\nThe image depicts individuals in a subway car. There is no indication of any aggressive or threatening behavior. People are spaced appropriately and engaged in normal travel activities."
+  },
+  {
+    "timestamp": "2025-09-13T00:16:06.583858",
+    "type": "info",
+    "message": "AI analyzing frame 38 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:16:08.724698",
+    "type": "info",
+    "message": "Frame 38: Normal behavior detected - SAFE\n\nThe image depicts a crowded subway car. There are several individuals, and their proximity to each other is typical for public transportation. No specific body language or spatial arrangement suggests harassment or threatening behavior."
+  },
+  {
+    "timestamp": "2025-09-13T00:16:09.083807",
+    "type": "info",
+    "message": "AI analyzing frame 43 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:16:11.885477",
+    "type": "alert",
+    "message": "HARASSMENT DETECTED at frame 43: ALERT\nThe image depicts a man with his arm raised and hand close to the face of a woman wearing a mask, in a way that could be interpreted as an aggressive or threatening gesture. This, combined with the close proximity, suggests potential harassment or intimidation."
+  },
+  {
+    "timestamp": "2025-09-13T00:16:11.904544",
+    "type": "alert",
+    "message": "Alert #1 detected: ALERT\nThe image depicts a man with his arm raised and hand close to the face of a woman wearing a mask, in a way that could be interpreted as an aggressive or threatening gesture. This, combined with the close proximity, suggests potential harassment or intimidation."
+  },
+  {
+    "timestamp": "2025-09-13T00:16:11.917797",
+    "type": "info",
+    "message": "Auto-stopping analysis due to REAL alert detection (cost-saving)"
+  },
+  {
+    "timestamp": "2025-09-13T00:16:11.935668",
+    "type": "alert",
+    "message": "Analysis completed with 1 REAL harassment alerts detected"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:42.608243",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:42.620080",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.12.24_AM.mp4 (1.07 MB)"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:45.587111",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:45.603721",
+    "type": "info",
+    "message": "PARALLEL AI analysis started for 20250913_005342_WhatsApp_Video_2025-09-12_at_10.12.24_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:45.639004",
+    "type": "info",
+    "message": "Using REAL AI sequential processing for accuracy"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:45.688468",
+    "type": "info",
+    "message": "Video info: 420 frames, 12 FPS"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:46.854850",
+    "type": "info",
+    "message": "AI models loaded: GEMINI"
+  },
+  {
+    "timestamp": "2025-09-13T00:53:46.875186",
+    "type": "info",
+    "message": "Analysis mode: standard (checking every 1 frames)"
+  },
+  {
+    "timestamp": "2025-09-13T00:55:01.918592",
+    "type": "info",
+    "message": "Analysis completed - No harassment detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:14.980768",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:14.985768",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:22.895087",
+    "type": "info",
+    "message": "Analysis started from web interface with mode: standard"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:22.921382",
+    "type": "info",
+    "message": "CHUNKED PARALLEL AI analysis started for 20250913_024514_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:22.955564",
+    "type": "info",
+    "message": "Using sequential processing (chunking disabled)"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:22.994422",
+    "type": "info",
+    "message": "Video info: 1455 frames, 30 FPS"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:24.469877",
+    "type": "info",
+    "message": "AI models loaded: GEMINI"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:24.486354",
+    "type": "info",
+    "message": "Analysis mode: standard (checking every 1 frames)"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:27.299420",
+    "type": "info",
+    "message": "AI analyzing frame 3 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:36.441323",
+    "type": "info",
+    "message": "Frame 3: Normal behavior detected - SAFE\n\nBased on the provided image and the given criteria, there are no clear or unambiguous signs of harassment or threatening behavior. Both individuals appear to be standing in a crowded public transport vehicle, which inherently involves close proximity. There is no visible unwanted physical contact, aggressive body language, blocking of paths, or other threatening gestures from the man towards the woman, or between any individuals. Their body postures appear neutral and consistent with commuters in a busy environment."
+  },
+  {
+    "timestamp": "2025-09-13T02:45:36.595861",
+    "type": "info",
+    "message": "AI analyzing frame 4 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:44.877332",
+    "type": "info",
+    "message": "Frame 4: Normal behavior detected - SAFE\n\nBased on the visual evidence, there are no clear warning signs of harassment or threatening behavior. The image shows people in what appears to be a train car. The man in the foreground has his back mostly turned to the woman on the left. Both are standing and appear to be bracing themselves, which is common in a moving vehicle. Their body language is neutral, and there is no indication of unwanted physical contact, aggressive posturing, or invasion of personal space in a threatening manner. Other passengers are also present, and no one appears to be in distress or involved in a confrontation."
+  },
+  {
+    "timestamp": "2025-09-13T02:45:45.193447",
+    "type": "info",
+    "message": "AI analyzing frame 7 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:45:51.997353",
+    "type": "info",
+    "message": "Frame 7: Normal behavior detected - SAFE\n\nBased on the image provided, there are no clear visual indicators of harassment or threatening behavior. The scene depicts a crowded public transport environment (likely a metro or train) where people are naturally in close proximity. The man in the foreground has his back partially to the camera and appears to be simply standing with a backpack, common behavior in such a setting. The woman is holding an overhead handle, also a common action in a moving vehicle. Neither individual exhibits aggressive body language, hostile gestures, or signs of unwanted physical contact or intimidation. Their spatial relationship is consistent with the limited personal space available in a crowded public transit."
+  },
+  {
+    "timestamp": "2025-09-13T02:45:52.256255",
+    "type": "info",
+    "message": "AI analyzing frame 10 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:46:08.792456",
+    "type": "info",
+    "message": "Frame 10: Normal behavior detected - SAFE\n\nThe image shows a woman extending her arm with a bag towards a man whose back is turned, inside what appears to be a crowded train. While the woman's gesture could indicate an interaction, an attempt to pass, or to get the man's attention, there are no clear warning signs of harassment or threatening behavior *from the man* directed towards the woman in this specific frame. The man's back is completely turned, showing no aggressive body language, hostile gestures, or active attempt to block, corner, or make unwanted physical contact with the woman. The scene depicts people standing in close proximity, which is common in public transport."
+  },
+  {
+    "timestamp": "2025-09-13T02:46:08.921267",
+    "type": "info",
+    "message": "AI analyzing frame 11 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:46:33.983508",
+    "type": "info",
+    "message": "Frame 11: Normal behavior detected - SAFE\n\nThe image shows a woman extending her arm and making physical contact with the back of a man in a crowded subway train. Her hand appears open, suggesting a tap or a light push rather than an aggressive strike. The man is facing away from the camera, and his body language does not display any signs of aggression, threat, or distress in this single frame. While physical contact between strangers can potentially be unwelcome, the visible body language of both individuals does not clearly indicate harassment or threatening behavior as defined by the provided warning signs, which primarily focus on aggressive or intimidating actions by a man towards a woman, or violent confrontations between men. The action shown could be a benign attempt to get attention or indicate a need to pass."
+  },
+  {
+    "timestamp": "2025-09-13T02:46:34.429277",
+    "type": "info",
+    "message": "AI analyzing frame 16 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:46:41.867394",
+    "type": "info",
+    "message": "Frame 16: Normal behavior detected - SAFE\n\nThe image depicts a normal scene inside a public transport vehicle (likely a metro or subway). Individuals are standing and sitting in typical commuting positions. There is no visible evidence of aggressive body language, unwanted physical contact, invasion of personal space, or any form of confrontation or intimidation between any individuals. The woman in the foreground appears to be standing calmly, holding a bag, and is not being followed, blocked, or cornered. The man with the backpack also appears to be standing normally. The overall environment and interactions appear calm and routine."
+  },
+  {
+    "timestamp": "2025-09-13T02:46:41.956924",
+    "type": "info",
+    "message": "AI analyzing frame 17 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:46:48.530504",
+    "type": "info",
+    "message": "Frame 17: Normal behavior detected - SAFE\n\nThe image depicts a normal scene inside a public transport vehicle (likely a metro or subway train). People are standing and sitting, engaged in typical commuting behavior. There is no visible indication of any of the specified warning signs: no one is being followed or blocked, no aggressive body language, no physical contact, no invasion of personal space, no pursuit, no groups intimidating anyone, no hostile gestures, and no physical altercations between individuals. The spatial relationships and body language of all visible individuals appear calm and non-threatening."
+  },
+  {
+    "timestamp": "2025-09-13T02:46:48.637100",
+    "type": "info",
+    "message": "AI analyzing frame 18 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:46:55.437137",
+    "type": "info",
+    "message": "Frame 18: Normal behavior detected - SAFE\n\nBased on the provided image, there is no clear evidence of harassment or threatening behavior according to the warning signs. The woman's raised arm could indicate she is speaking or gesturing, but there is no aggressive body language from any of the men present. No one appears to be making unwanted physical contact, blocking paths, cornering, or showing hostile gestures. The spatial relationships seem typical for a public transport setting."
+  },
+  {
+    "timestamp": "2025-09-13T02:46:56.167148",
+    "type": "info",
+    "message": "AI analyzing frame 26 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:47:02.053685",
+    "type": "info",
+    "message": "Frame 26: Normal behavior detected - SAFE\n\nBased on the visual evidence, there are no clear warning signs of harassment or threatening behavior. The individuals in the metro train appear to be commuting normally. The woman is standing holding onto a pole, and the men are either seated or standing without displaying any aggressive body language, invading personal space, or engaging in any confrontational actions towards her or each other. There is no indication of unwanted physical contact, blocking of paths, cornering, or hostile gestures."
+  },
+  {
+    "timestamp": "2025-09-13T02:47:02.157871",
+    "type": "info",
+    "message": "AI analyzing frame 27 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:47:09.207075",
+    "type": "info",
+    "message": "Frame 27: Normal behavior detected - SAFE\n\nBased on the provided image, there are no clear warning signs of harassment or threatening behavior. The individuals in the image appear to be occupying a public transport space (likely a train) in a seemingly normal manner. There is no visible aggressive body language, unwanted physical contact, blocking of paths, or intimidation directed towards anyone. The man in the plaid shirt is looking generally in the direction of the standing woman, but this alone does not indicate harassment without further context or aggressive cues."
+  },
+  {
+    "timestamp": "2025-09-13T02:47:09.314991",
+    "type": "info",
+    "message": "AI analyzing frame 28 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:47:17.890412",
+    "type": "info",
+    "message": "Frame 28: Normal behavior detected - SAFE\n\nThe image depicts a normal scene inside a public transport vehicle. People are standing and sitting in various positions, typical of a commute. There is no evidence of aggressive body language, unwanted physical contact, close pursuit, blocking of paths, or any other threatening behavior directed by anyone towards another person. The spatial relationships and body postures of all individuals appear neutral and non-confrontational."
+  },
+  {
+    "timestamp": "2025-09-13T02:47:18.107697",
+    "type": "info",
+    "message": "AI analyzing frame 29 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:47:28.676673",
+    "type": "info",
+    "message": "Frame 29: Normal behavior detected - SAFE\n\nThe image depicts a normal scene inside a public transport vehicle (likely a metro or subway). People are standing and sitting. There is no visible aggressive body language, unwanted physical contact, pursuit, blocking of paths, or intimidation directed by any individual towards another. The spatial relationships appear consistent with a typical crowded public transport environment. No warning signs for harassment or threatening behavior are detected."
+  },
+  {
+    "timestamp": "2025-09-13T02:47:28.809526",
+    "type": "info",
+    "message": "AI analyzing frame 30 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:47:38.965173",
+    "type": "info",
+    "message": "Frame 30: Normal behavior detected - SAFE\n\nThere are no visible signs of harassment or threatening behavior. The image depicts a normal scene inside a public train or metro, with people standing and sitting. Individuals' body language appears neutral, and there are no aggressive postures, unwanted physical contact, or close proximity that suggests intimidation or blocked paths. No conflicts or hostile interactions between individuals are discernible."
+  },
+  {
+    "timestamp": "2025-09-13T02:47:39.099510",
+    "type": "info",
+    "message": "AI analyzing frame 31 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:47:45.859447",
+    "type": "info",
+    "message": "Frame 31: Normal behavior detected - SAFE\n\nThe image shows people in a crowded public metro train. There are several individuals standing and seated. While there are men in the vicinity of a woman, there is no visual evidence of aggressive body language, unwanted physical contact, blocked paths, cornering, or any form of intimidation or confrontation as described in the warning signs. Everyone appears to be engaged in normal public transport behavior. The man with the backpack has his back to the camera and is separated by a pole from the woman, and other men are seated further away, showing no hostile intent."
+  },
+  {
+    "timestamp": "2025-09-13T02:47:46.021740",
+    "type": "info",
+    "message": "AI analyzing frame 33 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:47:53.583821",
+    "type": "info",
+    "message": "Frame 33: Normal behavior detected - SAFE\n\nThe image depicts individuals in a public train setting. There are no visible signs of aggression, unwanted physical contact, threatening body language, or attempts by any person to block or corner another. The man with the backpack appears to be standing with his back towards the camera, while the woman is standing slightly to his left, also with a neutral posture. Other men are seated, minding their own business. The spatial relationships and body language of all individuals appear to be consistent with normal behavior in a public transport environment."
+  },
+  {
+    "timestamp": "2025-09-13T02:47:53.699463",
+    "type": "info",
+    "message": "AI analyzing frame 34 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:48:01.262409",
+    "type": "info",
+    "message": "Frame 34: Normal behavior detected - SAFE\nBased on the visual evidence, there is no clear indication of harassment or threatening behavior. The scene depicts people inside what appears to be a metro train. A woman is standing, and a man is standing behind her. While they are in close proximity, this is common in public transport. The man's body language is neutral, and he appears to be holding onto a strap, a typical posture for a passenger. No aggressive gestures, unwanted physical contact, or confrontational stances are visible from anyone in the image."
+  },
+  {
+    "timestamp": "2025-09-13T02:48:01.369133",
+    "type": "info",
+    "message": "AI analyzing frame 35 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:48:08.157743",
+    "type": "info",
+    "message": "Frame 35: Normal behavior detected - SAFE\n\nBased on the image, there are no visible warning signs of harassment or threatening behavior. The individuals are in a public transport setting (metro), which often involves close proximity. The standing man has his back to the woman and appears to be holding onto a pole, a normal posture for a passenger. The woman is also standing, holding a bag, with neutral body language. There is no aggressive body language, unwanted physical contact, or spatial invasion clearly depicted. The men seated in the background are not interacting in an intimidating manner."
+  },
+  {
+    "timestamp": "2025-09-13T02:48:08.265661",
+    "type": "info",
+    "message": "AI analyzing frame 36 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:48:16.317188",
+    "type": "info",
+    "message": "Frame 36: Normal behavior detected - SAFE\n\nBased on the image, there are no clear warning signs of harassment or threatening behavior. The man's back is mostly towards the woman, and his body language appears neutral. The woman is standing and appears to be looking forward, with no visible signs of distress or being cornered. There is no physical contact, aggressive gestures, or indication of unwanted proximity that clearly crosses into harassment in this still frame. The spatial relationship and body language of both individuals appear consistent with normal behavior in a public transport setting."
+  },
+  {
+    "timestamp": "2025-09-13T02:48:16.431316",
+    "type": "info",
+    "message": "AI analyzing frame 37 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:48:23.439057",
+    "type": "info",
+    "message": "Frame 37: Normal behavior detected - SAFE\n\nThe image shows individuals in a public transport setting (likely a metro car). While a man is standing in close proximity to a woman, which is common in crowded public spaces, his back is largely turned away from her, and there's a pole between them. There are no visible signs of aggressive body language, unwanted physical contact, blocking of path, cornering, or any other threatening gestures or behavior from the man towards the woman. The woman's body language also appears neutral, not indicating distress or fear. Other passengers are seated further away, minding their own business. The scene depicts normal public transit behavior."
+  },
+  {
+    "timestamp": "2025-09-13T02:48:23.547512",
+    "type": "info",
+    "message": "AI analyzing frame 38 - 2 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:48:30.406217",
+    "type": "info",
+    "message": "Frame 38: Normal behavior detected - SAFE\n\n**Explanation:** The image depicts individuals standing and sitting in what appears to be a public transport setting (like a metro train). There is a man standing near a woman, but he is facing away from her and appears to be holding onto a pole, much like the woman. There is no visible aggressive body language, unwanted physical contact, or any indication that the man is closely following, blocking, cornering, or making any hostile gestures towards the woman or anyone else. The spatial relationship and body language appear consistent with normal public transit behavior where people are in close proximity due to space constraints."
+  },
+  {
+    "timestamp": "2025-09-13T02:48:30.826650",
+    "type": "info",
+    "message": "AI analyzing frame 43 - 3 people detected"
+  },
+  {
+    "timestamp": "2025-09-13T02:48:46.536319",
+    "type": "alert",
+    "message": "HARASSMENT DETECTED at frame 43: ALERT\n\nThe image shows a man with his arm raised and hand extended in the general direction of a woman who is standing nearby and turned away. While the exact nature of the man's gesture is unclear due to motion blur and the angle, it has the potential to be an unwanted or intimidating act, invading her personal space or being a form of aggressive body language, especially given the woman's posture of being turned away. Without further context or clearer visual detail, this situation presents a potential for harassment or unwanted interaction in a public space."
+  },
+  {
+    "timestamp": "2025-09-13T02:48:46.559531",
+    "type": "alert",
+    "message": "Alert #1 detected: ALERT\n\nThe image shows a man with his arm raised and hand extended in the general direction of a woman who is standing nearby and turned away. While the exact nature of the man's gesture is unclear due to motion blur and the angle, it has the potential to be an unwanted or intimidating act, invading her personal space or being a form of aggressive body language, especially given the woman's posture of being turned away. Without further context or clearer visual detail, this situation presents a potential for harassment or unwanted interaction in a public space."
+  },
+  {
+    "timestamp": "2025-09-13T02:48:46.574662",
+    "type": "info",
+    "message": "Auto-stopping analysis due to REAL alert detection (cost-saving)"
+  },
+  {
+    "timestamp": "2025-09-13T02:48:46.600225",
+    "type": "alert",
+    "message": "Analysis completed with 1 REAL harassment alerts detected"
+  },
+  {
+    "timestamp": "2025-09-13T06:43:29.511401",
+    "type": "info",
+    "message": "Upload created with organized folder structure"
+  },
+  {
+    "timestamp": "2025-09-13T06:43:29.527960",
+    "type": "info",
+    "message": "Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)"
+  }
+]

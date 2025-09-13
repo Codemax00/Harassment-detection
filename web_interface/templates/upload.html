@@ -1,0 +1,361 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Video - Safety Detector{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-upload text-primary"></i>
+            Upload Video for Analysis
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-file-video"></i> Select Video File</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data" id="uploadForm">
+                    <div class="mb-3">
+                        <label for="videoFile" class="form-label">Choose Video File</label>
+                        <input type="file" class="form-control" id="videoFile" name="video" 
+                               accept=".mp4,.avi,.mov,.mkv,.wmv" required>
+                        <div class="form-text">
+                            Supported formats: MP4, AVI, MOV, MKV, WMV (Max size: 500MB)
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="progress" style="height: 20px; display: none;" id="uploadProgress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" style="width: 0%">
+                                <span class="progress-text">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg" id="uploadBtn">
+                            <i class="fas fa-upload"></i> Upload and Analyze
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Drag and Drop Area -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <div id="dropZone" class="border-2 border-dashed border-primary rounded p-5 text-center">
+                    <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                    <h4>Drag & Drop Video Here</h4>
+                    <p class="text-muted">Or click the button above to browse files</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <!-- Upload Information -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Upload Information</h5>
+            </div>
+            <div class="card-body">
+                <h6>Supported File Types:</h6>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-file-video text-primary"></i> MP4 (Recommended)</li>
+                    <li><i class="fas fa-file-video text-secondary"></i> AVI</li>
+                    <li><i class="fas fa-file-video text-secondary"></i> MOV</li>
+                    <li><i class="fas fa-file-video text-secondary"></i> MKV</li>
+                    <li><i class="fas fa-file-video text-secondary"></i> WMV</li>
+                </ul>
+                
+                <hr>
+                
+                <h6>Real AI Analysis Features:</h6>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-robot text-primary"></i> <strong>Real AI Detection</strong></li>
+                    <li><i class="fas fa-check text-success"></i> YOLO Person Detection</li>
+                    <li><i class="fas fa-brain text-info"></i> Gemini/OpenAI Behavior Analysis</li>
+                    <li><i class="fas fa-exclamation-triangle text-warning"></i> Real Alert Generation</li>
+                    <li><i class="fas fa-camera text-success"></i> Evidence Capture</li>
+                    <li><i class="fas fa-piggy-bank text-warning"></i> Auto-stop on Alert</li>
+                </ul>
+                
+                <hr>
+                
+                <h6>Processing Time:</h6>
+                <div class="small text-muted">
+                    <p>Analysis speed depends on:</p>
+                    <ul>
+                        <li>Video length and resolution</li>
+                        <li>Number of people in video</li>
+                        <li>Selected AI model</li>
+                        <li>Cost-saving auto-stop feature</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Uploads -->
+        <div class="card mt-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-history"></i> Recent Uploads</h5>
+                <a href="{{ url_for('history_page') }}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-list"></i> View All
+                </a>
+            </div>
+            <div class="card-body">
+                {% if recent_uploads %}
+                    <div class="list-group list-group-flush">
+                        {% for upload in recent_uploads %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ upload.original_filename }}</strong>
+                                    <br>
+                                    <small class="text-muted">
+                                        {{ upload.upload_date[:10] }} • 
+                                        {{ "%.1f"|format(upload.file_size / 1024 / 1024) }} MB
+                                    </small>
+                                </div>
+                                <div>
+                                    {% if upload.analysis_status == 'completed' %}
+                                        <span class="badge bg-success">Completed</span>
+                                    {% elif upload.analysis_status == 'running' %}
+                                        <span class="badge bg-primary">Running</span>
+                                    {% elif upload.analysis_status == 'error' %}
+                                        <span class="badge bg-danger">Error</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Pending</span>
+                                    {% endif %}
+                                    {% if upload.alerts %}
+                                        <span class="badge bg-warning ms-1">{{ upload.alerts|length }} alerts</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted small">No recent uploads</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Status Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-upload"></i> Upload Status
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Uploading...</span>
+                    </div>
+                    <p class="mt-2">Uploading video file...</p>
+                    <div class="progress mt-3">
+                        <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('videoFile');
+    const uploadForm = document.getElementById('uploadForm');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadProgress = document.getElementById('uploadProgress');
+    
+    // Drag and drop functionality
+    dropZone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dropZone.classList.add('border-success');
+    });
+    
+    dropZone.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        dropZone.classList.remove('border-success');
+    });
+    
+    dropZone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dropZone.classList.remove('border-success');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            updateFileDisplay();
+        }
+    });
+    
+    // Click to browse
+    dropZone.addEventListener('click', function() {
+        fileInput.click();
+    });
+    
+    // File input change
+    fileInput.addEventListener('change', updateFileDisplay);
+    
+    function updateFileDisplay() {
+        const file = fileInput.files[0];
+        if (file) {
+            const fileSize = (file.size / 1024 / 1024).toFixed(2);
+            dropZone.innerHTML = `
+                <i class="fas fa-file-video fa-3x text-success mb-3"></i>
+                <h4>${file.name}</h4>
+                <p class="text-muted">Size: ${fileSize} MB</p>
+                <p class="small">Click to change file</p>
+            `;
+        }
+    }
+    
+    // Form submission with real progress tracking
+    uploadForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const file = fileInput.files[0];
+        if (!file) {
+            SafetyDetector.showNotification('Please select a video file', 'warning');
+            return;
+        }
+        
+        // Validate file type
+        const allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'wmv'];
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        
+        if (!allowedExtensions.includes(fileExtension)) {
+            SafetyDetector.showNotification('Invalid file type. Please upload MP4, AVI, MOV, MKV, or WMV files.', 'error');
+            return;
+        }
+        
+        // Validate file size (500MB max)
+        const maxSize = 500 * 1024 * 1024; // 500MB
+        if (file.size > maxSize) {
+            SafetyDetector.showNotification('File too large. Maximum size is 500MB.', 'error');
+            return;
+        }
+        
+        // Show progress
+        uploadProgress.style.display = 'block';
+        uploadBtn.disabled = true;
+        uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+        
+        // Use XMLHttpRequest for real progress tracking
+        const formData = new FormData();
+        formData.append('video', file);
+        
+        const xhr = new XMLHttpRequest();
+        
+        xhr.upload.addEventListener('progress', function(e) {
+            if (e.lengthComputable) {
+                const progress = Math.round((e.loaded / e.total) * 100);
+                const progressBar = uploadProgress.querySelector('.progress-bar');
+                const progressText = uploadProgress.querySelector('.progress-text');
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+            }
+        });
+        
+        xhr.addEventListener('load', function() {
+            if (xhr.status === 200) {
+                try {
+                    const data = JSON.parse(xhr.responseText);
+                    
+                    if (data.success) {
+                        SafetyDetector.showNotification(data.message, 'success');
+                        
+                        // Redirect to analysis page
+                        if (data.analysis_url) {
+                            window.location.href = data.analysis_url;
+                        } else {
+                            location.reload();
+                        }
+                    } else {
+                        SafetyDetector.showNotification('Upload failed: ' + data.error, 'error');
+                        resetUploadForm();
+                    }
+                } catch (e) {
+                    SafetyDetector.showNotification('Upload failed: Invalid response from server', 'error');
+                    resetUploadForm();
+                }
+            } else {
+                SafetyDetector.showNotification('Upload failed: ' + xhr.statusText, 'error');
+                resetUploadForm();
+            }
+        });
+        
+        xhr.addEventListener('error', function() {
+            SafetyDetector.showNotification('Upload failed: Network error', 'error');
+            resetUploadForm();
+        });
+        
+        xhr.open('POST', uploadForm.action);
+        xhr.send(formData);
+    });
+    
+    function resetUploadForm() {
+        uploadProgress.style.display = 'none';
+        uploadBtn.disabled = false;
+        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload and Analyze';
+    }
+    
+    // Load recent uploads from localStorage (only if no server-side uploads)
+    if (!document.querySelector('.list-group')) {
+        loadRecentUploads();
+    }
+    
+    function loadRecentUploads() {
+        try {
+            const recent = JSON.parse(localStorage.getItem('recentUploads') || '[]');
+            const container = document.getElementById('recentUploads');
+            
+            if (!container || recent.length === 0) {
+                return;
+            }
+            
+            container.innerHTML = recent.map(upload => `
+                <div class="border-bottom pb-2 mb-2">
+                    <div class="small">
+                        <strong>${upload.name}</strong><br>
+                        <span class="text-muted">${upload.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading recent uploads:', error);
+        }
+    }
+    
+    function saveRecentUpload(filename) {
+        const recent = JSON.parse(localStorage.getItem('recentUploads') || '[]');
+        recent.unshift({
+            name: filename,
+            date: new Date().toLocaleString()
+        });
+        
+        // Keep only last 5
+        if (recent.length > 5) {
+            recent.splice(5);
+        }
+        
+        localStorage.setItem('recentUploads', JSON.stringify(recent));
+    }
+});
+</script>
+{% endblock %}

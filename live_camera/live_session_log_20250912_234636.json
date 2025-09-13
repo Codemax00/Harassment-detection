@@ -1,0 +1,16 @@
+{
+  "session_type": "live_camera",
+  "start_time": "2025-09-12T23:46:36.177244",
+  "frame_analysis": [],
+  "alerts": [],
+  "summary": {
+    "session_duration_seconds": 0.016262054443359375,
+    "frames_processed": 0,
+    "frames_with_ai_analysis": 0,
+    "alerts_found": 0,
+    "average_people_detection_time": 0,
+    "average_ai_analysis_time": 0,
+    "current_fps": 0.0
+  },
+  "end_time": "2025-09-12T23:46:36.193506"
+}

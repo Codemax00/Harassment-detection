@@ -1,0 +1,10 @@
+{
+  "alert_id": 1,
+  "frame_number": 43,
+  "timestamp": "2025-09-13T00:36:00.306349",
+  "time_in_video": "00:00:00",
+  "confidence": 0.92,
+  "message": "ALERT.\n\nThe man in the grey shirt and backpack appears to be standing uncomfortably close to the woman in the white top and mask. His posture and the proximity suggest it could be unwanted attention or harassment.",
+  "evidence_file": "alert_001_frame_000043.jpg",
+  "ai_analysis": "Real AI analysis detected harassment behavior at 00:01"
+}

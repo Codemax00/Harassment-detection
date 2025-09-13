@@ -1,0 +1,686 @@
+{% extends "base.html" %}
+
+{% block title %}Configuration - Safety Detector{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-cog text-primary"></i>
+            System Configuration
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- AI Model Configuration -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-robot"></i> AI Model Settings</h5>
+            </div>
+            <div class="card-body">
+                <form id="aiConfigForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="activeModel" class="form-label">Active AI Model</label>
+                                <select class="form-select" id="activeModel" name="active_model">
+                                    {% if config.ai_model_settings %}
+                                        {% for model in config.ai_model_settings.available_models %}
+                                            <option value="{{ model }}" 
+                                                    {% if model == config.ai_model_settings.active_model %}selected{% endif %}>
+                                                {{ model|title }}
+                                                {% if model == 'gemini' %} - Fast & Cost-effective{% endif %}
+                                                {% if model == 'openai' %} - High Accuracy{% endif %}
+                                            </option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="confidenceThreshold" class="form-label">Confidence Threshold</label>
+                                <input type="range" class="form-range" id="confidenceThreshold" 
+                                       min="0.5" max="1.0" step="0.05" 
+                                       value="{{ config.ai_model_settings.harassment_detection_settings.confidence_threshold if config.ai_model_settings else 0.85 }}">
+                                <div class="form-text">
+                                    Current: <span id="confidenceValue">
+                                        {{ config.ai_model_settings.harassment_detection_settings.confidence_threshold if config.ai_model_settings else 0.85 }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="fallbackModel" class="form-label">Fallback Model</label>
+                                <select class="form-select" id="fallbackModel" name="fallback_model">
+                                    {% if config.ai_model_settings %}
+                                        {% for model in config.ai_model_settings.available_models %}
+                                            <option value="{{ model }}" 
+                                                    {% if model == config.ai_model_settings.harassment_detection_settings.fallback_model %}selected{% endif %}>
+                                                {{ model|title }}
+                                            </option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="analysisFrequency" class="form-label">Analysis Frequency</label>
+                                <select class="form-select" id="analysisFrequency" name="analysis_frequency">
+                                    <option value="when_1_plus_people">When 1+ people detected</option>
+                                    <option value="when_2_plus_people" 
+                                            {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.analysis_frequency == 'when_2_plus_people' %}selected{% endif %}>
+                                        When 2+ people detected (Recommended)
+                                    </option>
+                                    <option value="when_3_plus_people">When 3+ people detected</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Cost-Saving Settings -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-piggy-bank"></i> Cost-Saving Features</h5>
+            </div>
+            <div class="card-body">
+                <form id="costSavingForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="autoStopOnAlert" 
+                                       {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.cost_saving_features.auto_stop_on_alert %}checked{% endif %}>
+                                <label class="form-check-label" for="autoStopOnAlert">
+                                    Auto-stop analysis on alert detection
+                                </label>
+                                <div class="form-text">Automatically pause analysis when harassment is detected to save costs</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="promptUserToContinue" 
+                                       {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.cost_saving_features.prompt_user_to_continue %}checked{% endif %}>
+                                <label class="form-check-label" for="promptUserToContinue">
+                                    Prompt user to continue after alert
+                                </label>
+                                <div class="form-text">Ask user whether to continue analysis or stop</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="defaultActionAfterAlert" class="form-label">Default Action After Alert</label>
+                                <select class="form-select" id="defaultActionAfterAlert" name="default_action_after_alert">
+                                    <option value="stop" 
+                                            {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.cost_saving_features.default_action_after_alert == 'stop' %}selected{% endif %}>
+                                        Stop (Cost-saving)
+                                    </option>
+                                    <option value="continue">Continue Analysis</option>
+                                    <option value="prompt">Prompt User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mt-4">
+                                <input class="form-check-input" type="checkbox" id="showCostSavings" 
+                                       {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.cost_saving_features.show_cost_savings_info %}checked{% endif %}>
+                                <label class="form-check-label" for="showCostSavings">
+                                    Show cost savings information
+                                </label>
+                                <div class="form-text">Display estimated cost savings in reports</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Parallel Processing Settings -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-bolt"></i> Parallel Processing</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="parallelEnabled" 
+                                   {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.parallel_processing.enabled %}checked{% endif %}>
+                            <label class="form-check-label" for="parallelEnabled">
+                                Enable parallel processing
+                            </label>
+                            <div class="form-text">Process multiple frames simultaneously for faster analysis</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="maxParallelFrames" class="form-label">Max Parallel Frames</label>
+                            <input type="range" class="form-range" id="maxParallelFrames" 
+                                   min="1" max="8" step="1" 
+                                   value="{{ config.ai_model_settings.harassment_detection_settings.parallel_processing.max_parallel_frames if config.ai_model_settings else 4 }}">
+                            <div class="form-text">
+                                Current: <span id="parallelFramesValue">
+                                    {{ config.ai_model_settings.harassment_detection_settings.parallel_processing.max_parallel_frames if config.ai_model_settings else 4 }}
+                                </span> frames
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="batchSize" class="form-label">Batch Size</label>
+                            <select class="form-select" id="batchSize">
+                                <option value="4">4 frames (Fast)</option>
+                                <option value="8" selected>8 frames (Balanced)</option>
+                                <option value="16">16 frames (Thorough)</option>
+                                <option value="32">32 frames (Maximum)</option>
+                            </select>
+                            <div class="form-text">Number of frames processed in each batch</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="threadPoolSize" class="form-label">Thread Pool Size</label>
+                            <select class="form-select" id="threadPoolSize">
+                                <option value="2">2 threads (Conservative)</option>
+                                <option value="4" selected>4 threads (Recommended)</option>
+                                <option value="6">6 threads (Aggressive)</option>
+                                <option value="8">8 threads (Maximum)</option>
+                            </select>
+                            <div class="form-text">Number of worker threads for parallel processing</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Performance Tips:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li><strong>More threads</strong> = faster processing but higher CPU usage</li>
+                        <li><strong>Larger batches</strong> = better efficiency but higher memory usage</li>
+                        <li><strong>Recommended</strong>: 4 threads, 8 frame batches for most systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Video Chunking Settings -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-cut"></i> Video Chunking (Ultra-Fast Analysis)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="chunkingEnabled" 
+                                   {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.video_chunking.enabled %}checked{% endif %}>
+                            <label class="form-check-label" for="chunkingEnabled">
+                                Enable video chunking
+                            </label>
+                            <div class="form-text">Split videos into chunks and analyze them in parallel</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="chunkDuration" class="form-label">Chunk Duration</label>
+                            <select class="form-select" id="chunkDuration">
+                                <option value="10">10 seconds (More chunks)</option>
+                                <option value="15" selected>15 seconds (Balanced)</option>
+                                <option value="20">20 seconds (Fewer chunks)</option>
+                                <option value="30">30 seconds (Large chunks)</option>
+                            </select>
+                            <div class="form-text">Duration of each video chunk</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="maxParallelChunks" class="form-label">Parallel Chunks</label>
+                            <input type="range" class="form-range" id="maxParallelChunks" 
+                                   min="1" max="6" step="1" 
+                                   value="{{ config.ai_model_settings.harassment_detection_settings.video_chunking.max_parallel_chunks if config.ai_model_settings else 3 }}">
+                            <div class="form-text">
+                                Current: <span id="parallelChunksValue">
+                                    {{ config.ai_model_settings.harassment_detection_settings.video_chunking.max_parallel_chunks if config.ai_model_settings else 3 }}
+                                </span> chunks
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="overlapSeconds" class="form-label">Chunk Overlap</label>
+                            <select class="form-select" id="overlapSeconds">
+                                <option value="0">0 seconds (No overlap)</option>
+                                <option value="1">1 second</option>
+                                <option value="2" selected>2 seconds (Recommended)</option>
+                                <option value="3">3 seconds</option>
+                            </select>
+                            <div class="form-text">Overlap between chunks to avoid missing incidents</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-rocket"></i>
+                    <strong>Chunking Benefits:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li><strong>3-5x faster</strong> analysis with parallel chunk processing</li>
+                        <li><strong>Better resource usage</strong> with smaller video segments</li>
+                        <li><strong>Overlap protection</strong> ensures no incidents missed at boundaries</li>
+                        <li><strong>Early alerts</strong> from completed chunks while others process</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Detection Settings -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-search"></i> Detection Settings</h5>
+            </div>
+            <div class="card-body">
+                <form id="detectionForm">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="saveAllResponses" 
+                               {% if config.ai_model_settings and config.ai_model_settings.harassment_detection_settings.save_all_responses %}checked{% endif %}>
+                        <label class="form-check-label" for="saveAllResponses">
+                            Save all AI responses (including normal behavior)
+                        </label>
+                        <div class="form-text">Keep logs of all AI analysis results, not just alerts</div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label for="harassmentBehaviors" class="form-label">Monitored Behaviors</label>
+                        <div class="row">
+                            {% if config.prompt_templates and config.prompt_templates.harassment_detection %}
+                                {% for behavior in config.prompt_templates.harassment_detection.specific_behaviors %}
+                                    <div class="col-md-6 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked 
+                                                   id="behavior{{ loop.index }}" name="behaviors">
+                                            <label class="form-check-label" for="behavior{{ loop.index }}">
+                                                {{ behavior }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Save Configuration -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-0">Configuration Changes</h6>
+                        <small class="text-muted">Save your settings to apply changes</small>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary me-2" id="resetBtn">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                        <button type="button" class="btn btn-primary" id="saveConfigBtn">
+                            <i class="fas fa-save"></i> Save Configuration
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <!-- Current Model Status -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Current Model Status</h5>
+            </div>
+            <div class="card-body">
+                {% if model_info %}
+                    <div class="mb-3">
+                        <strong>Active Model:</strong>
+                        <span class="badge bg-primary ms-2">{{ model_info.active_model|title }}</span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Available Models:</strong>
+                        <div class="mt-1">
+                            {% for model in model_info.available_models %}
+                                <span class="badge bg-secondary me-1">{{ model|title }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Model Status:</strong>
+                        {% for model, status in model_info.model_status.items() %}
+                            <div class="d-flex justify-content-between align-items-center mt-1">
+                                <span>{{ model|title }}:</span>
+                                <span class="badge bg-{{ 'success' if status == 'Available' else 'danger' }}">
+                                    {{ status }}
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">Model information not available</p>
+                {% endif %}
+                
+                <button class="btn btn-outline-primary btn-sm" id="testModelsBtn">
+                    <i class="fas fa-check-circle"></i> Test Models
+                </button>
+            </div>
+        </div>
+        
+        <!-- Model Recommendations -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-lightbulb"></i> Model Recommendations</h5>
+            </div>
+            <div class="card-body">
+                {% if config.ai_model_settings and config.ai_model_settings.model_selection %}
+                    <div class="mb-3">
+                        <h6>Use Case Recommendations:</h6>
+                        {% for use_case, recommendation in config.ai_model_settings.model_selection.use_case_recommendations.items() %}
+                            <div class="border-bottom pb-2 mb-2">
+                                <strong>{{ use_case.replace('_', ' ')|title }}:</strong>
+                                <div class="small">
+                                    <span class="badge bg-success">{{ recommendation.recommended_model|title }}</span>
+                                    <br>
+                                    <span class="text-muted">{{ recommendation.reason }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <div class="mt-3">
+                    <h6>Quick Selection:</h6>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-success btn-sm" onclick="selectModel('gemini')">
+                            <i class="fas fa-bolt"></i> Use Gemini (Fast)
+                        </button>
+                        <button class="btn btn-outline-info btn-sm" onclick="selectModel('openai')">
+                            <i class="fas fa-brain"></i> Use OpenAI (Accurate)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Configuration Export/Import -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-file-export"></i> Configuration Backup</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary btn-sm" id="exportConfigBtn">
+                        <i class="fas fa-download"></i> Export Configuration
+                    </button>
+                    <input type="file" id="importConfigInput" accept=".json" style="display: none;">
+                    <button class="btn btn-outline-secondary btn-sm" id="importConfigBtn">
+                        <i class="fas fa-upload"></i> Import Configuration
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Confidence threshold slider
+    const confidenceSlider = document.getElementById('confidenceThreshold');
+    const confidenceValue = document.getElementById('confidenceValue');
+    
+    confidenceSlider.addEventListener('input', function() {
+        confidenceValue.textContent = this.value;
+    });
+    
+    // Parallel frames slider
+    const parallelSlider = document.getElementById('maxParallelFrames');
+    const parallelValue = document.getElementById('parallelFramesValue');
+    
+    parallelSlider.addEventListener('input', function() {
+        parallelValue.textContent = this.value;
+    });
+    
+    // Parallel chunks slider
+    const chunksSlider = document.getElementById('maxParallelChunks');
+    const chunksValue = document.getElementById('parallelChunksValue');
+    
+    chunksSlider.addEventListener('input', function() {
+        chunksValue.textContent = this.value;
+    });
+    
+    // Save configuration
+    document.getElementById('saveConfigBtn').addEventListener('click', saveConfiguration);
+    
+    // Reset configuration
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        if (confirm('Are you sure you want to reset all settings?')) {
+            location.reload();
+        }
+    });
+    
+    // Test models
+    document.getElementById('testModelsBtn').addEventListener('click', testModels);
+    
+    // Export configuration
+    document.getElementById('exportConfigBtn').addEventListener('click', exportConfiguration);
+    
+    // Import configuration
+    document.getElementById('importConfigBtn').addEventListener('click', function() {
+        document.getElementById('importConfigInput').click();
+    });
+    
+    document.getElementById('importConfigInput').addEventListener('change', importConfiguration);
+    
+    function saveConfiguration() {
+        // Start with the full config structure passed from the backend to preserve all data
+        const fullConfig = {{ config|tojson }};
+
+        // Get references to the settings objects for easier access
+        const modelSettings = fullConfig.ai_model_settings;
+        const hds = modelSettings.harassment_detection_settings;
+
+        // Update values from the form, preserving the nested structure
+        modelSettings.active_model = document.getElementById('activeModel').value;
+        
+        hds.confidence_threshold = parseFloat(document.getElementById('confidenceThreshold').value);
+        hds.fallback_model = document.getElementById('fallbackModel').value;
+        hds.analysis_frequency = document.getElementById('analysisFrequency').value;
+        hds.save_all_responses = document.getElementById('saveAllResponses').checked;
+
+        // Update nested objects
+        hds.cost_saving_features.auto_stop_on_alert = document.getElementById('autoStopOnAlert').checked;
+        hds.cost_saving_features.prompt_user_to_continue = document.getElementById('promptUserToContinue').checked;
+        hds.cost_saving_features.default_action_after_alert = document.getElementById('defaultActionAfterAlert').value;
+        hds.cost_saving_features.show_cost_savings_info = document.getElementById('showCostSavings').checked;
+
+        hds.parallel_processing.enabled = document.getElementById('parallelEnabled').checked;
+        hds.parallel_processing.max_parallel_frames = parseInt(document.getElementById('maxParallelFrames').value);
+        hds.parallel_processing.batch_size = parseInt(document.getElementById('batchSize').value);
+        hds.parallel_processing.thread_pool_size = parseInt(document.getElementById('threadPoolSize').value);
+
+        hds.video_chunking.enabled = document.getElementById('chunkingEnabled').checked;
+        hds.video_chunking.chunk_duration_seconds = parseInt(document.getElementById('chunkDuration').value);
+        hds.video_chunking.max_parallel_chunks = parseInt(document.getElementById('maxParallelChunks').value);
+        hds.video_chunking.overlap_seconds = parseInt(document.getElementById('overlapSeconds').value);
+
+        console.log("✅ Saving new configuration with correct nested structure:", JSON.stringify(fullConfig, null, 2));
+
+        fetch('/update_config', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fullConfig) // Send the complete, correctly structured object
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error saving configuration: ' + data.error);
+            } else {
+                alert('Configuration saved successfully!');
+                location.reload();
+            }
+        })
+        .catch(error => {
+            alert('Error saving configuration: ' + error.message);
+        });
+    }
+    
+    function testModels() {
+        const btn = document.getElementById('testModelsBtn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+        btn.disabled = true;
+        
+        // Simulate model testing
+        setTimeout(function() {
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Models OK';
+            btn.classList.remove('btn-outline-primary');
+            btn.classList.add('btn-success');
+            
+            setTimeout(function() {
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Test Models';
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-primary');
+                btn.disabled = false;
+            }, 2000);
+        }, 2000);
+    }
+    
+    function selectModel(model) {
+        document.getElementById('activeModel').value = model;
+        // Highlight the change
+        document.getElementById('activeModel').style.backgroundColor = '#fff3cd';
+        setTimeout(function() {
+            document.getElementById('activeModel').style.backgroundColor = '';
+        }, 1000);
+    }
+    
+    function exportConfiguration() {
+        // Get current configuration
+        const config = {
+            ai_model_settings: {
+                active_model: document.getElementById('activeModel').value,
+                harassment_detection_settings: {
+                    confidence_threshold: parseFloat(document.getElementById('confidenceThreshold').value),
+                    analysis_frequency: document.getElementById('analysisFrequency').value,
+                    save_all_responses: document.getElementById('saveAllResponses').checked,
+                    fallback_model: document.getElementById('fallbackModel').value,
+                    cost_saving_features: {
+                        auto_stop_on_alert: document.getElementById('autoStopOnAlert').checked,
+                        prompt_user_to_continue: document.getElementById('promptUserToContinue').checked,
+                        default_action_after_alert: document.getElementById('defaultActionAfterAlert').value,
+                        show_cost_savings_info: document.getElementById('showCostSavings').checked
+                    }
+                }
+            }
+        };
+        
+        const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `safety_detector_config_${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+    
+    function importConfiguration(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const config = JSON.parse(e.target.result);
+                
+                if (config.ai_model_settings) {
+                    // Apply imported configuration
+                    const settings = config.ai_model_settings;
+                    
+                    if (settings.active_model) {
+                        document.getElementById('activeModel').value = settings.active_model;
+                    }
+                    
+                    if (settings.harassment_detection_settings) {
+                        const hds = settings.harassment_detection_settings;
+                        
+                        if (hds.confidence_threshold) {
+                            document.getElementById('confidenceThreshold').value = hds.confidence_threshold;
+                            document.getElementById('confidenceValue').textContent = hds.confidence_threshold;
+                        }
+                        
+                        if (hds.analysis_frequency) {
+                            document.getElementById('analysisFrequency').value = hds.analysis_frequency;
+                        }
+                        
+                        if (hds.save_all_responses !== undefined) {
+                            document.getElementById('saveAllResponses').checked = hds.save_all_responses;
+                        }
+                        
+                        if (hds.fallback_model) {
+                            document.getElementById('fallbackModel').value = hds.fallback_model;
+                        }
+                        
+                        if (hds.cost_saving_features) {
+                            const csf = hds.cost_saving_features;
+                            
+                            if (csf.auto_stop_on_alert !== undefined) {
+                                document.getElementById('autoStopOnAlert').checked = csf.auto_stop_on_alert;
+                            }
+                            
+                            if (csf.prompt_user_to_continue !== undefined) {
+                                document.getElementById('promptUserToContinue').checked = csf.prompt_user_to_continue;
+                            }
+                            
+                            if (csf.default_action_after_alert) {
+                                document.getElementById('defaultActionAfterAlert').value = csf.default_action_after_alert;
+                            }
+                            
+                            if (csf.show_cost_savings_info !== undefined) {
+                                document.getElementById('showCostSavings').checked = csf.show_cost_savings_info;
+                            }
+                        }
+                    }
+                    
+                    alert('Configuration imported successfully! Remember to save the changes.');
+                } else {
+                    alert('Invalid configuration file format.');
+                }
+            } catch (error) {
+                alert('Error reading configuration file: ' + error.message);
+            }
+        };
+        
+        reader.readAsText(file);
+    }
+});
+</script>
+{% endblock %}

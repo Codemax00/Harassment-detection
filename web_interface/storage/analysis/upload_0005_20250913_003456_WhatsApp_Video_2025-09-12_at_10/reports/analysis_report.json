@@ -1,0 +1,28 @@
+{
+  "upload_id": 5,
+  "filename": "20250913_003456_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4",
+  "analysis_date": "2025-09-13T00:35:00.039411",
+  "file_size_mb": 2.5905590057373047,
+  "total_frames": 43,
+  "frames_processed": 43,
+  "ai_checks": 21,
+  "analysis_duration": "01:00",
+  "completion_percentage": 2,
+  "status": "completed",
+  "alerts": [
+    {
+      "alert_id": 1,
+      "frame": 43,
+      "time": "00:01",
+      "message": "ALERT.\n\nThe man in the grey shirt and backpack appears to be standing uncomfortably close to the woman in the white top and mask. His posture and the proximity suggest it could be unwanted attention or harassment.",
+      "confidence": 0.92
+    }
+  ],
+  "ai_model_used": "gemini",
+  "parallel_enabled": false,
+  "cost_info": {
+    "api_calls": 21,
+    "estimated_cost": 0.021,
+    "auto_stopped": true
+  }
+}

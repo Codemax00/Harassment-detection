@@ -1,0 +1,13 @@
+{
+  "upload_id": 5,
+  "filename": "20250913_003456_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4",
+  "created": "2025-09-13T00:34:56.231595",
+  "upload_folder": "storage\\analysis\\upload_0005_20250913_003456_WhatsApp_Video_2025-09-12_at_10",
+  "subfolders": {
+    "frames": "storage\\analysis\\upload_0005_20250913_003456_WhatsApp_Video_2025-09-12_at_10\\frames",
+    "alerts": "storage\\analysis\\upload_0005_20250913_003456_WhatsApp_Video_2025-09-12_at_10\\alerts",
+    "evidence": "storage\\analysis\\upload_0005_20250913_003456_WhatsApp_Video_2025-09-12_at_10\\evidence",
+    "logs": "storage\\analysis\\upload_0005_20250913_003456_WhatsApp_Video_2025-09-12_at_10\\logs",
+    "reports": "storage\\analysis\\upload_0005_20250913_003456_WhatsApp_Video_2025-09-12_at_10\\reports"
+  }
+}

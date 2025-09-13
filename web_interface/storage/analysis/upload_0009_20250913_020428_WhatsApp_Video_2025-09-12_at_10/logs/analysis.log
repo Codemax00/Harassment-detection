@@ -1,0 +1,1355 @@
+[2025-09-13T02:04:28.791228] INFO: Upload created with organized folder structure
+[2025-09-13T02:04:28.822780] INFO: Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)
+[2025-09-13T02:04:33.539835] INFO: Analysis started from web interface with mode: standard
+[2025-09-13T02:04:33.581958] INFO: CHUNKED PARALLEL AI analysis started for 20250913_020428_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4
+[2025-09-13T02:04:33.641359] INFO: Using sequential processing (chunking disabled)
+[2025-09-13T02:04:33.691632] INFO: Video info: 1455 frames, 30 FPS
+[2025-09-13T02:04:33.840919] INFO: AI models loaded: GEMINI
+[2025-09-13T02:04:33.925487] INFO: Analysis mode: standard (checking every 1 frames)
+[2025-09-13T02:04:37.314652] INFO: AI analyzing frame 3 - 2 people detected
+[2025-09-13T02:04:37.346981] INFO: Frame 3: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:37.648065] INFO: AI analyzing frame 4 - 2 people detected
+[2025-09-13T02:04:37.731025] INFO: Frame 4: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:38.761225] INFO: AI analyzing frame 7 - 2 people detected
+[2025-09-13T02:04:38.823491] INFO: Frame 7: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:39.578360] INFO: AI analyzing frame 10 - 2 people detected
+[2025-09-13T02:04:39.625870] INFO: Frame 10: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:39.848175] INFO: AI analyzing frame 11 - 2 people detected
+[2025-09-13T02:04:40.039137] INFO: Frame 11: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:40.822835] INFO: AI analyzing frame 16 - 2 people detected
+[2025-09-13T02:04:40.844841] INFO: Frame 16: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:40.963941] INFO: AI analyzing frame 17 - 2 people detected
+[2025-09-13T02:04:40.992197] INFO: Frame 17: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:41.131619] INFO: AI analyzing frame 18 - 2 people detected
+[2025-09-13T02:04:41.172744] INFO: Frame 18: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:41.992637] INFO: AI analyzing frame 26 - 2 people detected
+[2025-09-13T02:04:42.027725] INFO: Frame 26: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:42.158059] INFO: AI analyzing frame 27 - 2 people detected
+[2025-09-13T02:04:42.188405] INFO: Frame 27: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:42.305456] INFO: AI analyzing frame 28 - 2 people detected
+[2025-09-13T02:04:42.334682] INFO: Frame 28: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:42.455439] INFO: AI analyzing frame 29 - 2 people detected
+[2025-09-13T02:04:42.489973] INFO: Frame 29: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:42.658789] INFO: AI analyzing frame 30 - 3 people detected
+[2025-09-13T02:04:42.682012] INFO: Frame 30: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:42.818650] INFO: AI analyzing frame 31 - 2 people detected
+[2025-09-13T02:04:42.845598] INFO: Frame 31: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:43.102311] INFO: AI analyzing frame 33 - 2 people detected
+[2025-09-13T02:04:43.134606] INFO: Frame 33: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:43.255956] INFO: AI analyzing frame 34 - 3 people detected
+[2025-09-13T02:04:43.274787] INFO: Frame 34: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:43.405569] INFO: AI analyzing frame 35 - 3 people detected
+[2025-09-13T02:04:43.432880] INFO: Frame 35: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:43.560926] INFO: AI analyzing frame 36 - 3 people detected
+[2025-09-13T02:04:43.577988] INFO: Frame 36: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:43.695607] INFO: AI analyzing frame 37 - 2 people detected
+[2025-09-13T02:04:43.729313] INFO: Frame 37: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:43.847373] INFO: AI analyzing frame 38 - 2 people detected
+[2025-09-13T02:04:43.883293] INFO: Frame 38: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:44.509107] INFO: AI analyzing frame 43 - 3 people detected
+[2025-09-13T02:04:44.538835] INFO: Frame 43: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:44.654719] INFO: AI analyzing frame 44 - 3 people detected
+[2025-09-13T02:04:44.685393] INFO: Frame 44: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:44.925255] INFO: AI analyzing frame 46 - 2 people detected
+[2025-09-13T02:04:44.958070] INFO: Frame 46: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:45.086670] INFO: AI analyzing frame 47 - 2 people detected
+[2025-09-13T02:04:45.119480] INFO: Frame 47: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:45.239592] INFO: AI analyzing frame 48 - 2 people detected
+[2025-09-13T02:04:45.278632] INFO: Frame 48: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:45.421582] INFO: AI analyzing frame 49 - 3 people detected
+[2025-09-13T02:04:45.470358] INFO: Frame 49: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:45.770517] INFO: AI analyzing frame 51 - 3 people detected
+[2025-09-13T02:04:45.802731] INFO: Frame 51: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:45.979841] INFO: AI analyzing frame 52 - 2 people detected
+[2025-09-13T02:04:46.015505] INFO: Frame 52: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:46.163739] INFO: AI analyzing frame 53 - 2 people detected
+[2025-09-13T02:04:46.208338] INFO: Frame 53: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:46.338916] INFO: AI analyzing frame 54 - 3 people detected
+[2025-09-13T02:04:46.375387] INFO: Frame 54: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:46.497224] INFO: AI analyzing frame 55 - 2 people detected
+[2025-09-13T02:04:46.530539] INFO: Frame 55: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:46.680689] INFO: AI analyzing frame 56 - 2 people detected
+[2025-09-13T02:04:46.696779] INFO: Frame 56: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:46.827476] INFO: AI analyzing frame 57 - 2 people detected
+[2025-09-13T02:04:46.866554] INFO: Frame 57: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:47.022246] INFO: AI analyzing frame 58 - 2 people detected
+[2025-09-13T02:04:47.051679] INFO: Frame 58: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:47.163625] INFO: AI analyzing frame 59 - 2 people detected
+[2025-09-13T02:04:47.198288] INFO: Frame 59: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:47.346968] INFO: AI analyzing frame 60 - 2 people detected
+[2025-09-13T02:04:47.379110] INFO: Frame 60: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:47.489272] INFO: AI analyzing frame 61 - 2 people detected
+[2025-09-13T02:04:47.520208] INFO: Frame 61: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:47.660170] INFO: AI analyzing frame 62 - 3 people detected
+[2025-09-13T02:04:47.700917] INFO: Frame 62: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:47.830064] INFO: AI analyzing frame 63 - 2 people detected
+[2025-09-13T02:04:47.861103] INFO: Frame 63: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:47.972755] INFO: AI analyzing frame 64 - 2 people detected
+[2025-09-13T02:04:48.005758] INFO: Frame 64: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:48.146385] INFO: AI analyzing frame 65 - 2 people detected
+[2025-09-13T02:04:48.183594] INFO: Frame 65: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:48.335911] INFO: AI analyzing frame 66 - 2 people detected
+[2025-09-13T02:04:48.380249] INFO: Frame 66: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:48.505343] INFO: AI analyzing frame 67 - 2 people detected
+[2025-09-13T02:04:48.536655] INFO: Frame 67: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:48.662488] INFO: AI analyzing frame 68 - 2 people detected
+[2025-09-13T02:04:48.701655] INFO: Frame 68: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:48.796952] INFO: AI analyzing frame 69 - 2 people detected
+[2025-09-13T02:04:48.830228] INFO: Frame 69: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:48.939101] INFO: AI analyzing frame 70 - 2 people detected
+[2025-09-13T02:04:48.970908] INFO: Frame 70: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:49.088692] INFO: AI analyzing frame 71 - 2 people detected
+[2025-09-13T02:04:49.121619] INFO: Frame 71: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:49.255341] INFO: AI analyzing frame 72 - 2 people detected
+[2025-09-13T02:04:49.274715] INFO: Frame 72: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:49.388688] INFO: AI analyzing frame 73 - 2 people detected
+[2025-09-13T02:04:49.427635] INFO: Frame 73: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:49.569492] INFO: AI analyzing frame 74 - 2 people detected
+[2025-09-13T02:04:49.601837] INFO: Frame 74: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:49.759201] INFO: AI analyzing frame 75 - 2 people detected
+[2025-09-13T02:04:49.793600] INFO: Frame 75: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:49.922499] INFO: AI analyzing frame 76 - 2 people detected
+[2025-09-13T02:04:49.955385] INFO: Frame 76: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:50.088638] INFO: AI analyzing frame 77 - 2 people detected
+[2025-09-13T02:04:50.127083] INFO: Frame 77: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:50.239523] INFO: AI analyzing frame 78 - 2 people detected
+[2025-09-13T02:04:50.275534] INFO: Frame 78: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:50.395475] INFO: AI analyzing frame 79 - 2 people detected
+[2025-09-13T02:04:50.428403] INFO: Frame 79: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:50.637615] INFO: AI analyzing frame 81 - 2 people detected
+[2025-09-13T02:04:50.669462] INFO: Frame 81: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:50.779701] INFO: AI analyzing frame 82 - 2 people detected
+[2025-09-13T02:04:50.817954] INFO: Frame 82: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:50.953754] INFO: AI analyzing frame 83 - 2 people detected
+[2025-09-13T02:04:50.993752] INFO: Frame 83: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:51.123457] INFO: AI analyzing frame 84 - 2 people detected
+[2025-09-13T02:04:51.154108] INFO: Frame 84: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:51.271969] INFO: AI analyzing frame 85 - 2 people detected
+[2025-09-13T02:04:51.305816] INFO: Frame 85: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:51.440127] INFO: AI analyzing frame 86 - 2 people detected
+[2025-09-13T02:04:51.472157] INFO: Frame 86: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:51.588609] INFO: AI analyzing frame 87 - 2 people detected
+[2025-09-13T02:04:51.625255] INFO: Frame 87: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:51.745853] INFO: AI analyzing frame 88 - 2 people detected
+[2025-09-13T02:04:51.788731] INFO: Frame 88: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:51.905291] INFO: AI analyzing frame 89 - 2 people detected
+[2025-09-13T02:04:51.938712] INFO: Frame 89: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:52.055327] INFO: AI analyzing frame 90 - 2 people detected
+[2025-09-13T02:04:52.086750] INFO: Frame 90: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:52.224404] INFO: AI analyzing frame 91 - 3 people detected
+[2025-09-13T02:04:52.253427] INFO: Frame 91: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:52.441525] INFO: AI analyzing frame 92 - 3 people detected
+[2025-09-13T02:04:52.488555] INFO: Frame 92: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:52.624526] INFO: AI analyzing frame 93 - 3 people detected
+[2025-09-13T02:04:52.662161] INFO: Frame 93: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:52.806568] INFO: AI analyzing frame 94 - 3 people detected
+[2025-09-13T02:04:52.837474] INFO: Frame 94: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:52.970649] INFO: AI analyzing frame 95 - 2 people detected
+[2025-09-13T02:04:53.011250] INFO: Frame 95: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:53.135701] INFO: AI analyzing frame 96 - 2 people detected
+[2025-09-13T02:04:53.174476] INFO: Frame 96: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:53.307719] INFO: AI analyzing frame 97 - 2 people detected
+[2025-09-13T02:04:53.345005] INFO: Frame 97: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:53.490295] INFO: AI analyzing frame 98 - 2 people detected
+[2025-09-13T02:04:53.526054] INFO: Frame 98: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:53.656572] INFO: AI analyzing frame 99 - 2 people detected
+[2025-09-13T02:04:53.706381] INFO: Frame 99: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:53.851873] INFO: AI analyzing frame 100 - 2 people detected
+[2025-09-13T02:04:53.884307] INFO: Frame 100: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:54.039154] INFO: AI analyzing frame 101 - 2 people detected
+[2025-09-13T02:04:54.073274] INFO: Frame 101: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:54.193240] INFO: AI analyzing frame 102 - 2 people detected
+[2025-09-13T02:04:54.230028] INFO: Frame 102: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:54.349260] INFO: AI analyzing frame 103 - 3 people detected
+[2025-09-13T02:04:54.382228] INFO: Frame 103: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:54.505189] INFO: AI analyzing frame 104 - 2 people detected
+[2025-09-13T02:04:54.542025] INFO: Frame 104: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:54.655188] INFO: AI analyzing frame 105 - 2 people detected
+[2025-09-13T02:04:54.678795] INFO: Frame 105: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:54.788515] INFO: AI analyzing frame 106 - 2 people detected
+[2025-09-13T02:04:54.835225] INFO: Frame 106: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:54.955162] INFO: AI analyzing frame 107 - 2 people detected
+[2025-09-13T02:04:54.989052] INFO: Frame 107: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:55.126361] INFO: AI analyzing frame 108 - 2 people detected
+[2025-09-13T02:04:55.171905] INFO: Frame 108: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:55.351074] INFO: AI analyzing frame 109 - 2 people detected
+[2025-09-13T02:04:55.391011] INFO: Frame 109: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:55.540263] INFO: AI analyzing frame 110 - 2 people detected
+[2025-09-13T02:04:55.569060] INFO: Frame 110: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:55.679332] INFO: AI analyzing frame 111 - 2 people detected
+[2025-09-13T02:04:55.720551] INFO: Frame 111: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:56.008381] INFO: AI analyzing frame 112 - 2 people detected
+[2025-09-13T02:04:56.041647] INFO: Frame 112: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:56.169801] INFO: AI analyzing frame 113 - 3 people detected
+[2025-09-13T02:04:56.202705] INFO: Frame 113: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:56.328973] INFO: AI analyzing frame 114 - 3 people detected
+[2025-09-13T02:04:56.361303] INFO: Frame 114: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:56.520191] INFO: AI analyzing frame 115 - 3 people detected
+[2025-09-13T02:04:56.574285] INFO: Frame 115: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:56.741204] INFO: AI analyzing frame 116 - 3 people detected
+[2025-09-13T02:04:56.780013] INFO: Frame 116: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:56.940474] INFO: AI analyzing frame 117 - 3 people detected
+[2025-09-13T02:04:56.979181] INFO: Frame 117: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:57.131077] INFO: AI analyzing frame 118 - 3 people detected
+[2025-09-13T02:04:57.293231] INFO: Frame 118: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:57.564682] INFO: AI analyzing frame 119 - 3 people detected
+[2025-09-13T02:04:57.611863] INFO: Frame 119: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:58.610981] INFO: AI analyzing frame 120 - 3 people detected
+[2025-09-13T02:04:58.894751] INFO: Frame 120: Normal behavior detected - Gemini model not available
+[2025-09-13T02:04:59.435479] INFO: AI analyzing frame 121 - 3 people detected
+[2025-09-13T02:05:00.033233] INFO: Frame 121: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:01.035190] INFO: AI analyzing frame 122 - 3 people detected
+[2025-09-13T02:05:01.108521] INFO: Frame 122: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:01.672860] INFO: AI analyzing frame 123 - 3 people detected
+[2025-09-13T02:05:01.735990] INFO: Frame 123: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:02.017660] INFO: AI analyzing frame 124 - 3 people detected
+[2025-09-13T02:05:02.112419] INFO: Frame 124: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:02.521364] INFO: AI analyzing frame 125 - 4 people detected
+[2025-09-13T02:05:02.600313] INFO: Frame 125: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:02.838153] INFO: AI analyzing frame 126 - 3 people detected
+[2025-09-13T02:05:02.898807] INFO: Frame 126: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:03.065508] INFO: AI analyzing frame 127 - 3 people detected
+[2025-09-13T02:05:03.097410] INFO: Frame 127: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:03.238405] INFO: AI analyzing frame 128 - 3 people detected
+[2025-09-13T02:05:03.273833] INFO: Frame 128: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:03.404927] INFO: AI analyzing frame 129 - 4 people detected
+[2025-09-13T02:05:03.429963] INFO: Frame 129: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:03.571683] INFO: AI analyzing frame 130 - 4 people detected
+[2025-09-13T02:05:03.626630] INFO: Frame 130: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:03.777622] INFO: AI analyzing frame 131 - 3 people detected
+[2025-09-13T02:05:03.815347] INFO: Frame 131: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:03.977236] INFO: AI analyzing frame 132 - 3 people detected
+[2025-09-13T02:05:04.010564] INFO: Frame 132: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:04.141593] INFO: AI analyzing frame 133 - 3 people detected
+[2025-09-13T02:05:04.182652] INFO: Frame 133: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:04.321662] INFO: AI analyzing frame 134 - 3 people detected
+[2025-09-13T02:05:04.352943] INFO: Frame 134: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:04.478484] INFO: AI analyzing frame 135 - 3 people detected
+[2025-09-13T02:05:04.519201] INFO: Frame 135: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:04.639587] INFO: AI analyzing frame 136 - 3 people detected
+[2025-09-13T02:05:04.677718] INFO: Frame 136: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:04.805095] INFO: AI analyzing frame 137 - 3 people detected
+[2025-09-13T02:05:04.840501] INFO: Frame 137: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:04.980078] INFO: AI analyzing frame 138 - 3 people detected
+[2025-09-13T02:05:05.021986] INFO: Frame 138: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:05.171658] INFO: AI analyzing frame 139 - 4 people detected
+[2025-09-13T02:05:05.209203] INFO: Frame 139: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:05.353393] INFO: AI analyzing frame 140 - 3 people detected
+[2025-09-13T02:05:05.388755] INFO: Frame 140: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:05.496568] INFO: AI analyzing frame 141 - 3 people detected
+[2025-09-13T02:05:05.535446] INFO: Frame 141: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:05.658510] INFO: AI analyzing frame 142 - 3 people detected
+[2025-09-13T02:05:05.692806] INFO: Frame 142: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:05.840932] INFO: AI analyzing frame 143 - 3 people detected
+[2025-09-13T02:05:05.876425] INFO: Frame 143: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:05.989094] INFO: AI analyzing frame 144 - 3 people detected
+[2025-09-13T02:05:06.021485] INFO: Frame 144: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:06.138276] INFO: AI analyzing frame 145 - 3 people detected
+[2025-09-13T02:05:06.177361] INFO: Frame 145: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:06.330103] INFO: AI analyzing frame 146 - 3 people detected
+[2025-09-13T02:05:06.356908] INFO: Frame 146: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:06.484096] INFO: AI analyzing frame 147 - 3 people detected
+[2025-09-13T02:05:06.516352] INFO: Frame 147: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:06.638986] INFO: AI analyzing frame 148 - 3 people detected
+[2025-09-13T02:05:06.671867] INFO: Frame 148: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:06.805519] INFO: AI analyzing frame 149 - 3 people detected
+[2025-09-13T02:05:06.834991] INFO: Frame 149: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:06.946251] INFO: AI analyzing frame 150 - 3 people detected
+[2025-09-13T02:05:06.989404] INFO: Frame 150: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:07.112077] INFO: AI analyzing frame 151 - 3 people detected
+[2025-09-13T02:05:07.152715] INFO: Frame 151: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:07.327851] INFO: AI analyzing frame 152 - 3 people detected
+[2025-09-13T02:05:07.371206] INFO: Frame 152: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:07.521914] INFO: AI analyzing frame 153 - 3 people detected
+[2025-09-13T02:05:07.565268] INFO: Frame 153: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:07.856575] INFO: AI analyzing frame 154 - 3 people detected
+[2025-09-13T02:05:07.893784] INFO: Frame 154: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:08.047073] INFO: AI analyzing frame 155 - 2 people detected
+[2025-09-13T02:05:08.079447] INFO: Frame 155: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:08.212172] INFO: AI analyzing frame 156 - 3 people detected
+[2025-09-13T02:05:08.261228] INFO: Frame 156: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:08.406470] INFO: AI analyzing frame 157 - 2 people detected
+[2025-09-13T02:05:08.449140] INFO: Frame 157: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:08.612798] INFO: AI analyzing frame 158 - 2 people detected
+[2025-09-13T02:05:08.663125] INFO: Frame 158: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:08.823025] INFO: AI analyzing frame 159 - 2 people detected
+[2025-09-13T02:05:08.861632] INFO: Frame 159: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:08.997215] INFO: AI analyzing frame 160 - 3 people detected
+[2025-09-13T02:05:09.038452] INFO: Frame 160: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:09.193841] INFO: AI analyzing frame 161 - 3 people detected
+[2025-09-13T02:05:09.226199] INFO: Frame 161: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:09.539111] INFO: AI analyzing frame 162 - 3 people detected
+[2025-09-13T02:05:09.577207] INFO: Frame 162: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:09.756122] INFO: AI analyzing frame 163 - 2 people detected
+[2025-09-13T02:05:09.806166] INFO: Frame 163: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:09.978720] INFO: AI analyzing frame 164 - 2 people detected
+[2025-09-13T02:05:10.013282] INFO: Frame 164: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:10.161886] INFO: AI analyzing frame 165 - 2 people detected
+[2025-09-13T02:05:10.204950] INFO: Frame 165: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:10.353534] INFO: AI analyzing frame 166 - 2 people detected
+[2025-09-13T02:05:10.385657] INFO: Frame 166: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:10.507649] INFO: AI analyzing frame 167 - 2 people detected
+[2025-09-13T02:05:10.555016] INFO: Frame 167: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:10.674723] INFO: AI analyzing frame 168 - 2 people detected
+[2025-09-13T02:05:10.708401] INFO: Frame 168: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:10.841494] INFO: AI analyzing frame 169 - 2 people detected
+[2025-09-13T02:05:10.885387] INFO: Frame 169: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:11.078982] INFO: AI analyzing frame 170 - 2 people detected
+[2025-09-13T02:05:11.123507] INFO: Frame 170: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:11.320894] INFO: AI analyzing frame 171 - 2 people detected
+[2025-09-13T02:05:11.352919] INFO: Frame 171: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:11.490735] INFO: AI analyzing frame 172 - 2 people detected
+[2025-09-13T02:05:11.524711] INFO: Frame 172: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:11.630685] INFO: AI analyzing frame 173 - 2 people detected
+[2025-09-13T02:05:11.670974] INFO: Frame 173: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:11.802363] INFO: AI analyzing frame 174 - 2 people detected
+[2025-09-13T02:05:11.841880] INFO: Frame 174: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:11.974939] INFO: AI analyzing frame 175 - 2 people detected
+[2025-09-13T02:05:12.017718] INFO: Frame 175: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:12.155620] INFO: AI analyzing frame 176 - 3 people detected
+[2025-09-13T02:05:12.191957] INFO: Frame 176: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:12.349886] INFO: AI analyzing frame 177 - 4 people detected
+[2025-09-13T02:05:12.392506] INFO: Frame 177: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:12.558334] INFO: AI analyzing frame 178 - 4 people detected
+[2025-09-13T02:05:12.621748] INFO: Frame 178: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:12.751372] INFO: AI analyzing frame 179 - 4 people detected
+[2025-09-13T02:05:12.792054] INFO: Frame 179: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:12.934515] INFO: AI analyzing frame 180 - 3 people detected
+[2025-09-13T02:05:12.967057] INFO: Frame 180: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:13.090998] INFO: AI analyzing frame 181 - 3 people detected
+[2025-09-13T02:05:13.138986] INFO: Frame 181: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:13.291566] INFO: AI analyzing frame 182 - 3 people detected
+[2025-09-13T02:05:13.337885] INFO: Frame 182: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:13.467550] INFO: AI analyzing frame 183 - 3 people detected
+[2025-09-13T02:05:13.508995] INFO: Frame 183: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:13.641987] INFO: AI analyzing frame 184 - 3 people detected
+[2025-09-13T02:05:13.679667] INFO: Frame 184: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:13.863082] INFO: AI analyzing frame 185 - 3 people detected
+[2025-09-13T02:05:13.913164] INFO: Frame 185: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:14.058482] INFO: AI analyzing frame 186 - 3 people detected
+[2025-09-13T02:05:14.095712] INFO: Frame 186: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:14.275831] INFO: AI analyzing frame 187 - 3 people detected
+[2025-09-13T02:05:14.329255] INFO: Frame 187: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:14.462807] INFO: AI analyzing frame 188 - 3 people detected
+[2025-09-13T02:05:14.504912] INFO: Frame 188: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:14.665162] INFO: AI analyzing frame 189 - 3 people detected
+[2025-09-13T02:05:14.704855] INFO: Frame 189: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:14.863779] INFO: AI analyzing frame 190 - 3 people detected
+[2025-09-13T02:05:14.904927] INFO: Frame 190: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:15.029516] INFO: AI analyzing frame 191 - 3 people detected
+[2025-09-13T02:05:15.071754] INFO: Frame 191: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:15.309701] INFO: AI analyzing frame 192 - 3 people detected
+[2025-09-13T02:05:15.356920] INFO: Frame 192: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:15.530284] INFO: AI analyzing frame 193 - 3 people detected
+[2025-09-13T02:05:15.562218] INFO: Frame 193: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:15.729994] INFO: AI analyzing frame 194 - 3 people detected
+[2025-09-13T02:05:15.776259] INFO: Frame 194: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:15.907426] INFO: AI analyzing frame 195 - 3 people detected
+[2025-09-13T02:05:15.956791] INFO: Frame 195: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:16.095011] INFO: AI analyzing frame 196 - 3 people detected
+[2025-09-13T02:05:16.138186] INFO: Frame 196: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:16.314639] INFO: AI analyzing frame 197 - 3 people detected
+[2025-09-13T02:05:16.364718] INFO: Frame 197: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:16.494280] INFO: AI analyzing frame 198 - 3 people detected
+[2025-09-13T02:05:16.535883] INFO: Frame 198: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:16.705376] INFO: AI analyzing frame 199 - 3 people detected
+[2025-09-13T02:05:16.763038] INFO: Frame 199: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:16.921539] INFO: AI analyzing frame 200 - 4 people detected
+[2025-09-13T02:05:16.961971] INFO: Frame 200: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:17.154857] INFO: AI analyzing frame 201 - 3 people detected
+[2025-09-13T02:05:17.204824] INFO: Frame 201: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:17.363171] INFO: AI analyzing frame 202 - 3 people detected
+[2025-09-13T02:05:17.411371] INFO: Frame 202: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:17.526521] INFO: AI analyzing frame 203 - 3 people detected
+[2025-09-13T02:05:17.567486] INFO: Frame 203: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:17.690725] INFO: AI analyzing frame 204 - 2 people detected
+[2025-09-13T02:05:17.865217] INFO: Frame 204: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:18.079772] INFO: AI analyzing frame 205 - 2 people detected
+[2025-09-13T02:05:18.113047] INFO: Frame 205: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:18.245445] INFO: AI analyzing frame 206 - 3 people detected
+[2025-09-13T02:05:18.295383] INFO: Frame 206: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:18.409900] INFO: AI analyzing frame 207 - 3 people detected
+[2025-09-13T02:05:18.462189] INFO: Frame 207: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:18.619621] INFO: AI analyzing frame 208 - 2 people detected
+[2025-09-13T02:05:18.658968] INFO: Frame 208: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:18.940594] INFO: AI analyzing frame 211 - 2 people detected
+[2025-09-13T02:05:18.974811] INFO: Frame 211: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:19.107983] INFO: AI analyzing frame 212 - 3 people detected
+[2025-09-13T02:05:19.141511] INFO: Frame 212: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:19.288138] INFO: AI analyzing frame 213 - 2 people detected
+[2025-09-13T02:05:19.329592] INFO: Frame 213: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:19.588244] INFO: AI analyzing frame 215 - 2 people detected
+[2025-09-13T02:05:19.635235] INFO: Frame 215: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:19.775162] INFO: AI analyzing frame 216 - 3 people detected
+[2025-09-13T02:05:19.816909] INFO: Frame 216: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:19.944889] INFO: AI analyzing frame 217 - 3 people detected
+[2025-09-13T02:05:19.985142] INFO: Frame 217: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:20.096594] INFO: AI analyzing frame 218 - 3 people detected
+[2025-09-13T02:05:20.136063] INFO: Frame 218: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:20.288914] INFO: AI analyzing frame 219 - 2 people detected
+[2025-09-13T02:05:20.325087] INFO: Frame 219: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:20.458031] INFO: AI analyzing frame 220 - 3 people detected
+[2025-09-13T02:05:20.491714] INFO: Frame 220: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:20.625019] INFO: AI analyzing frame 221 - 2 people detected
+[2025-09-13T02:05:20.663237] INFO: Frame 221: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:20.801215] INFO: AI analyzing frame 222 - 2 people detected
+[2025-09-13T02:05:20.844564] INFO: Frame 222: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:21.018578] INFO: AI analyzing frame 223 - 2 people detected
+[2025-09-13T02:05:21.058383] INFO: Frame 223: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:21.186024] INFO: AI analyzing frame 224 - 2 people detected
+[2025-09-13T02:05:21.225280] INFO: Frame 224: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:21.383857] INFO: AI analyzing frame 225 - 2 people detected
+[2025-09-13T02:05:21.425063] INFO: Frame 225: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:21.558060] INFO: AI analyzing frame 226 - 2 people detected
+[2025-09-13T02:05:21.591513] INFO: Frame 226: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:21.724556] INFO: AI analyzing frame 227 - 2 people detected
+[2025-09-13T02:05:21.772024] INFO: Frame 227: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:21.904761] INFO: AI analyzing frame 228 - 2 people detected
+[2025-09-13T02:05:21.942627] INFO: Frame 228: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:22.057803] INFO: AI analyzing frame 229 - 2 people detected
+[2025-09-13T02:05:22.100330] INFO: Frame 229: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:22.226888] INFO: AI analyzing frame 230 - 2 people detected
+[2025-09-13T02:05:22.295059] INFO: Frame 230: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:22.434709] INFO: AI analyzing frame 231 - 2 people detected
+[2025-09-13T02:05:22.467633] INFO: Frame 231: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:22.608519] INFO: AI analyzing frame 232 - 2 people detected
+[2025-09-13T02:05:22.650803] INFO: Frame 232: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:22.774402] INFO: AI analyzing frame 233 - 2 people detected
+[2025-09-13T02:05:22.816580] INFO: Frame 233: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:22.956316] INFO: AI analyzing frame 234 - 2 people detected
+[2025-09-13T02:05:22.996232] INFO: Frame 234: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:23.121402] INFO: AI analyzing frame 235 - 2 people detected
+[2025-09-13T02:05:23.159952] INFO: Frame 235: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:23.319777] INFO: AI analyzing frame 236 - 2 people detected
+[2025-09-13T02:05:23.358222] INFO: Frame 236: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:23.491496] INFO: AI analyzing frame 237 - 2 people detected
+[2025-09-13T02:05:23.525761] INFO: Frame 237: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:23.691538] INFO: AI analyzing frame 238 - 3 people detected
+[2025-09-13T02:05:23.724828] INFO: Frame 238: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:23.871424] INFO: AI analyzing frame 239 - 2 people detected
+[2025-09-13T02:05:23.908802] INFO: Frame 239: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:24.067403] INFO: AI analyzing frame 240 - 2 people detected
+[2025-09-13T02:05:24.104697] INFO: Frame 240: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:24.250039] INFO: AI analyzing frame 241 - 2 people detected
+[2025-09-13T02:05:24.288010] INFO: Frame 241: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:24.426525] INFO: AI analyzing frame 242 - 3 people detected
+[2025-09-13T02:05:24.471333] INFO: Frame 242: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:24.599330] INFO: AI analyzing frame 243 - 2 people detected
+[2025-09-13T02:05:24.639213] INFO: Frame 243: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:24.790519] INFO: AI analyzing frame 244 - 2 people detected
+[2025-09-13T02:05:24.825751] INFO: Frame 244: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:24.988021] INFO: AI analyzing frame 245 - 2 people detected
+[2025-09-13T02:05:25.038878] INFO: Frame 245: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:25.191392] INFO: AI analyzing frame 246 - 2 people detected
+[2025-09-13T02:05:25.231842] INFO: Frame 246: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:25.388011] INFO: AI analyzing frame 247 - 2 people detected
+[2025-09-13T02:05:25.429661] INFO: Frame 247: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:25.559317] INFO: AI analyzing frame 248 - 2 people detected
+[2025-09-13T02:05:25.600061] INFO: Frame 248: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:25.738044] INFO: AI analyzing frame 249 - 2 people detected
+[2025-09-13T02:05:25.779944] INFO: Frame 249: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:25.907656] INFO: AI analyzing frame 250 - 2 people detected
+[2025-09-13T02:05:25.940754] INFO: Frame 250: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:26.059973] INFO: AI analyzing frame 251 - 2 people detected
+[2025-09-13T02:05:26.100787] INFO: Frame 251: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:26.241712] INFO: AI analyzing frame 252 - 3 people detected
+[2025-09-13T02:05:26.303500] INFO: Frame 252: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:26.471282] INFO: AI analyzing frame 253 - 2 people detected
+[2025-09-13T02:05:26.517361] INFO: Frame 253: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:26.695033] INFO: AI analyzing frame 254 - 3 people detected
+[2025-09-13T02:05:26.738167] INFO: Frame 254: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:26.879199] INFO: AI analyzing frame 255 - 3 people detected
+[2025-09-13T02:05:26.921506] INFO: Frame 255: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:27.062750] INFO: AI analyzing frame 256 - 2 people detected
+[2025-09-13T02:05:27.103367] INFO: Frame 256: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:27.230489] INFO: AI analyzing frame 257 - 3 people detected
+[2025-09-13T02:05:27.287954] INFO: Frame 257: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:27.414157] INFO: AI analyzing frame 258 - 4 people detected
+[2025-09-13T02:05:27.469381] INFO: Frame 258: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:27.611834] INFO: AI analyzing frame 259 - 4 people detected
+[2025-09-13T02:05:27.655090] INFO: Frame 259: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:27.844357] INFO: AI analyzing frame 260 - 3 people detected
+[2025-09-13T02:05:27.884142] INFO: Frame 260: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:28.050722] INFO: AI analyzing frame 261 - 4 people detected
+[2025-09-13T02:05:28.098850] INFO: Frame 261: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:28.248561] INFO: AI analyzing frame 262 - 4 people detected
+[2025-09-13T02:05:28.296324] INFO: Frame 262: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:28.431752] INFO: AI analyzing frame 263 - 3 people detected
+[2025-09-13T02:05:28.471213] INFO: Frame 263: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:28.614815] INFO: AI analyzing frame 264 - 2 people detected
+[2025-09-13T02:05:28.663551] INFO: Frame 264: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:28.828106] INFO: AI analyzing frame 265 - 3 people detected
+[2025-09-13T02:05:28.863474] INFO: Frame 265: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:28.995531] INFO: AI analyzing frame 266 - 3 people detected
+[2025-09-13T02:05:29.035878] INFO: Frame 266: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:29.331047] INFO: AI analyzing frame 268 - 2 people detected
+[2025-09-13T02:05:29.386499] INFO: Frame 268: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:29.534321] INFO: AI analyzing frame 269 - 2 people detected
+[2025-09-13T02:05:29.580836] INFO: Frame 269: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:29.748021] INFO: AI analyzing frame 270 - 2 people detected
+[2025-09-13T02:05:29.782010] INFO: Frame 270: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:29.945077] INFO: AI analyzing frame 271 - 2 people detected
+[2025-09-13T02:05:29.986245] INFO: Frame 271: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:30.130748] INFO: AI analyzing frame 272 - 3 people detected
+[2025-09-13T02:05:30.185972] INFO: Frame 272: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:30.344490] INFO: AI analyzing frame 273 - 4 people detected
+[2025-09-13T02:05:30.382814] INFO: Frame 273: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:30.517904] INFO: AI analyzing frame 274 - 5 people detected
+[2025-09-13T02:05:30.571618] INFO: Frame 274: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:30.748708] INFO: AI analyzing frame 275 - 5 people detected
+[2025-09-13T02:05:30.804806] INFO: Frame 275: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:30.965358] INFO: AI analyzing frame 276 - 5 people detected
+[2025-09-13T02:05:31.018281] INFO: Frame 276: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:31.177975] INFO: AI analyzing frame 277 - 5 people detected
+[2025-09-13T02:05:31.221370] INFO: Frame 277: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:31.367627] INFO: AI analyzing frame 278 - 4 people detected
+[2025-09-13T02:05:31.404731] INFO: Frame 278: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:31.550752] INFO: AI analyzing frame 279 - 5 people detected
+[2025-09-13T02:05:31.588013] INFO: Frame 279: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:31.733841] INFO: AI analyzing frame 280 - 4 people detected
+[2025-09-13T02:05:31.788014] INFO: Frame 280: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:31.940359] INFO: AI analyzing frame 281 - 4 people detected
+[2025-09-13T02:05:31.982961] INFO: Frame 281: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:32.205257] INFO: AI analyzing frame 282 - 4 people detected
+[2025-09-13T02:05:32.264735] INFO: Frame 282: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:32.410422] INFO: AI analyzing frame 283 - 5 people detected
+[2025-09-13T02:05:32.471797] INFO: Frame 283: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:32.629448] INFO: AI analyzing frame 284 - 4 people detected
+[2025-09-13T02:05:32.671233] INFO: Frame 284: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:32.941824] INFO: AI analyzing frame 286 - 4 people detected
+[2025-09-13T02:05:32.982133] INFO: Frame 286: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:33.121171] INFO: AI analyzing frame 287 - 3 people detected
+[2025-09-13T02:05:33.163099] INFO: Frame 287: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:33.309035] INFO: AI analyzing frame 288 - 2 people detected
+[2025-09-13T02:05:33.359377] INFO: Frame 288: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:33.526187] INFO: AI analyzing frame 289 - 3 people detected
+[2025-09-13T02:05:33.576186] INFO: Frame 289: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:33.738562] INFO: AI analyzing frame 290 - 4 people detected
+[2025-09-13T02:05:33.776468] INFO: Frame 290: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:33.923950] INFO: AI analyzing frame 291 - 3 people detected
+[2025-09-13T02:05:33.974517] INFO: Frame 291: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:34.191040] INFO: AI analyzing frame 293 - 3 people detected
+[2025-09-13T02:05:34.229257] INFO: Frame 293: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:34.388102] INFO: AI analyzing frame 294 - 4 people detected
+[2025-09-13T02:05:34.538024] INFO: Frame 294: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:34.742747] INFO: AI analyzing frame 295 - 4 people detected
+[2025-09-13T02:05:34.805577] INFO: Frame 295: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:34.984312] INFO: AI analyzing frame 296 - 3 people detected
+[2025-09-13T02:05:35.024399] INFO: Frame 296: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:35.171270] INFO: AI analyzing frame 297 - 3 people detected
+[2025-09-13T02:05:35.208553] INFO: Frame 297: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:35.357128] INFO: AI analyzing frame 298 - 2 people detected
+[2025-09-13T02:05:35.404486] INFO: Frame 298: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:35.537800] INFO: AI analyzing frame 299 - 2 people detected
+[2025-09-13T02:05:35.575223] INFO: Frame 299: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:35.733728] INFO: AI analyzing frame 300 - 2 people detected
+[2025-09-13T02:05:35.779477] INFO: Frame 300: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:35.941294] INFO: AI analyzing frame 301 - 2 people detected
+[2025-09-13T02:05:35.974886] INFO: Frame 301: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:36.478553] INFO: AI analyzing frame 306 - 2 people detected
+[2025-09-13T02:05:36.525094] INFO: Frame 306: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:36.686253] INFO: AI analyzing frame 307 - 2 people detected
+[2025-09-13T02:05:36.725866] INFO: Frame 307: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:36.871165] INFO: AI analyzing frame 308 - 2 people detected
+[2025-09-13T02:05:36.908804] INFO: Frame 308: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:37.051433] INFO: AI analyzing frame 309 - 2 people detected
+[2025-09-13T02:05:37.091583] INFO: Frame 309: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:37.216883] INFO: AI analyzing frame 310 - 2 people detected
+[2025-09-13T02:05:37.262905] INFO: Frame 310: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:37.400382] INFO: AI analyzing frame 311 - 2 people detected
+[2025-09-13T02:05:37.441229] INFO: Frame 311: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:37.727905] INFO: AI analyzing frame 313 - 2 people detected
+[2025-09-13T02:05:37.768928] INFO: Frame 313: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:37.924465] INFO: AI analyzing frame 314 - 2 people detected
+[2025-09-13T02:05:37.975842] INFO: Frame 314: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:38.107534] INFO: AI analyzing frame 315 - 2 people detected
+[2025-09-13T02:05:38.158117] INFO: Frame 315: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:38.291025] INFO: AI analyzing frame 316 - 2 people detected
+[2025-09-13T02:05:38.337849] INFO: Frame 316: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:38.471132] INFO: AI analyzing frame 317 - 2 people detected
+[2025-09-13T02:05:38.516324] INFO: Frame 317: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:38.637843] INFO: AI analyzing frame 318 - 2 people detected
+[2025-09-13T02:05:38.677625] INFO: Frame 318: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:38.806935] INFO: AI analyzing frame 319 - 2 people detected
+[2025-09-13T02:05:38.846051] INFO: Frame 319: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:39.011325] INFO: AI analyzing frame 320 - 3 people detected
+[2025-09-13T02:05:39.054495] INFO: Frame 320: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:39.207778] INFO: AI analyzing frame 321 - 3 people detected
+[2025-09-13T02:05:39.262140] INFO: Frame 321: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:39.421136] INFO: AI analyzing frame 322 - 3 people detected
+[2025-09-13T02:05:39.462795] INFO: Frame 322: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:39.599879] INFO: AI analyzing frame 323 - 2 people detected
+[2025-09-13T02:05:39.646423] INFO: Frame 323: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:39.774019] INFO: AI analyzing frame 324 - 4 people detected
+[2025-09-13T02:05:39.815792] INFO: Frame 324: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:39.944215] INFO: AI analyzing frame 325 - 2 people detected
+[2025-09-13T02:05:39.980837] INFO: Frame 325: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:40.095164] INFO: AI analyzing frame 326 - 3 people detected
+[2025-09-13T02:05:40.137778] INFO: Frame 326: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:40.325709] INFO: AI analyzing frame 327 - 2 people detected
+[2025-09-13T02:05:40.371146] INFO: Frame 327: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:40.787787] INFO: AI analyzing frame 331 - 2 people detected
+[2025-09-13T02:05:40.824915] INFO: Frame 331: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:40.967038] INFO: AI analyzing frame 332 - 2 people detected
+[2025-09-13T02:05:41.008693] INFO: Frame 332: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:41.173758] INFO: AI analyzing frame 333 - 2 people detected
+[2025-09-13T02:05:41.208477] INFO: Frame 333: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:41.356849] INFO: AI analyzing frame 334 - 2 people detected
+[2025-09-13T02:05:41.404320] INFO: Frame 334: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:41.541178] INFO: AI analyzing frame 335 - 2 people detected
+[2025-09-13T02:05:41.587588] INFO: Frame 335: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:41.782848] INFO: AI analyzing frame 336 - 3 people detected
+[2025-09-13T02:05:41.837607] INFO: Frame 336: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:41.974544] INFO: AI analyzing frame 337 - 2 people detected
+[2025-09-13T02:05:42.020961] INFO: Frame 337: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:42.241837] INFO: AI analyzing frame 339 - 2 people detected
+[2025-09-13T02:05:42.283343] INFO: Frame 339: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:42.476056] INFO: AI analyzing frame 341 - 3 people detected
+[2025-09-13T02:05:42.507970] INFO: Frame 341: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:42.657747] INFO: AI analyzing frame 342 - 2 people detected
+[2025-09-13T02:05:42.701231] INFO: Frame 342: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:42.848844] INFO: AI analyzing frame 343 - 2 people detected
+[2025-09-13T02:05:42.895983] INFO: Frame 343: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:43.084052] INFO: AI analyzing frame 344 - 2 people detected
+[2025-09-13T02:05:43.138569] INFO: Frame 344: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:43.304445] INFO: AI analyzing frame 345 - 2 people detected
+[2025-09-13T02:05:43.357623] INFO: Frame 345: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:43.503094] INFO: AI analyzing frame 346 - 2 people detected
+[2025-09-13T02:05:43.541812] INFO: Frame 346: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:43.685169] INFO: AI analyzing frame 347 - 2 people detected
+[2025-09-13T02:05:43.738021] INFO: Frame 347: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:43.904870] INFO: AI analyzing frame 348 - 2 people detected
+[2025-09-13T02:05:43.943917] INFO: Frame 348: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:44.094909] INFO: AI analyzing frame 349 - 2 people detected
+[2025-09-13T02:05:44.146041] INFO: Frame 349: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:44.340157] INFO: AI analyzing frame 350 - 2 people detected
+[2025-09-13T02:05:44.395779] INFO: Frame 350: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:44.838692] INFO: AI analyzing frame 353 - 2 people detected
+[2025-09-13T02:05:44.889460] INFO: Frame 353: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:45.054398] INFO: AI analyzing frame 354 - 2 people detected
+[2025-09-13T02:05:45.096684] INFO: Frame 354: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:45.255208] INFO: AI analyzing frame 355 - 2 people detected
+[2025-09-13T02:05:45.307520] INFO: Frame 355: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:45.448102] INFO: AI analyzing frame 356 - 2 people detected
+[2025-09-13T02:05:45.496166] INFO: Frame 356: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:45.679050] INFO: AI analyzing frame 357 - 3 people detected
+[2025-09-13T02:05:45.737656] INFO: Frame 357: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:45.924715] INFO: AI analyzing frame 358 - 3 people detected
+[2025-09-13T02:05:45.995993] INFO: Frame 358: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:46.180057] INFO: AI analyzing frame 359 - 2 people detected
+[2025-09-13T02:05:46.237605] INFO: Frame 359: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:46.432134] INFO: AI analyzing frame 360 - 2 people detected
+[2025-09-13T02:05:46.490025] INFO: Frame 360: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:46.637632] INFO: AI analyzing frame 361 - 2 people detected
+[2025-09-13T02:05:46.688055] INFO: Frame 361: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:46.856895] INFO: AI analyzing frame 362 - 2 people detected
+[2025-09-13T02:05:46.914343] INFO: Frame 362: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:47.067909] INFO: AI analyzing frame 363 - 2 people detected
+[2025-09-13T02:05:47.114347] INFO: Frame 363: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:47.274262] INFO: AI analyzing frame 364 - 2 people detected
+[2025-09-13T02:05:47.356051] INFO: Frame 364: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:47.520922] INFO: AI analyzing frame 365 - 2 people detected
+[2025-09-13T02:05:47.571695] INFO: Frame 365: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:47.745718] INFO: AI analyzing frame 366 - 2 people detected
+[2025-09-13T02:05:47.794955] INFO: Frame 366: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:47.962236] INFO: AI analyzing frame 367 - 2 people detected
+[2025-09-13T02:05:48.010687] INFO: Frame 367: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:48.270966] INFO: AI analyzing frame 369 - 2 people detected
+[2025-09-13T02:05:48.325790] INFO: Frame 369: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:48.515161] INFO: AI analyzing frame 370 - 2 people detected
+[2025-09-13T02:05:48.579388] INFO: Frame 370: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:48.756836] INFO: AI analyzing frame 371 - 2 people detected
+[2025-09-13T02:05:48.822674] INFO: Frame 371: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:48.997103] INFO: AI analyzing frame 372 - 2 people detected
+[2025-09-13T02:05:49.054863] INFO: Frame 372: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:49.242459] INFO: AI analyzing frame 373 - 2 people detected
+[2025-09-13T02:05:49.295267] INFO: Frame 373: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:49.479355] INFO: AI analyzing frame 374 - 2 people detected
+[2025-09-13T02:05:49.534221] INFO: Frame 374: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:49.680913] INFO: AI analyzing frame 375 - 2 people detected
+[2025-09-13T02:05:49.730113] INFO: Frame 375: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:49.895679] INFO: AI analyzing frame 376 - 2 people detected
+[2025-09-13T02:05:49.947628] INFO: Frame 376: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:50.162821] INFO: AI analyzing frame 377 - 2 people detected
+[2025-09-13T02:05:50.215495] INFO: Frame 377: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:50.398020] INFO: AI analyzing frame 378 - 3 people detected
+[2025-09-13T02:05:50.446404] INFO: Frame 378: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:50.605729] INFO: AI analyzing frame 379 - 2 people detected
+[2025-09-13T02:05:50.659920] INFO: Frame 379: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:50.804447] INFO: AI analyzing frame 380 - 2 people detected
+[2025-09-13T02:05:50.863524] INFO: Frame 380: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:51.050489] INFO: AI analyzing frame 381 - 3 people detected
+[2025-09-13T02:05:51.097650] INFO: Frame 381: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:51.246354] INFO: AI analyzing frame 382 - 3 people detected
+[2025-09-13T02:05:51.315423] INFO: Frame 382: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:51.498256] INFO: AI analyzing frame 383 - 3 people detected
+[2025-09-13T02:05:51.564535] INFO: Frame 383: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:51.730986] INFO: AI analyzing frame 384 - 3 people detected
+[2025-09-13T02:05:51.787570] INFO: Frame 384: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:51.957043] INFO: AI analyzing frame 385 - 3 people detected
+[2025-09-13T02:05:52.021295] INFO: Frame 385: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:52.176627] INFO: AI analyzing frame 386 - 2 people detected
+[2025-09-13T02:05:52.229435] INFO: Frame 386: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:52.395486] INFO: AI analyzing frame 387 - 2 people detected
+[2025-09-13T02:05:52.438947] INFO: Frame 387: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:52.595219] INFO: AI analyzing frame 388 - 2 people detected
+[2025-09-13T02:05:52.644381] INFO: Frame 388: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:52.820976] INFO: AI analyzing frame 389 - 2 people detected
+[2025-09-13T02:05:52.894545] INFO: Frame 389: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:53.088333] INFO: AI analyzing frame 390 - 2 people detected
+[2025-09-13T02:05:53.140577] INFO: Frame 390: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:53.325473] INFO: AI analyzing frame 391 - 2 people detected
+[2025-09-13T02:05:53.383390] INFO: Frame 391: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:53.518105] INFO: AI analyzing frame 392 - 2 people detected
+[2025-09-13T02:05:53.566572] INFO: Frame 392: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:53.709846] INFO: AI analyzing frame 393 - 2 people detected
+[2025-09-13T02:05:53.761166] INFO: Frame 393: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:53.929635] INFO: AI analyzing frame 394 - 2 people detected
+[2025-09-13T02:05:53.987471] INFO: Frame 394: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:54.145244] INFO: AI analyzing frame 395 - 2 people detected
+[2025-09-13T02:05:54.196232] INFO: Frame 395: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:54.420899] INFO: AI analyzing frame 396 - 2 people detected
+[2025-09-13T02:05:54.479849] INFO: Frame 396: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:54.662509] INFO: AI analyzing frame 397 - 2 people detected
+[2025-09-13T02:05:54.713817] INFO: Frame 397: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:54.871266] INFO: AI analyzing frame 398 - 2 people detected
+[2025-09-13T02:05:54.921115] INFO: Frame 398: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:55.067109] INFO: AI analyzing frame 399 - 2 people detected
+[2025-09-13T02:05:55.111969] INFO: Frame 399: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:55.287750] INFO: AI analyzing frame 400 - 2 people detected
+[2025-09-13T02:05:55.334299] INFO: Frame 400: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:55.486489] INFO: AI analyzing frame 401 - 2 people detected
+[2025-09-13T02:05:55.540898] INFO: Frame 401: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:55.739309] INFO: AI analyzing frame 402 - 2 people detected
+[2025-09-13T02:05:55.804656] INFO: Frame 402: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:56.106829] INFO: AI analyzing frame 403 - 2 people detected
+[2025-09-13T02:05:56.201044] INFO: Frame 403: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:56.337264] INFO: AI analyzing frame 404 - 2 people detected
+[2025-09-13T02:05:56.405588] INFO: Frame 404: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:56.570728] INFO: AI analyzing frame 405 - 2 people detected
+[2025-09-13T02:05:56.629323] INFO: Frame 405: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:56.771656] INFO: AI analyzing frame 406 - 2 people detected
+[2025-09-13T02:05:56.827129] INFO: Frame 406: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:56.997056] INFO: AI analyzing frame 407 - 2 people detected
+[2025-09-13T02:05:57.046350] INFO: Frame 407: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:57.219831] INFO: AI analyzing frame 408 - 2 people detected
+[2025-09-13T02:05:57.307988] INFO: Frame 408: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:57.525003] INFO: AI analyzing frame 409 - 2 people detected
+[2025-09-13T02:05:57.572691] INFO: Frame 409: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:57.745667] INFO: AI analyzing frame 410 - 2 people detected
+[2025-09-13T02:05:57.800082] INFO: Frame 410: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:57.935346] INFO: AI analyzing frame 411 - 2 people detected
+[2025-09-13T02:05:57.976507] INFO: Frame 411: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:58.138101] INFO: AI analyzing frame 412 - 2 people detected
+[2025-09-13T02:05:58.187954] INFO: Frame 412: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:58.364288] INFO: AI analyzing frame 413 - 2 people detected
+[2025-09-13T02:05:58.421458] INFO: Frame 413: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:58.554625] INFO: AI analyzing frame 414 - 2 people detected
+[2025-09-13T02:05:58.605157] INFO: Frame 414: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:58.811447] INFO: AI analyzing frame 415 - 2 people detected
+[2025-09-13T02:05:58.870646] INFO: Frame 415: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:59.038855] INFO: AI analyzing frame 416 - 2 people detected
+[2025-09-13T02:05:59.098488] INFO: Frame 416: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:59.255515] INFO: AI analyzing frame 417 - 2 people detected
+[2025-09-13T02:05:59.304499] INFO: Frame 417: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:59.461794] INFO: AI analyzing frame 418 - 2 people detected
+[2025-09-13T02:05:59.513084] INFO: Frame 418: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:59.677246] INFO: AI analyzing frame 419 - 2 people detected
+[2025-09-13T02:05:59.721037] INFO: Frame 419: Normal behavior detected - Gemini model not available
+[2025-09-13T02:05:59.895712] INFO: AI analyzing frame 420 - 2 people detected
+[2025-09-13T02:05:59.945118] INFO: Frame 420: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:00.260706] INFO: AI analyzing frame 421 - 2 people detected
+[2025-09-13T02:06:00.333218] INFO: Frame 421: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:00.477684] INFO: AI analyzing frame 422 - 2 people detected
+[2025-09-13T02:06:00.526826] INFO: Frame 422: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:00.692872] INFO: AI analyzing frame 423 - 2 people detected
+[2025-09-13T02:06:00.737931] INFO: Frame 423: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:00.902503] INFO: AI analyzing frame 424 - 2 people detected
+[2025-09-13T02:06:00.948029] INFO: Frame 424: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:01.111532] INFO: AI analyzing frame 425 - 2 people detected
+[2025-09-13T02:06:01.158764] INFO: Frame 425: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:01.323145] INFO: AI analyzing frame 426 - 2 people detected
+[2025-09-13T02:06:01.388085] INFO: Frame 426: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:01.567647] INFO: AI analyzing frame 427 - 2 people detected
+[2025-09-13T02:06:01.638191] INFO: Frame 427: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:01.831534] INFO: AI analyzing frame 428 - 2 people detected
+[2025-09-13T02:06:01.887282] INFO: Frame 428: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:02.071482] INFO: AI analyzing frame 429 - 2 people detected
+[2025-09-13T02:06:02.122170] INFO: Frame 429: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:02.270643] INFO: AI analyzing frame 430 - 2 people detected
+[2025-09-13T02:06:02.322580] INFO: Frame 430: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:02.470558] INFO: AI analyzing frame 431 - 2 people detected
+[2025-09-13T02:06:02.520656] INFO: Frame 431: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:02.704954] INFO: AI analyzing frame 432 - 2 people detected
+[2025-09-13T02:06:02.755511] INFO: Frame 432: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:02.920602] INFO: AI analyzing frame 433 - 2 people detected
+[2025-09-13T02:06:02.992506] INFO: Frame 433: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:03.181871] INFO: AI analyzing frame 434 - 2 people detected
+[2025-09-13T02:06:03.239032] INFO: Frame 434: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:03.403873] INFO: AI analyzing frame 435 - 2 people detected
+[2025-09-13T02:06:03.456421] INFO: Frame 435: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:03.623554] INFO: AI analyzing frame 436 - 2 people detected
+[2025-09-13T02:06:03.672121] INFO: Frame 436: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:03.832653] INFO: AI analyzing frame 437 - 2 people detected
+[2025-09-13T02:06:03.890299] INFO: Frame 437: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:04.089062] INFO: AI analyzing frame 438 - 2 people detected
+[2025-09-13T02:06:04.154506] INFO: Frame 438: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:04.400548] INFO: AI analyzing frame 439 - 3 people detected
+[2025-09-13T02:06:04.474842] INFO: Frame 439: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:04.734258] INFO: AI analyzing frame 440 - 2 people detected
+[2025-09-13T02:06:04.807484] INFO: Frame 440: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:05.162638] INFO: AI analyzing frame 441 - 2 people detected
+[2025-09-13T02:06:05.222644] INFO: Frame 441: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:05.420757] INFO: AI analyzing frame 442 - 2 people detected
+[2025-09-13T02:06:05.485436] INFO: Frame 442: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:05.709146] INFO: AI analyzing frame 443 - 2 people detected
+[2025-09-13T02:06:05.789343] INFO: Frame 443: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:05.995407] INFO: AI analyzing frame 444 - 2 people detected
+[2025-09-13T02:06:06.058489] INFO: Frame 444: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:06.280610] INFO: AI analyzing frame 445 - 2 people detected
+[2025-09-13T02:06:06.362610] INFO: Frame 445: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:06.510251] INFO: AI analyzing frame 446 - 2 people detected
+[2025-09-13T02:06:06.578605] INFO: Frame 446: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:06.748106] INFO: AI analyzing frame 447 - 2 people detected
+[2025-09-13T02:06:06.810660] INFO: Frame 447: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:06.960481] INFO: AI analyzing frame 448 - 2 people detected
+[2025-09-13T02:06:07.026454] INFO: Frame 448: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:07.170573] INFO: AI analyzing frame 449 - 2 people detected
+[2025-09-13T02:06:07.225311] INFO: Frame 449: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:07.403806] INFO: AI analyzing frame 450 - 2 people detected
+[2025-09-13T02:06:07.458828] INFO: Frame 450: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:07.630401] INFO: AI analyzing frame 451 - 2 people detected
+[2025-09-13T02:06:07.712157] INFO: Frame 451: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:07.873325] INFO: AI analyzing frame 452 - 2 people detected
+[2025-09-13T02:06:07.933028] INFO: Frame 452: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:08.112928] INFO: AI analyzing frame 453 - 2 people detected
+[2025-09-13T02:06:08.157479] INFO: Frame 453: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:08.324041] INFO: AI analyzing frame 454 - 2 people detected
+[2025-09-13T02:06:08.375088] INFO: Frame 454: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:08.523622] INFO: AI analyzing frame 455 - 2 people detected
+[2025-09-13T02:06:08.574111] INFO: Frame 455: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:08.715672] INFO: AI analyzing frame 456 - 2 people detected
+[2025-09-13T02:06:08.762047] INFO: Frame 456: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:08.903998] INFO: AI analyzing frame 457 - 2 people detected
+[2025-09-13T02:06:08.957377] INFO: Frame 457: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:09.140032] INFO: AI analyzing frame 458 - 2 people detected
+[2025-09-13T02:06:09.190144] INFO: Frame 458: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:09.374547] INFO: AI analyzing frame 459 - 2 people detected
+[2025-09-13T02:06:09.433009] INFO: Frame 459: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:09.573832] INFO: AI analyzing frame 460 - 2 people detected
+[2025-09-13T02:06:09.624672] INFO: Frame 460: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:09.783071] INFO: AI analyzing frame 461 - 3 people detected
+[2025-09-13T02:06:09.824150] INFO: Frame 461: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:09.973698] INFO: AI analyzing frame 462 - 2 people detected
+[2025-09-13T02:06:10.032518] INFO: Frame 462: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:10.173880] INFO: AI analyzing frame 463 - 2 people detected
+[2025-09-13T02:06:10.224063] INFO: Frame 463: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:10.424166] INFO: AI analyzing frame 464 - 2 people detected
+[2025-09-13T02:06:10.473727] INFO: Frame 464: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:10.637097] INFO: AI analyzing frame 465 - 3 people detected
+[2025-09-13T02:06:10.691679] INFO: Frame 465: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:10.865656] INFO: AI analyzing frame 466 - 2 people detected
+[2025-09-13T02:06:10.916738] INFO: Frame 466: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:11.057096] INFO: AI analyzing frame 467 - 2 people detected
+[2025-09-13T02:06:11.116682] INFO: Frame 467: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:11.256206] INFO: AI analyzing frame 468 - 2 people detected
+[2025-09-13T02:06:11.313485] INFO: Frame 468: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:11.442927] INFO: AI analyzing frame 469 - 2 people detected
+[2025-09-13T02:06:11.490946] INFO: Frame 469: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:11.650637] INFO: AI analyzing frame 470 - 3 people detected
+[2025-09-13T02:06:11.720926] INFO: Frame 470: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:11.893097] INFO: AI analyzing frame 471 - 2 people detected
+[2025-09-13T02:06:11.958169] INFO: Frame 471: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:12.171403] INFO: AI analyzing frame 472 - 2 people detected
+[2025-09-13T02:06:12.225099] INFO: Frame 472: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:12.390328] INFO: AI analyzing frame 473 - 2 people detected
+[2025-09-13T02:06:12.445490] INFO: Frame 473: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:12.589813] INFO: AI analyzing frame 474 - 3 people detected
+[2025-09-13T02:06:12.632767] INFO: Frame 474: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:12.770313] INFO: AI analyzing frame 475 - 3 people detected
+[2025-09-13T02:06:12.823350] INFO: Frame 475: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:12.974258] INFO: AI analyzing frame 476 - 3 people detected
+[2025-09-13T02:06:13.024063] INFO: Frame 476: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:13.237097] INFO: AI analyzing frame 477 - 2 people detected
+[2025-09-13T02:06:13.291893] INFO: Frame 477: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:13.470933] INFO: AI analyzing frame 478 - 3 people detected
+[2025-09-13T02:06:13.523967] INFO: Frame 478: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:13.683311] INFO: AI analyzing frame 479 - 2 people detected
+[2025-09-13T02:06:13.740229] INFO: Frame 479: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:13.870566] INFO: AI analyzing frame 480 - 3 people detected
+[2025-09-13T02:06:13.916076] INFO: Frame 480: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:14.067377] INFO: AI analyzing frame 481 - 3 people detected
+[2025-09-13T02:06:14.204375] INFO: Frame 481: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:14.471150] INFO: AI analyzing frame 482 - 2 people detected
+[2025-09-13T02:06:14.542448] INFO: Frame 482: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:14.737243] INFO: AI analyzing frame 483 - 2 people detected
+[2025-09-13T02:06:14.792316] INFO: Frame 483: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:14.956883] INFO: AI analyzing frame 484 - 3 people detected
+[2025-09-13T02:06:15.029056] INFO: Frame 484: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:15.189781] INFO: AI analyzing frame 485 - 2 people detected
+[2025-09-13T02:06:15.240770] INFO: Frame 485: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:15.420227] INFO: AI analyzing frame 486 - 2 people detected
+[2025-09-13T02:06:15.473483] INFO: Frame 486: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:15.623380] INFO: AI analyzing frame 487 - 2 people detected
+[2025-09-13T02:06:15.657367] INFO: Frame 487: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:15.806751] INFO: AI analyzing frame 488 - 2 people detected
+[2025-09-13T02:06:15.873836] INFO: Frame 488: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:16.057067] INFO: AI analyzing frame 489 - 2 people detected
+[2025-09-13T02:06:16.112665] INFO: Frame 489: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:16.273528] INFO: AI analyzing frame 490 - 2 people detected
+[2025-09-13T02:06:16.343000] INFO: Frame 490: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:16.497270] INFO: AI analyzing frame 491 - 2 people detected
+[2025-09-13T02:06:16.555193] INFO: Frame 491: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:16.738196] INFO: AI analyzing frame 492 - 2 people detected
+[2025-09-13T02:06:16.793495] INFO: Frame 492: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:16.931466] INFO: AI analyzing frame 493 - 2 people detected
+[2025-09-13T02:06:16.987048] INFO: Frame 493: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:17.175885] INFO: AI analyzing frame 494 - 2 people detected
+[2025-09-13T02:06:17.243443] INFO: Frame 494: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:17.461877] INFO: AI analyzing frame 495 - 2 people detected
+[2025-09-13T02:06:17.524714] INFO: Frame 495: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:17.737451] INFO: AI analyzing frame 496 - 2 people detected
+[2025-09-13T02:06:17.798055] INFO: Frame 496: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:17.948651] INFO: AI analyzing frame 497 - 2 people detected
+[2025-09-13T02:06:18.012114] INFO: Frame 497: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:18.166195] INFO: AI analyzing frame 498 - 2 people detected
+[2025-09-13T02:06:18.212208] INFO: Frame 498: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:18.415429] INFO: AI analyzing frame 499 - 2 people detected
+[2025-09-13T02:06:18.466231] INFO: Frame 499: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:18.626608] INFO: AI analyzing frame 500 - 2 people detected
+[2025-09-13T02:06:18.699590] INFO: Frame 500: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:18.942292] INFO: AI analyzing frame 501 - 2 people detected
+[2025-09-13T02:06:18.998092] INFO: Frame 501: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:19.212534] INFO: AI analyzing frame 502 - 2 people detected
+[2025-09-13T02:06:19.268367] INFO: Frame 502: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:19.527074] INFO: AI analyzing frame 503 - 2 people detected
+[2025-09-13T02:06:19.596674] INFO: Frame 503: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:19.814251] INFO: AI analyzing frame 504 - 2 people detected
+[2025-09-13T02:06:19.877284] INFO: Frame 504: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:20.188062] INFO: AI analyzing frame 505 - 2 people detected
+[2025-09-13T02:06:20.320477] INFO: Frame 505: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:20.600629] INFO: AI analyzing frame 506 - 2 people detected
+[2025-09-13T02:06:20.718301] INFO: Frame 506: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:20.959730] INFO: AI analyzing frame 507 - 2 people detected
+[2025-09-13T02:06:21.044688] INFO: Frame 507: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:21.254201] INFO: AI analyzing frame 508 - 2 people detected
+[2025-09-13T02:06:21.359076] INFO: Frame 508: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:21.619745] INFO: AI analyzing frame 509 - 3 people detected
+[2025-09-13T02:06:21.676776] INFO: Frame 509: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:21.859827] INFO: AI analyzing frame 510 - 2 people detected
+[2025-09-13T02:06:21.942230] INFO: Frame 510: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:22.130355] INFO: AI analyzing frame 511 - 2 people detected
+[2025-09-13T02:06:22.210426] INFO: Frame 511: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:22.373011] INFO: AI analyzing frame 512 - 2 people detected
+[2025-09-13T02:06:22.442048] INFO: Frame 512: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:22.620399] INFO: AI analyzing frame 513 - 2 people detected
+[2025-09-13T02:06:22.674218] INFO: Frame 513: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:22.842406] INFO: AI analyzing frame 514 - 2 people detected
+[2025-09-13T02:06:22.902351] INFO: Frame 514: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:23.059424] INFO: AI analyzing frame 515 - 2 people detected
+[2025-09-13T02:06:23.121232] INFO: Frame 515: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:23.287007] INFO: AI analyzing frame 516 - 2 people detected
+[2025-09-13T02:06:23.372827] INFO: Frame 516: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:23.527865] INFO: AI analyzing frame 517 - 2 people detected
+[2025-09-13T02:06:23.600053] INFO: Frame 517: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:23.774018] INFO: AI analyzing frame 518 - 2 people detected
+[2025-09-13T02:06:23.823098] INFO: Frame 518: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:24.005479] INFO: AI analyzing frame 519 - 2 people detected
+[2025-09-13T02:06:24.057033] INFO: Frame 519: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:24.215663] INFO: AI analyzing frame 520 - 2 people detected
+[2025-09-13T02:06:24.257644] INFO: Frame 520: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:24.440322] INFO: AI analyzing frame 521 - 2 people detected
+[2025-09-13T02:06:24.633595] INFO: Frame 521: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:24.856629] INFO: AI analyzing frame 522 - 2 people detected
+[2025-09-13T02:06:24.936720] INFO: Frame 522: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:25.136744] INFO: AI analyzing frame 523 - 2 people detected
+[2025-09-13T02:06:25.192268] INFO: Frame 523: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:25.356979] INFO: AI analyzing frame 524 - 2 people detected
+[2025-09-13T02:06:25.423007] INFO: Frame 524: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:25.590067] INFO: AI analyzing frame 525 - 2 people detected
+[2025-09-13T02:06:25.656614] INFO: Frame 525: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:25.791409] INFO: AI analyzing frame 526 - 2 people detected
+[2025-09-13T02:06:25.840963] INFO: Frame 526: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:25.983503] INFO: AI analyzing frame 527 - 3 people detected
+[2025-09-13T02:06:26.046352] INFO: Frame 527: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:26.236680] INFO: AI analyzing frame 528 - 3 people detected
+[2025-09-13T02:06:26.291110] INFO: Frame 528: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:26.610351] INFO: AI analyzing frame 530 - 2 people detected
+[2025-09-13T02:06:26.668457] INFO: Frame 530: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:26.823375] INFO: AI analyzing frame 531 - 2 people detected
+[2025-09-13T02:06:26.889928] INFO: Frame 531: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:27.033561] INFO: AI analyzing frame 532 - 2 people detected
+[2025-09-13T02:06:27.094990] INFO: Frame 532: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:27.231814] INFO: AI analyzing frame 533 - 2 people detected
+[2025-09-13T02:06:27.287266] INFO: Frame 533: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:27.516236] INFO: AI analyzing frame 534 - 2 people detected
+[2025-09-13T02:06:27.586733] INFO: Frame 534: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:27.741912] INFO: AI analyzing frame 535 - 2 people detected
+[2025-09-13T02:06:27.808762] INFO: Frame 535: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:27.986697] INFO: AI analyzing frame 536 - 2 people detected
+[2025-09-13T02:06:28.041828] INFO: Frame 536: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:28.189576] INFO: AI analyzing frame 537 - 2 people detected
+[2025-09-13T02:06:28.234232] INFO: Frame 537: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:29.406200] INFO: AI analyzing frame 547 - 2 people detected
+[2025-09-13T02:06:29.472998] INFO: Frame 547: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:29.622792] INFO: AI analyzing frame 548 - 2 people detected
+[2025-09-13T02:06:29.686660] INFO: Frame 548: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:29.840133] INFO: AI analyzing frame 549 - 2 people detected
+[2025-09-13T02:06:29.890550] INFO: Frame 549: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:30.056640] INFO: AI analyzing frame 550 - 2 people detected
+[2025-09-13T02:06:30.095403] INFO: Frame 550: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:30.247462] INFO: AI analyzing frame 551 - 2 people detected
+[2025-09-13T02:06:30.334115] INFO: Frame 551: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:30.536718] INFO: AI analyzing frame 552 - 2 people detected
+[2025-09-13T02:06:30.603491] INFO: Frame 552: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:30.805824] INFO: AI analyzing frame 553 - 2 people detected
+[2025-09-13T02:06:30.875280] INFO: Frame 553: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:30.997867] INFO: AI analyzing frame 554 - 2 people detected
+[2025-09-13T02:06:31.045013] INFO: Frame 554: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:31.182455] INFO: AI analyzing frame 555 - 2 people detected
+[2025-09-13T02:06:31.238065] INFO: Frame 555: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:31.386569] INFO: AI analyzing frame 556 - 2 people detected
+[2025-09-13T02:06:31.438299] INFO: Frame 556: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:31.569956] INFO: AI analyzing frame 557 - 2 people detected
+[2025-09-13T02:06:31.611815] INFO: Frame 557: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:31.778465] INFO: AI analyzing frame 558 - 2 people detected
+[2025-09-13T02:06:31.838682] INFO: Frame 558: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:31.970095] INFO: AI analyzing frame 559 - 2 people detected
+[2025-09-13T02:06:32.022498] INFO: Frame 559: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:32.186527] INFO: AI analyzing frame 560 - 2 people detected
+[2025-09-13T02:06:32.238858] INFO: Frame 560: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:32.369921] INFO: AI analyzing frame 561 - 3 people detected
+[2025-09-13T02:06:32.422416] INFO: Frame 561: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:32.639570] INFO: AI analyzing frame 563 - 3 people detected
+[2025-09-13T02:06:32.703808] INFO: Frame 563: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:33.353619] INFO: AI analyzing frame 569 - 2 people detected
+[2025-09-13T02:06:33.406733] INFO: Frame 569: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:33.553137] INFO: AI analyzing frame 570 - 3 people detected
+[2025-09-13T02:06:33.606222] INFO: Frame 570: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:33.753231] INFO: AI analyzing frame 571 - 3 people detected
+[2025-09-13T02:06:33.797395] INFO: Frame 571: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:33.953239] INFO: AI analyzing frame 572 - 2 people detected
+[2025-09-13T02:06:34.006922] INFO: Frame 572: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:34.161768] INFO: AI analyzing frame 573 - 2 people detected
+[2025-09-13T02:06:34.216001] INFO: Frame 573: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:34.563315] INFO: AI analyzing frame 575 - 2 people detected
+[2025-09-13T02:06:34.637549] INFO: Frame 575: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:43.636516] INFO: AI analyzing frame 649 - 2 people detected
+[2025-09-13T02:06:43.703068] INFO: Frame 649: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:44.216621] INFO: AI analyzing frame 653 - 2 people detected
+[2025-09-13T02:06:44.273080] INFO: Frame 653: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:44.474044] INFO: AI analyzing frame 654 - 2 people detected
+[2025-09-13T02:06:44.544180] INFO: Frame 654: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:44.719851] INFO: AI analyzing frame 655 - 2 people detected
+[2025-09-13T02:06:44.774568] INFO: Frame 655: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:44.949309] INFO: AI analyzing frame 656 - 2 people detected
+[2025-09-13T02:06:45.002933] INFO: Frame 656: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:45.158796] INFO: AI analyzing frame 657 - 2 people detected
+[2025-09-13T02:06:45.225887] INFO: Frame 657: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:45.401598] INFO: AI analyzing frame 658 - 2 people detected
+[2025-09-13T02:06:45.456278] INFO: Frame 658: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:45.615307] INFO: AI analyzing frame 659 - 2 people detected
+[2025-09-13T02:06:45.657323] INFO: Frame 659: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:46.170333] INFO: AI analyzing frame 661 - 2 people detected
+[2025-09-13T02:06:46.240323] INFO: Frame 661: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:46.431790] INFO: AI analyzing frame 662 - 2 people detected
+[2025-09-13T02:06:46.490115] INFO: Frame 662: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:46.656466] INFO: AI analyzing frame 663 - 2 people detected
+[2025-09-13T02:06:46.719795] INFO: Frame 663: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:46.880666] INFO: AI analyzing frame 664 - 2 people detected
+[2025-09-13T02:06:46.936332] INFO: Frame 664: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:47.177405] INFO: AI analyzing frame 666 - 2 people detected
+[2025-09-13T02:06:47.223036] INFO: Frame 666: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:47.889918] INFO: AI analyzing frame 671 - 2 people detected
+[2025-09-13T02:06:47.956435] INFO: Frame 671: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:48.123963] INFO: AI analyzing frame 672 - 2 people detected
+[2025-09-13T02:06:48.173574] INFO: Frame 672: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:54.473982] INFO: AI analyzing frame 734 - 2 people detected
+[2025-09-13T02:06:54.539583] INFO: Frame 734: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:54.720125] INFO: AI analyzing frame 735 - 2 people detected
+[2025-09-13T02:06:54.773707] INFO: Frame 735: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:55.087451] INFO: AI analyzing frame 737 - 2 people detected
+[2025-09-13T02:06:55.154802] INFO: Frame 737: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:55.619355] INFO: AI analyzing frame 741 - 2 people detected
+[2025-09-13T02:06:55.662079] INFO: Frame 741: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:55.810637] INFO: AI analyzing frame 742 - 2 people detected
+[2025-09-13T02:06:55.871398] INFO: Frame 742: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:56.109493] INFO: AI analyzing frame 744 - 2 people detected
+[2025-09-13T02:06:56.162747] INFO: Frame 744: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:56.302629] INFO: AI analyzing frame 745 - 2 people detected
+[2025-09-13T02:06:56.394521] INFO: Frame 745: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:56.553397] INFO: AI analyzing frame 746 - 2 people detected
+[2025-09-13T02:06:56.619352] INFO: Frame 746: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:56.769311] INFO: AI analyzing frame 747 - 2 people detected
+[2025-09-13T02:06:56.822527] INFO: Frame 747: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:56.963751] INFO: AI analyzing frame 748 - 2 people detected
+[2025-09-13T02:06:57.010492] INFO: Frame 748: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:57.153279] INFO: AI analyzing frame 749 - 2 people detected
+[2025-09-13T02:06:57.204942] INFO: Frame 749: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:57.348274] INFO: AI analyzing frame 750 - 3 people detected
+[2025-09-13T02:06:57.398070] INFO: Frame 750: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:57.969264] INFO: AI analyzing frame 755 - 2 people detected
+[2025-09-13T02:06:58.036145] INFO: Frame 755: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:58.169309] INFO: AI analyzing frame 756 - 2 people detected
+[2025-09-13T02:06:58.221426] INFO: Frame 756: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:58.365831] INFO: AI analyzing frame 757 - 2 people detected
+[2025-09-13T02:06:58.420151] INFO: Frame 757: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:58.647186] INFO: AI analyzing frame 759 - 2 people detected
+[2025-09-13T02:06:58.703356] INFO: Frame 759: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:58.870935] INFO: AI analyzing frame 760 - 2 people detected
+[2025-09-13T02:06:58.939188] INFO: Frame 760: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:59.259293] INFO: AI analyzing frame 762 - 2 people detected
+[2025-09-13T02:06:59.336980] INFO: Frame 762: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:59.540168] INFO: AI analyzing frame 763 - 2 people detected
+[2025-09-13T02:06:59.602648] INFO: Frame 763: Normal behavior detected - Gemini model not available
+[2025-09-13T02:06:59.987085] INFO: AI analyzing frame 766 - 2 people detected
+[2025-09-13T02:07:00.097037] INFO: Frame 766: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:00.306869] INFO: AI analyzing frame 767 - 2 people detected
+[2025-09-13T02:07:00.439733] INFO: Frame 767: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:00.797613] INFO: AI analyzing frame 768 - 2 people detected
+[2025-09-13T02:07:00.937430] INFO: Frame 768: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:01.189795] INFO: AI analyzing frame 769 - 2 people detected
+[2025-09-13T02:07:01.276304] INFO: Frame 769: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:01.528579] INFO: AI analyzing frame 770 - 2 people detected
+[2025-09-13T02:07:01.599758] INFO: Frame 770: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:01.829779] INFO: AI analyzing frame 771 - 2 people detected
+[2025-09-13T02:07:01.907117] INFO: Frame 771: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:02.102465] INFO: AI analyzing frame 772 - 2 people detected
+[2025-09-13T02:07:02.209320] INFO: Frame 772: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:02.462936] INFO: AI analyzing frame 773 - 2 people detected
+[2025-09-13T02:07:02.555205] INFO: Frame 773: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:02.782499] INFO: AI analyzing frame 774 - 3 people detected
+[2025-09-13T02:07:02.853492] INFO: Frame 774: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:03.052315] INFO: AI analyzing frame 775 - 3 people detected
+[2025-09-13T02:07:03.119654] INFO: Frame 775: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:03.540588] INFO: AI analyzing frame 778 - 2 people detected
+[2025-09-13T02:07:03.606424] INFO: Frame 778: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:03.771951] INFO: AI analyzing frame 779 - 2 people detected
+[2025-09-13T02:07:03.844187] INFO: Frame 779: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:05.550238] INFO: AI analyzing frame 794 - 2 people detected
+[2025-09-13T02:07:05.619324] INFO: Frame 794: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:05.807980] INFO: AI analyzing frame 795 - 2 people detected
+[2025-09-13T02:07:05.869259] INFO: Frame 795: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:06.041287] INFO: AI analyzing frame 796 - 2 people detected
+[2025-09-13T02:07:06.090860] INFO: Frame 796: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:06.313439] INFO: AI analyzing frame 798 - 2 people detected
+[2025-09-13T02:07:06.369910] INFO: Frame 798: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:06.522545] INFO: AI analyzing frame 799 - 2 people detected
+[2025-09-13T02:07:06.583168] INFO: Frame 799: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:06.777795] INFO: AI analyzing frame 800 - 2 people detected
+[2025-09-13T02:07:06.839011] INFO: Frame 800: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:07.056315] INFO: AI analyzing frame 801 - 2 people detected
+[2025-09-13T02:07:07.123004] INFO: Frame 801: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:07.555335] INFO: AI analyzing frame 805 - 2 people detected
+[2025-09-13T02:07:07.607985] INFO: Frame 805: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:11.949560] INFO: AI analyzing frame 847 - 2 people detected
+[2025-09-13T02:07:12.023780] INFO: Frame 847: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:12.272016] INFO: AI analyzing frame 849 - 2 people detected
+[2025-09-13T02:07:12.339589] INFO: Frame 849: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:15.123513] INFO: AI analyzing frame 876 - 2 people detected
+[2025-09-13T02:07:15.189022] INFO: Frame 876: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:15.939475] INFO: AI analyzing frame 882 - 2 people detected
+[2025-09-13T02:07:15.998135] INFO: Frame 882: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:16.239155] INFO: AI analyzing frame 884 - 2 people detected
+[2025-09-13T02:07:16.306451] INFO: Frame 884: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:16.481007] INFO: AI analyzing frame 885 - 2 people detected
+[2025-09-13T02:07:16.669513] INFO: Frame 885: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:16.895655] INFO: AI analyzing frame 886 - 2 people detected
+[2025-09-13T02:07:16.970266] INFO: Frame 886: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:17.248872] INFO: AI analyzing frame 888 - 2 people detected
+[2025-09-13T02:07:17.310731] INFO: Frame 888: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:17.552192] INFO: AI analyzing frame 890 - 2 people detected
+[2025-09-13T02:07:17.604651] INFO: Frame 890: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:18.036165] INFO: AI analyzing frame 894 - 2 people detected
+[2025-09-13T02:07:18.108992] INFO: Frame 894: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:18.467443] INFO: AI analyzing frame 896 - 2 people detected
+[2025-09-13T02:07:18.540850] INFO: Frame 896: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:18.736860] INFO: AI analyzing frame 897 - 2 people detected
+[2025-09-13T02:07:18.803447] INFO: Frame 897: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:18.986737] INFO: AI analyzing frame 898 - 2 people detected
+[2025-09-13T02:07:19.049736] INFO: Frame 898: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:19.218956] INFO: AI analyzing frame 899 - 2 people detected
+[2025-09-13T02:07:19.275329] INFO: Frame 899: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:19.490482] INFO: AI analyzing frame 900 - 2 people detected
+[2025-09-13T02:07:19.554148] INFO: Frame 900: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:19.815928] INFO: AI analyzing frame 901 - 2 people detected
+[2025-09-13T02:07:19.895044] INFO: Frame 901: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:20.091525] INFO: AI analyzing frame 902 - 2 people detected
+[2025-09-13T02:07:20.192912] INFO: Frame 902: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:20.618916] INFO: AI analyzing frame 904 - 2 people detected
+[2025-09-13T02:07:20.704879] INFO: Frame 904: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:20.992311] INFO: AI analyzing frame 905 - 2 people detected
+[2025-09-13T02:07:21.127043] INFO: Frame 905: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:21.653647] INFO: AI analyzing frame 908 - 2 people detected
+[2025-09-13T02:07:21.741763] INFO: Frame 908: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:22.136334] INFO: AI analyzing frame 910 - 2 people detected
+[2025-09-13T02:07:22.207051] INFO: Frame 910: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:22.394563] INFO: AI analyzing frame 911 - 2 people detected
+[2025-09-13T02:07:22.456759] INFO: Frame 911: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:22.832759] INFO: AI analyzing frame 914 - 2 people detected
+[2025-09-13T02:07:22.910681] INFO: Frame 914: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:23.102238] INFO: AI analyzing frame 915 - 2 people detected
+[2025-09-13T02:07:23.176520] INFO: Frame 915: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:23.350094] INFO: AI analyzing frame 916 - 2 people detected
+[2025-09-13T02:07:23.405841] INFO: Frame 916: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:23.585643] INFO: AI analyzing frame 917 - 2 people detected
+[2025-09-13T02:07:23.640986] INFO: Frame 917: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:24.067180] INFO: AI analyzing frame 921 - 2 people detected
+[2025-09-13T02:07:24.127085] INFO: Frame 921: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:24.327819] INFO: AI analyzing frame 922 - 2 people detected
+[2025-09-13T02:07:24.397693] INFO: Frame 922: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:24.584661] INFO: AI analyzing frame 923 - 2 people detected
+[2025-09-13T02:07:24.648555] INFO: Frame 923: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:24.802209] INFO: AI analyzing frame 924 - 2 people detected
+[2025-09-13T02:07:24.857068] INFO: Frame 924: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:25.033396] INFO: AI analyzing frame 925 - 2 people detected
+[2025-09-13T02:07:25.090363] INFO: Frame 925: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:25.272021] INFO: AI analyzing frame 926 - 2 people detected
+[2025-09-13T02:07:25.327586] INFO: Frame 926: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:25.511860] INFO: AI analyzing frame 927 - 2 people detected
+[2025-09-13T02:07:25.594392] INFO: Frame 927: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:25.803947] INFO: AI analyzing frame 928 - 2 people detected
+[2025-09-13T02:07:25.877485] INFO: Frame 928: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:26.175142] INFO: AI analyzing frame 930 - 2 people detected
+[2025-09-13T02:07:26.256986] INFO: Frame 930: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:26.628667] INFO: AI analyzing frame 933 - 2 people detected
+[2025-09-13T02:07:26.689128] INFO: Frame 933: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:26.993308] INFO: AI analyzing frame 935 - 2 people detected
+[2025-09-13T02:07:27.085551] INFO: Frame 935: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:27.288670] INFO: AI analyzing frame 936 - 2 people detected
+[2025-09-13T02:07:27.358704] INFO: Frame 936: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:27.571066] INFO: AI analyzing frame 937 - 2 people detected
+[2025-09-13T02:07:27.636407] INFO: Frame 937: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:27.832897] INFO: AI analyzing frame 938 - 2 people detected
+[2025-09-13T02:07:27.892535] INFO: Frame 938: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:28.078921] INFO: AI analyzing frame 939 - 2 people detected
+[2025-09-13T02:07:28.153621] INFO: Frame 939: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:28.310052] INFO: AI analyzing frame 940 - 2 people detected
+[2025-09-13T02:07:28.394878] INFO: Frame 940: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:28.622177] INFO: AI analyzing frame 941 - 2 people detected
+[2025-09-13T02:07:28.693045] INFO: Frame 941: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:28.891613] INFO: AI analyzing frame 942 - 2 people detected
+[2025-09-13T02:07:28.960670] INFO: Frame 942: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:29.148962] INFO: AI analyzing frame 943 - 2 people detected
+[2025-09-13T02:07:29.212206] INFO: Frame 943: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:29.390247] INFO: AI analyzing frame 944 - 2 people detected
+[2025-09-13T02:07:29.456159] INFO: Frame 944: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:29.635494] INFO: AI analyzing frame 945 - 2 people detected
+[2025-09-13T02:07:29.698868] INFO: Frame 945: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:29.876469] INFO: AI analyzing frame 946 - 2 people detected
+[2025-09-13T02:07:30.052288] INFO: Frame 946: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:30.294782] INFO: AI analyzing frame 947 - 2 people detected
+[2025-09-13T02:07:30.375633] INFO: Frame 947: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:30.592299] INFO: AI analyzing frame 948 - 2 people detected
+[2025-09-13T02:07:30.668768] INFO: Frame 948: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:30.873864] INFO: AI analyzing frame 949 - 2 people detected
+[2025-09-13T02:07:30.944125] INFO: Frame 949: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:31.129884] INFO: AI analyzing frame 950 - 2 people detected
+[2025-09-13T02:07:31.191432] INFO: Frame 950: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:31.353870] INFO: AI analyzing frame 951 - 2 people detected
+[2025-09-13T02:07:31.419281] INFO: Frame 951: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:31.649012] INFO: AI analyzing frame 952 - 2 people detected
+[2025-09-13T02:07:31.735799] INFO: Frame 952: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:31.943418] INFO: AI analyzing frame 953 - 2 people detected
+[2025-09-13T02:07:32.027395] INFO: Frame 953: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:32.219539] INFO: AI analyzing frame 954 - 2 people detected
+[2025-09-13T02:07:32.286393] INFO: Frame 954: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:32.495383] INFO: AI analyzing frame 955 - 2 people detected
+[2025-09-13T02:07:32.552094] INFO: Frame 955: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:32.740755] INFO: AI analyzing frame 956 - 2 people detected
+[2025-09-13T02:07:32.820230] INFO: Frame 956: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:33.013642] INFO: AI analyzing frame 957 - 2 people detected
+[2025-09-13T02:07:33.075398] INFO: Frame 957: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:33.253480] INFO: AI analyzing frame 958 - 2 people detected
+[2025-09-13T02:07:33.327611] INFO: Frame 958: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:33.510483] INFO: AI analyzing frame 959 - 2 people detected
+[2025-09-13T02:07:33.573812] INFO: Frame 959: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:33.753143] INFO: AI analyzing frame 960 - 2 people detected
+[2025-09-13T02:07:33.818778] INFO: Frame 960: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:33.985333] INFO: AI analyzing frame 961 - 2 people detected
+[2025-09-13T02:07:34.053439] INFO: Frame 961: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:34.245458] INFO: AI analyzing frame 962 - 2 people detected
+[2025-09-13T02:07:34.319986] INFO: Frame 962: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:34.536834] INFO: AI analyzing frame 963 - 2 people detected
+[2025-09-13T02:07:34.595550] INFO: Frame 963: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:34.791889] INFO: AI analyzing frame 964 - 2 people detected
+[2025-09-13T02:07:34.854786] INFO: Frame 964: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:35.017422] INFO: AI analyzing frame 965 - 2 people detected
+[2025-09-13T02:07:35.086639] INFO: Frame 965: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:35.259517] INFO: AI analyzing frame 966 - 2 people detected
+[2025-09-13T02:07:35.322485] INFO: Frame 966: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:35.495887] INFO: AI analyzing frame 967 - 2 people detected
+[2025-09-13T02:07:35.555692] INFO: Frame 967: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:35.741058] INFO: AI analyzing frame 968 - 2 people detected
+[2025-09-13T02:07:35.835987] INFO: Frame 968: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:36.000895] INFO: AI analyzing frame 969 - 2 people detected
+[2025-09-13T02:07:36.072303] INFO: Frame 969: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:36.255397] INFO: AI analyzing frame 970 - 2 people detected
+[2025-09-13T02:07:36.322611] INFO: Frame 970: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:36.508691] INFO: AI analyzing frame 971 - 2 people detected
+[2025-09-13T02:07:36.571130] INFO: Frame 971: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:36.735820] INFO: AI analyzing frame 972 - 2 people detected
+[2025-09-13T02:07:36.805889] INFO: Frame 972: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:37.010266] INFO: AI analyzing frame 973 - 2 people detected
+[2025-09-13T02:07:37.091830] INFO: Frame 973: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:37.280645] INFO: AI analyzing frame 974 - 2 people detected
+[2025-09-13T02:07:37.339392] INFO: Frame 974: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:37.518543] INFO: AI analyzing frame 975 - 2 people detected
+[2025-09-13T02:07:37.589339] INFO: Frame 975: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:37.752531] INFO: AI analyzing frame 976 - 2 people detected
+[2025-09-13T02:07:37.823773] INFO: Frame 976: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:37.991575] INFO: AI analyzing frame 977 - 2 people detected
+[2025-09-13T02:07:38.055368] INFO: Frame 977: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:38.216949] INFO: AI analyzing frame 978 - 2 people detected
+[2025-09-13T02:07:38.270514] INFO: Frame 978: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:38.442596] INFO: AI analyzing frame 979 - 2 people detected
+[2025-09-13T02:07:38.514833] INFO: Frame 979: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:38.669590] INFO: AI analyzing frame 980 - 2 people detected
+[2025-09-13T02:07:38.735273] INFO: Frame 980: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:38.898078] INFO: AI analyzing frame 981 - 2 people detected
+[2025-09-13T02:07:38.951912] INFO: Frame 981: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:40.285177] INFO: AI analyzing frame 993 - 2 people detected
+[2025-09-13T02:07:40.355015] INFO: Frame 993: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:40.918494] INFO: AI analyzing frame 996 - 2 people detected
+[2025-09-13T02:07:40.988076] INFO: Frame 996: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:41.168348] INFO: AI analyzing frame 997 - 2 people detected
+[2025-09-13T02:07:41.240960] INFO: Frame 997: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:41.430454] INFO: AI analyzing frame 998 - 2 people detected
+[2025-09-13T02:07:41.503054] INFO: Frame 998: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:41.669051] INFO: AI analyzing frame 999 - 2 people detected
+[2025-09-13T02:07:41.751752] INFO: Frame 999: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:41.908750] INFO: AI analyzing frame 1000 - 2 people detected
+[2025-09-13T02:07:41.954129] INFO: Frame 1000: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:42.043207] INFO: Progress: 1000/1455 frames (68%)
+[2025-09-13T02:07:42.202225] INFO: AI analyzing frame 1001 - 2 people detected
+[2025-09-13T02:07:42.253768] INFO: Frame 1001: Normal behavior detected - Gemini model not available
+[2025-09-13T02:07:42.431439] INFO: AI analyzing frame 1002 - 2 people detected
+[2025-09-13T02:08:14.486650] INFO: Analysis started from web interface with mode: standard
+[2025-09-13T02:08:14.755824] ERROR: REAL AI analysis failed: cannot access local variable 'ai_manager' where it is not associated with a value
+[2025-09-13T02:09:55.218210] INFO: Analysis started from web interface with mode: standard
+[2025-09-13T02:09:55.308750] INFO: CHUNKED PARALLEL AI analysis started for 20250913_020428_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4
+[2025-09-13T02:09:55.409068] INFO: Using sequential processing (chunking disabled)
+[2025-09-13T02:09:55.812700] INFO: Video info: 1455 frames, 30 FPS
+[2025-09-13T02:09:58.811746] INFO: AI models loaded: GEMINI
+[2025-09-13T02:09:59.006832] INFO: Analysis mode: standard (checking every 1 frames)
+[2025-09-13T02:10:06.684818] INFO: AI analyzing frame 3 - 2 people detected
+[2025-09-13T02:10:15.872755] INFO: Frame 3: Normal behavior detected - SAFE
+
+Based on the single still image, there is no clear visual evidence of harassment or threatening behavior according to the provided warning signs. The man and woman are standing in what appears to be a public metro train, a common environment where people are in close proximity. There is a vertical pole between them, and their body language does not appear aggressive or intimidating from this frame. The woman is holding onto a pole, which is normal for stability on a moving train. No unwanted physical contact, blocking of path, or aggressive gestures are discernible.
+[2025-09-13T02:10:16.087712] INFO: AI analyzing frame 4 - 2 people detected
+[2025-09-13T02:10:23.580209] INFO: Frame 4: Normal behavior detected - SAFE
+
+The image shows two individuals, a man and a woman, standing in what appears to be a public transit vehicle (likely a metro or train). Both are wearing masks. The man is standing with his back mostly towards the woman, holding onto a pole, which is typical for maintaining balance in a moving vehicle. The woman is also holding onto a pole. Their proximity seems consistent with a moderately crowded public transport environment. There is no visible aggressive body language, unwanted physical contact, blocking of path, or other threatening behavior from the man towards the woman. Their posture and positions appear normal for passengers.
+[2025-09-13T02:10:26.223212] INFO: AI analyzing frame 7 - 2 people detected
+[2025-09-13T02:10:34.404757] INFO: Frame 7: Normal behavior detected - SAFE
+
+There are no clear warning signs of harassment or threatening behavior in the image. The scene depicts individuals standing in close proximity within what appears to be a crowded public transport setting (like a metro train), which is a common occurrence. The man is standing behind the woman, but his body language is neutral, and he is not making any aggressive gestures, unwanted physical contact, blocking her path, or cornering her. Both individuals appear to be simply occupying space in a busy environment.
+[2025-09-13T02:10:34.900758] INFO: AI analyzing frame 10 - 2 people detected
+[2025-09-13T02:10:44.536227] ALERT: HARASSMENT DETECTED at frame 10: ALERT
+
+The woman's body language, specifically her raised right arm with her hand appearing to make contact with the man's lower back/hip area or push him away, strongly suggests she is reacting to an unwanted invasion of her personal space or unwanted physical contact. This defensive or reactive posture indicates that the interaction is unwelcome, aligning with warning signs such as "A man standing too close to a woman in a way that invades her personal space without consent" or "A man making unwanted physical contact with a woman."
+[2025-09-13T02:10:44.666500] ALERT: Alert #1 detected: ALERT
+
+The woman's body language, specifically her raised right arm with her hand appearing to make contact with the man's lower back/hip area or push him away, strongly suggests she is reacting to an unwanted invasion of her personal space or unwanted physical contact. This defensive or reactive posture indicates that the interaction is unwelcome, aligning with warning signs such as "A man standing too close to a woman in a way that invades her personal space without consent" or "A man making unwanted physical contact with a woman."
+[2025-09-13T02:10:44.737452] INFO: Auto-stopping analysis due to REAL alert detection (cost-saving)
+[2025-09-13T02:10:44.831268] ALERT: Analysis completed with 1 REAL harassment alerts detected

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Error {{ error_code }} - Safety Detector{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    {% if error_code == 404 %}
+                        <i class="fas fa-search fa-4x text-warning mb-3"></i>
+                    {% elif error_code == 500 %}
+                        <i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>
+                    {% elif error_code == 400 %}
+                        <i class="fas fa-exclamation-circle fa-4x text-warning mb-3"></i>
+                    {% elif error_code == 413 %}
+                        <i class="fas fa-file-upload fa-4x text-info mb-3"></i>
+                    {% elif error_code == 429 %}
+                        <i class="fas fa-clock fa-4x text-warning mb-3"></i>
+                    {% else %}
+                        <i class="fas fa-bug fa-4x text-secondary mb-3"></i>
+                    {% endif %}
+                </div>
+                
+                <h1 class="display-4 mb-3">{{ error_code }}</h1>
+                <h4 class="mb-3">{{ error_message }}</h4>
+                <p class="text-muted mb-4">{{ error_description }}</p>
+                
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-home"></i> Back to Dashboard
+                    </a>
+                    
+                    {% if error_code == 404 %}
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-success btn-lg">
+                            <i class="fas fa-upload"></i> Upload Video
+                        </a>
+                    {% elif error_code == 413 %}
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-info btn-lg">
+                            <i class="fas fa-upload"></i> Try Smaller File
+                        </a>
+                    {% endif %}
+                    
+                    <button class="btn btn-outline-secondary btn-lg" onclick="history.back()">
+                        <i class="fas fa-arrow-left"></i> Go Back
+                    </button>
+                </div>
+                
+                {% if error_code == 500 %}
+                    <div class="mt-4">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Troubleshooting Tips:</strong>
+                            <ul class="text-start mt-2 mb-0">
+                                <li>Refresh the page and try again</li>
+                                <li>Check if all dependencies are installed</li>
+                                <li>Verify your API keys are configured</li>
+                                <li>Contact support if the issue persists</li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

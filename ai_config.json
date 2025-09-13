@@ -1,0 +1,127 @@
+{
+  "ai_model_settings": {
+    "active_model": "gemini",
+    "available_models": ["gemini", "openai"],
+    "model_selection": {
+      "selection_criteria": {
+        "speed_priority": "gemini",
+        "accuracy_priority": "openai", 
+        "cost_priority": "gemini",
+        "real_time_monitoring": "gemini",
+        "detailed_analysis": "openai"
+      },
+      "use_case_recommendations": {
+        "live_camera_monitoring": {
+          "recommended_model": "gemini",
+          "reason": "Fast response time needed for real-time alerts",
+          "alternative": "openai for high-security areas"
+        },
+        "video_file_analysis": {
+          "recommended_model": "openai", 
+          "reason": "Detailed analysis and accuracy more important than speed",
+          "alternative": "gemini for bulk processing"
+        },
+        "evidence_documentation": {
+          "recommended_model": "openai",
+          "reason": "Detailed explanations needed for legal purposes",
+          "alternative": "gemini for initial screening"
+        },
+        "high_volume_processing": {
+          "recommended_model": "gemini",
+          "reason": "Cost-effective for processing many videos",
+          "alternative": "openai for critical incidents"
+        }
+      },
+      "switching_guidelines": {
+        "switch_to_gemini_when": [
+          "Processing many videos in batch",
+          "Real-time monitoring with fast response needed",
+          "Cost optimization is important",
+          "Initial screening of content"
+        ],
+        "switch_to_openai_when": [
+          "Maximum accuracy is critical",
+          "Detailed incident analysis required",
+          "Legal documentation needed",
+          "Complex behavioral patterns to analyze"
+        ]
+      }
+    },
+    "model_configs": {
+      "gemini": {
+        "model_name": "gemini-2.5-flash",
+        "api_key_env": "GEMINI_API_KEY",
+        "description": "Google Gemini Vision AI - Fast and accurate multimodal analysis",
+        "strengths": ["Fast processing", "Good reasoning", "Multimodal"],
+        "avg_response_time": "1-3 seconds",
+        "cost_level": "low",
+        "accuracy_level": "high",
+        "best_for": ["real-time monitoring", "bulk processing", "cost optimization"]
+      },
+      "openai": {
+        "model_name": "gpt-4-vision-preview",
+        "api_key_env": "OPENAI_API_KEY", 
+        "description": "OpenAI GPT-4 Vision - Advanced reasoning and detailed analysis",
+        "strengths": ["Excellent reasoning", "Detailed explanations", "High accuracy"],
+        "avg_response_time": "2-5 seconds",
+        "cost_level": "medium-high",
+        "accuracy_level": "very-high", 
+        "best_for": ["detailed analysis", "legal documentation", "complex scenarios"]
+      }
+    },
+    "harassment_detection_settings": {
+      "confidence_threshold": 0.85,
+      "analysis_frequency": "when_2_plus_people",
+      "save_all_responses": true,
+      "fallback_model": "gemini",
+      "cost_saving_features": {
+        "auto_stop_on_alert": true,
+        "prompt_user_to_continue": true,
+        "default_action_after_alert": "stop",
+        "show_cost_savings_info": true
+      },
+      "parallel_processing": {
+        "enabled": true,
+        "max_parallel_frames": 4,
+        "batch_size": 8,
+        "use_multiprocessing": false,
+        "thread_pool_size": 4,
+        "queue_buffer_size": 16
+      },
+      "video_chunking": {
+        "enabled": true,
+        "chunk_duration_seconds": 15,
+        "max_parallel_chunks": 3,
+        "overlap_seconds": 2,
+        "auto_cleanup_chunks": true,
+        "preserve_chunks_on_alert": true
+      }
+    }
+  },
+  "prompt_templates": {
+    "harassment_detection": {
+      "base_prompt": "Analyze this image for potential harassment or threatening behavior.",
+      "specific_behaviors": [
+              "A man closely following a woman in a way that appears unwanted or intimidating",
+              "A man blocking a woman's path, preventing her from moving freely",
+              "Aggressive or threatening body language directed by a man toward a woman",
+              "A man cornering a woman against a wall, vehicle, or confined space",
+              "A man making unwanted physical contact with a woman (touching, grabbing, pulling, restraining)",
+              "A man standing too close to a woman in a way that invades her personal space without consent",
+              "A man persistently pursuing, trailing, or stalking a woman despite her attempts to move away",
+              "Groups of men surrounding or intimidating a lone woman",
+              "A man verbally harassing a woman with shouting, catcalling, or hostile gestures (if audio/gestures available)",
+
+              "Two or more men engaging in a physical fight (punching, kicking, wrestling, or striking each other)",
+              "One man aggressively pushing, shoving, or grabbing another man",
+              "Men showing hostile gestures toward each other (raised fists, threatening hand movements, or posturing to fight)",
+              "One man chasing or pursuing another man in an aggressive or violent manner",
+              "Multiple men ganging up to physically or verbally intimidate another man",
+              "analyze the body structure of the person to detect if the is some kind of harassment or threatening behavior",
+              "Any violent confrontation between men in public (street fights, brawls, assault-like scenarios)"
+            ],
+      "response_format": "Respond with 'ALERT' if harassment detected, 'SAFE' if normal behavior. Then provide a brief explanation.",
+      "context_instructions": "Consider the environment, body language, spatial relationships, and overall scene context."
+    }
+  }
+}

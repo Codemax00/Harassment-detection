@@ -1,0 +1,352 @@
+{% extends "base.html" %}
+
+{% block title %}Upload History - Safety Detector{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-history text-primary"></i>
+            Upload History & Logs
+        </h1>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Total Uploads</h5>
+                        <h3>{{ stats.total_uploads }}</h3>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-upload fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Completed</h5>
+                        <h3>{{ stats.completed_analyses }}</h3>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-warning text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Alerts Found</h5>
+                        <h3>{{ stats.total_alerts }}</h3>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-info text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Storage Used</h5>
+                        <h3>{{ stats.total_size_mb }} MB</h3>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-hdd fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-0">History Management</h6>
+                        <small class="text-muted">Manage your upload history and files</small>
+                    </div>
+                    <div>
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-primary me-2">
+                            <i class="fas fa-upload"></i> Upload New Video
+                        </a>
+                        <button class="btn btn-warning me-2" onclick="exportHistory()">
+                            <i class="fas fa-download"></i> Export History
+                        </button>
+                        <button class="btn btn-danger" onclick="confirmClearHistory()">
+                            <i class="fas fa-trash"></i> Clear All History
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload History Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> Upload History</h5>
+            </div>
+            <div class="card-body">
+                {% if uploads %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Filename</th>
+                                    <th>Upload Date</th>
+                                    <th>Size</th>
+                                    <th>Status</th>
+                                    <th>Alerts</th>
+                                    <th>Completion</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for upload in uploads %}
+                                    <tr>
+                                        <td>
+                                            <span class="badge bg-secondary">#{{ upload.id }}</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <strong>{{ upload.original_filename }}</strong>
+                                                <br>
+                                                <small class="text-muted">{{ upload.filename }}</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                {{ upload.upload_date[:10] }}
+                                                <br>
+                                                <small class="text-muted">{{ upload.upload_date[11:19] }}</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ "%.1f"|format(upload.file_size / 1024 / 1024) }} MB
+                                        </td>
+                                        <td>
+                                            {% if upload.analysis_status == 'completed' %}
+                                                <span class="badge bg-success">Completed</span>
+                                            {% elif upload.analysis_status == 'running' %}
+                                                <span class="badge bg-primary">Running</span>
+                                            {% elif upload.analysis_status == 'error' %}
+                                                <span class="badge bg-danger">Error</span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if upload.alerts %}
+                                                <span class="badge bg-warning">{{ upload.alerts|length }}</span>
+                                            {% else %}
+                                                <span class="badge bg-success">0</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar" 
+                                                     style="width: {{ upload.analysis_results.completion_percentage }}%">
+                                                    {{ upload.analysis_results.completion_percentage }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="{{ url_for('history_detail', upload_id=upload.id) }}" 
+                                                   class="btn btn-outline-info" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                {% if upload.analysis_status == 'pending' %}
+                                                    <a href="{{ url_for('analyze_video', filename=upload.filename) }}" 
+                                                       class="btn btn-outline-primary" title="Analyze">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                {% endif %}
+                                                <button class="btn btn-outline-danger" 
+                                                        onclick="confirmDelete({{ upload.id }}, '{{ upload.original_filename }}')" 
+                                                        title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                        <h4>No Upload History</h4>
+                        <p class="text-muted">You haven't uploaded any videos yet.</p>
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Upload Your First Video
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-trash"></i> Confirm Delete
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <h5>Delete Upload?</h5>
+                    <p>Are you sure you want to delete <strong id="deleteFilename"></strong>?</p>
+                    <div class="alert alert-warning">
+                        <small>
+                            <i class="fas fa-warning"></i>
+                            This will permanently delete:
+                            <ul class="text-start mt-2 mb-0">
+                                <li>The video file</li>
+                                <li>All analysis logs</li>
+                                <li>Alert evidence files</li>
+                                <li>Analysis results</li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="POST" id="deleteForm" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete Permanently
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Clear History Modal -->
+<div class="modal fade" id="clearHistoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle"></i> Clear All History
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>
+                    <h5>Clear All Upload History?</h5>
+                    <p>This will permanently delete <strong>ALL</strong> uploaded videos and history data.</p>
+                    <div class="alert alert-danger">
+                        <strong>⚠️ This action cannot be undone!</strong>
+                        <br>
+                        <small>{{ stats.total_uploads }} uploads and {{ stats.total_size_mb }} MB of data will be deleted.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="POST" action="{{ url_for('clear_history') }}" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Clear All History
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    function confirmDelete(uploadId, filename) {
+        document.getElementById('deleteFilename').textContent = filename;
+        document.getElementById('deleteForm').action = `/delete_upload/${uploadId}`;
+        
+        const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        modal.show();
+    }
+    
+    function confirmClearHistory() {
+        const modal = new bootstrap.Modal(document.getElementById('clearHistoryModal'));
+        modal.show();
+    }
+    
+    function exportHistory() {
+        try {
+            const historyData = {
+                export_date: new Date().toISOString(),
+                statistics: {{ stats|tojson }},
+                uploads: {{ uploads|tojson }}
+            };
+            
+            const dataStr = JSON.stringify(historyData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `safety_detector_history_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+            
+            // Show success message
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-success alert-dismissible fade show';
+            alert.innerHTML = `
+                <i class="fas fa-check-circle"></i> History exported successfully!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.container-fluid').insertBefore(alert, document.querySelector('.row'));
+            
+        } catch (error) {
+            alert('Error exporting history: ' + error.message);
+        }
+    }
+    
+    // Make functions globally available
+    window.confirmDelete = confirmDelete;
+    window.confirmClearHistory = confirmClearHistory;
+    window.exportHistory = exportHistory;
+});
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{
+  "alert_id": 1,
+  "frame_number": 10,
+  "timestamp": "2025-09-13T01:35:11.297073",
+  "time_in_video": "00:00:00",
+  "confidence": 0.92,
+  "message": "ALERT.\n\nThe woman's body language, specifically her extended arm and open hand directed towards the man's back, strongly suggests she is pushing him away or creating distance due to an unwanted proximity or interaction. This indicates an invasion of her personal space without consent, and her active posture shows she is reacting to an uncomfortable situation.",
+  "evidence_file": "alert_001_frame_000010.jpg",
+  "ai_analysis": "Real AI analysis detected harassment behavior at 00:00"
+}

@@ -1,0 +1,16 @@
+Safety Detector - Live Camera Session Summary
+==================================================
+
+Session Date: 2025-09-12 23:46:17
+Session Duration: 0.0 seconds
+
+Performance Statistics:
+  Frames Processed: 0
+  Average FPS: 0.0
+  AI Analyses: 0
+  Average People Detection: 0.000 seconds
+  Average AI Analysis: 0.000 seconds
+
+Alert Summary:
+  Total Alerts: 0
+  No alerts detected during this session.

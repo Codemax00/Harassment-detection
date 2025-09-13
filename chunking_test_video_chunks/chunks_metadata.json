@@ -1,0 +1,67 @@
+{
+  "original_video": "chunking_test_video.mp4",
+  "total_duration": 60.0,
+  "total_frames": 1800,
+  "fps": 30,
+  "chunks_count": 5,
+  "chunk_duration": 15,
+  "overlap_seconds": 2,
+  "chunks": [
+    {
+      "chunk_number": 1,
+      "filename": "chunk_001_0000s-0015s.mp4",
+      "path": "chunking_test_video_chunks\\chunk_001_0000s-0015s.mp4",
+      "start_time": 0,
+      "end_time": 15,
+      "start_frame": 0,
+      "end_frame": 450,
+      "frames_count": 450,
+      "duration": 15
+    },
+    {
+      "chunk_number": 2,
+      "filename": "chunk_002_0013s-0028s.mp4",
+      "path": "chunking_test_video_chunks\\chunk_002_0013s-0028s.mp4",
+      "start_time": 13,
+      "end_time": 28,
+      "start_frame": 390,
+      "end_frame": 840,
+      "frames_count": 450,
+      "duration": 15
+    },
+    {
+      "chunk_number": 3,
+      "filename": "chunk_003_0026s-0041s.mp4",
+      "path": "chunking_test_video_chunks\\chunk_003_0026s-0041s.mp4",
+      "start_time": 26,
+      "end_time": 41,
+      "start_frame": 780,
+      "end_frame": 1230,
+      "frames_count": 450,
+      "duration": 15
+    },
+    {
+      "chunk_number": 4,
+      "filename": "chunk_004_0039s-0054s.mp4",
+      "path": "chunking_test_video_chunks\\chunk_004_0039s-0054s.mp4",
+      "start_time": 39,
+      "end_time": 54,
+      "start_frame": 1170,
+      "end_frame": 1620,
+      "frames_count": 450,
+      "duration": 15
+    },
+    {
+      "chunk_number": 5,
+      "filename": "chunk_005_0052s-0060s.mp4",
+      "path": "chunking_test_video_chunks\\chunk_005_0052s-0060s.mp4",
+      "start_time": 52,
+      "end_time": 60.0,
+      "start_frame": 1560,
+      "end_frame": 1800,
+      "frames_count": 240,
+      "duration": 8.0
+    }
+  ],
+  "created_at": "2025-09-13T01:03:49.373804"
+}

@@ -1,0 +1,37 @@
+[2025-09-12T23:18:43.152192] INFO: Upload created with organized folder structure
+[2025-09-12T23:18:43.159882] INFO: Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.12.24_AM.mp4
+[2025-09-13T00:31:26.932742] INFO: Upload created with organized folder structure
+[2025-09-13T00:31:26.932742] INFO: Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)
+[2025-09-13T00:31:34.069618] INFO: Analysis started from web interface with mode: standard
+[2025-09-13T00:31:34.099310] INFO: PARALLEL AI analysis started for 20250913_003126_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4
+[2025-09-13T00:31:34.122404] INFO: Using sequential processing (parallel disabled)
+[2025-09-13T00:31:34.164512] INFO: Analysis completed - No harassment detected
+[2025-09-13T01:05:35.021471] INFO: Upload created with organized folder structure
+[2025-09-13T01:05:35.041174] INFO: Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)
+[2025-09-13T01:05:40.188389] INFO: Analysis started from web interface with mode: standard
+[2025-09-13T01:05:40.209667] INFO: CHUNKED PARALLEL AI analysis started for 20250913_010535_WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4
+[2025-09-13T01:05:40.228199] INFO: Using sequential processing (chunking disabled)
+[2025-09-13T01:05:40.257017] INFO: Video info: 1455 frames, 30 FPS
+[2025-09-13T01:05:41.397571] INFO: AI models loaded: GEMINI
+[2025-09-13T01:05:41.406495] INFO: Analysis mode: standard (checking every 1 frames)
+[2025-09-13T01:05:46.417185] INFO: AI analyzing frame 3 - 2 people detected
+[2025-09-13T01:05:52.809789] INFO: Frame 3: Normal behavior detected - SAFE. The image depicts individuals in a crowded public transport setting. While the man is in close proximity to the woman, this is common and often unavoidable in such an environment. There are no clear signs of aggressive body language, unwanted physical contact, blocking of path, or other threatening behaviors from this single still frame. A pole also provides some separation between them.
+[2025-09-13T01:05:53.013541] INFO: AI analyzing frame 4 - 2 people detected
+[2025-09-13T01:05:58.827284] INFO: Frame 4: Normal behavior detected - SAFE
+
+There are no clear visual indicators of harassment or threatening behavior. People are standing in close proximity, which is common in a crowded public transport setting, but there's no aggressive body language, unwanted physical contact, or signs of someone being cornered or blocked. Both individuals appear to be neutrally standing and holding onto the rails.
+[2025-09-13T01:05:59.243891] INFO: AI analyzing frame 7 - 2 people detected
+[2025-09-13T01:06:04.467535] INFO: Frame 7: Normal behavior detected - SAFE
+
+Based on the visible evidence in this still image, there are no clear indications of harassment or threatening behavior. The individuals appear to be in a public transport setting, which often involves close proximity due to crowding. Their body language seems neutral, and there is no aggressive posture, unwanted physical contact, or explicit blocking of paths discernible.
+[2025-09-13T01:06:04.854820] INFO: AI analyzing frame 10 - 2 people detected
+[2025-09-13T01:06:10.996115] ALERT: HARASSMENT DETECTED at frame 10: ALERT
+
+The woman's extended arm and open hand suggest an active defensive or confrontational gesture, possibly pushing someone away or reacting to unwanted proximity/contact. This body language is not typical for a relaxed public setting and indicates a potential conflict or a response to an intimidating situation.
+[2025-09-13T01:06:11.027845] ALERT: Alert #1 detected: ALERT
+
+The woman's extended arm and open hand suggest an active defensive or confrontational gesture, possibly pushing someone away or reacting to unwanted proximity/contact. This body language is not typical for a relaxed public setting and indicates a potential conflict or a response to an intimidating situation.
+[2025-09-13T01:06:11.059159] INFO: Auto-stopping analysis due to REAL alert detection (cost-saving)
+[2025-09-13T01:06:11.127770] ALERT: Analysis completed with 1 REAL harassment alerts detected
+[2025-09-13T06:43:56.328232] INFO: Upload created with organized folder structure
+[2025-09-13T06:43:56.346351] INFO: Video uploaded and organized: WhatsApp_Video_2025-09-12_at_10.26.50_AM.mp4 (2.59 MB)

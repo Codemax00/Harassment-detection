@@ -1,0 +1,10 @@
+{
+  "alert_id": 1,
+  "frame_number": 10,
+  "timestamp": "2025-09-13T02:10:44.650351",
+  "time_in_video": "00:00:00",
+  "confidence": 0.92,
+  "message": "ALERT\n\nThe woman's body language, specifically her raised right arm with her hand appearing to make contact with the man's lower back/hip area or push him away, strongly suggests she is reacting to an unwanted invasion of her personal space or unwanted physical contact. This defensive or reactive posture indicates that the interaction is unwelcome, aligning with warning signs such as \"A man standing too close to a woman in a way that invades her personal space without consent\" or \"A man making unwanted physical contact with a woman.\"",
+  "evidence_file": "alert_001_frame_000010.jpg",
+  "ai_analysis": "Real AI analysis detected harassment behavior at 00:00"
+}

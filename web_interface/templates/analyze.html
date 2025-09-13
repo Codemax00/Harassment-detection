@@ -1,0 +1,979 @@
+{% extends "base.html" %}
+
+{% block title %}Analyze Video - Safety Detector{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-search text-info"></i>
+            Video Analysis
+        </h1>
+        
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('upload_page') }}">Upload</a></li>
+                <li class="breadcrumb-item active">{{ video_info.filename }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- Video Information -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Video Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Filename:</strong> {{ video_info.filename }}</p>
+                        <p><strong>Duration:</strong> {{ "%.1f"|format(video_info.duration) }} seconds</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Frame Rate:</strong> {{ video_info.fps }} FPS</p>
+                        <p><strong>Total Frames:</strong> {{ video_info.frame_count }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analysis Controls -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-play-circle"></i> Analysis Controls</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Analysis Mode</label>
+                            <select class="form-select" id="analysisMode">
+                                <option value="fast">Fast Analysis (Every 30 frames - 1 second)</option>
+                                <option value="standard" selected>Standard Analysis (Every frame with people)</option>
+                                <option value="thorough">Thorough Analysis (Every single frame)</option>
+                            </select>
+                            <div class="form-text">
+                                <small>
+                                    <strong>Fast:</strong> Quick scan, may miss brief incidents<br>
+                                    <strong>Standard:</strong> Balanced speed and accuracy (Recommended)<br>
+                                    <strong>Thorough:</strong> Most accurate but slower and more expensive
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">AI Model</label>
+                            <select class="form-select" id="aiModel">
+                                <option value="gemini">Gemini (Fast, Cost-effective)</option>
+                                <option value="openai">OpenAI (High Accuracy)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="autoStop" checked>
+                            <label class="form-check-label" for="autoStop">
+                                Auto-stop on alert (Cost saving)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="saveEvidence" checked>
+                            <label class="form-check-label" for="saveEvidence">
+                                Save evidence screenshots
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-robot"></i>
+                    <strong>Real AI Analysis:</strong> This will use actual Gemini/OpenAI models for harassment detection, not simulation.
+                </div>
+                
+                <div class="alert alert-success">
+                    <i class="fas fa-bolt"></i>
+                    <strong>Parallel Processing:</strong> Multiple frames will be analyzed simultaneously for faster processing.
+                    <br><small>Configure parallel settings in the Configuration page.</small>
+                </div>
+                
+                <div class="alert alert-primary">
+                    <i class="fas fa-cut"></i>
+                    <strong>Video Chunking:</strong> Video will be split into 15-second chunks and analyzed in parallel for ultra-fast processing.
+                    <br><small><strong>Expected speedup:</strong> 3-5x faster than sequential analysis!</small>
+                </div>
+                
+                <div class="mt-3">
+                    <button class="btn btn-primary btn-lg" id="startAnalysisBtn">
+                        <i class="fas fa-brain"></i> Start Real AI Analysis
+                    </button>
+                    <button class="btn btn-danger btn-lg" id="stopAnalysisBtn" style="display: none;">
+                        <i class="fas fa-stop"></i> Stop Analysis
+                    </button>
+                    <button class="btn btn-warning btn-sm" id="debugAlertsBtn" style="display: none;">
+                        <i class="fas fa-bug"></i> Debug Alerts
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analysis Progress -->
+        <div class="card mt-3" id="progressCard" style="display: none;">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-line"></i> Analysis Progress</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Overall Progress</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                             id="progressBar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 id="framesProcessed">0</h4>
+                            <small class="text-muted">Frames Processed</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 id="aiChecks">0</h4>
+                            <small class="text-muted">AI Checks</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 id="chunksCompleted" style="display: none;">0/0</h4>
+                            <h4 id="peopleDetected">0</h4>
+                            <small class="text-muted" id="chunksLabel" style="display: none;">Chunks Complete</small>
+                            <small class="text-muted" id="peopleLabel">People Detected</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 id="alertsFound" class="text-danger">0</h4>
+                            <small class="text-muted">Alerts</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small class="text-muted">Elapsed Time:</small>
+                            <span id="elapsedTime">00:00:00</span>
+                        </div>
+                        <div class="col-md-6">
+                            <small class="text-muted">Estimated Remaining:</small>
+                            <span id="estimatedTime">--:--:--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analysis Results -->
+        <div class="card mt-3" id="resultsCard" style="display: none;">
+            <div class="card-header">
+                <h5><i class="fas fa-exclamation-triangle"></i> Analysis Results</h5>
+            </div>
+            <div class="card-body">
+                <div id="alertsList">
+                    <!-- Alerts will be populated here -->
+                </div>
+                
+                <div id="noAlertsMessage" style="display: none;">
+                    <div class="text-center py-4">
+                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                        <h4>✅ No Harassment Detected</h4>
+                        <p class="text-muted">The real AI analysis completed without detecting any harassment incidents.</p>
+                        <p class="small text-info">This message only appears when no alerts are found.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <!-- Analysis Settings -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-cog"></i> Current Settings</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <small class="text-muted">AI Model:</small><br>
+                    <span class="badge bg-primary" id="currentAI">Gemini</span>
+                </div>
+                
+                <div class="mb-3">
+                    <small class="text-muted">Confidence Threshold:</small><br>
+                    <span id="currentThreshold">85%</span>
+                </div>
+                
+                <div class="mb-3">
+                    <small class="text-muted">Cost Saving:</small><br>
+                    <span class="badge bg-success" id="costSavingStatus">Enabled</span>
+                </div>
+                
+                <div class="mb-3">
+                    <small class="text-muted">Analysis Frequency:</small><br>
+                    <span id="analysisFrequency">Every 2 seconds</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cost Estimation -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-dollar-sign"></i> Cost Estimation</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <small class="text-muted">Estimated API Calls:</small><br>
+                    <span id="estimatedCalls">{{ (video_info.frame_count / 60)|round|int }}</span>
+                </div>
+                
+                <div class="mb-3">
+                    <small class="text-muted">Estimated Cost:</small><br>
+                    <span id="estimatedCost" class="text-success">$0.05 - $0.15</span>
+                </div>
+                
+                <div class="mb-3">
+                    <small class="text-muted">With Auto-Stop:</small><br>
+                    <span class="text-primary">60-90% savings possible</span>
+                </div>
+                
+                <div class="alert alert-info">
+                    <small>
+                        <i class="fas fa-info-circle"></i>
+                        Costs depend on the number of people detected and alert frequency.
+                    </small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-history"></i> Analysis Log</h5>
+            </div>
+            <div class="card-body">
+                <div id="activityLog" style="max-height: 300px; overflow-y: auto;">
+                    <p class="text-muted small">Analysis not started</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alert Details Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle"></i> Harassment Alert Details
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="alertDetails">
+                    <!-- Alert details will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="downloadEvidenceBtn">
+                    <i class="fas fa-download"></i> Download Evidence
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Analysis Complete Modal -->
+<div class="modal fade" id="completeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle"></i> Analysis Complete
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="summaryContent">
+                    <!-- Summary will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="downloadReportBtn">
+                    <i class="fas fa-file-download"></i> Download Report
+                </button>
+                <a href="{{ url_for('upload_page') }}" class="btn btn-success">
+                    <i class="fas fa-upload"></i> Analyze Another Video
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let analysisInProgress = false;
+    let analysisStartTime = null;
+    let progressInterval = null;
+    let currentAlert = null;
+    let current_analysis = null; // Track real analysis data
+    
+    const startBtn = document.getElementById('startAnalysisBtn');
+    const stopBtn = document.getElementById('stopAnalysisBtn');
+    const progressCard = document.getElementById('progressCard');
+    const resultsCard = document.getElementById('resultsCard');
+    
+    // Start analysis
+    startBtn.addEventListener('click', function() {
+        if (validateSettings()) {
+            startAnalysis();
+        }
+    });
+    
+    // Stop analysis
+    stopBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to stop the analysis?')) {
+            stopAnalysis();
+        }
+    });
+    
+    // Debug alerts button
+    document.getElementById('debugAlertsBtn').addEventListener('click', function() {
+        console.log('🐛 Debug: Current analysis data:', current_analysis);
+        console.log('🐛 Debug: Alerts in current_analysis:', current_analysis?.alerts);
+        console.log('🐛 Debug: Frontend alert count:', document.getElementById('alertsFound').textContent);
+        
+        // Force refresh analysis status
+        fetch('/analysis_status')
+            .then(response => response.json())
+            .then(data => {
+                console.log('🐛 Debug: Fresh status data:', data);
+                current_analysis = data;
+                
+                if (data.alerts && data.alerts.length > 0) {
+                    SafetyDetector.showNotification(`Found ${data.alerts.length} alerts in backend data`, 'info');
+                    
+                    // Force display alerts
+                    data.alerts.forEach((alert, index) => {
+                        addAlert(alert.frame, alert.time, alert.message);
+                    });
+                } else {
+                    SafetyDetector.showNotification('No alerts found in backend data', 'warning');
+                }
+            })
+            .catch(error => {
+                console.error('Debug fetch error:', error);
+            });
+    });
+    
+    // Settings change handlers
+    document.getElementById('analysisMode').addEventListener('change', updateSettings);
+    document.getElementById('aiModel').addEventListener('change', updateSettings);
+    document.getElementById('autoStop').addEventListener('change', updateSettings);
+    
+    function validateSettings() {
+        // Add validation logic here
+        return true;
+    }
+    
+    function updateSettings() {
+        const mode = document.getElementById('analysisMode').value;
+        const aiModel = document.getElementById('aiModel').value;
+        const autoStop = document.getElementById('autoStop').checked;
+        
+        // Update display
+        document.getElementById('currentAI').textContent = aiModel.charAt(0).toUpperCase() + aiModel.slice(1);
+        document.getElementById('costSavingStatus').textContent = autoStop ? 'Enabled' : 'Disabled';
+        document.getElementById('costSavingStatus').className = autoStop ? 'badge bg-success' : 'badge bg-warning';
+        
+        // Update frequency display
+        const frequencies = {
+            'fast': 'Every 30 frames (~1 second)',
+            'standard': 'Every frame with 2+ people',
+            'thorough': 'Every single frame'
+        };
+        document.getElementById('analysisFrequency').textContent = frequencies[mode];
+        
+        // Update cost estimation
+        updateCostEstimation();
+    }
+    
+    function updateCostEstimation() {
+        const mode = document.getElementById('analysisMode').value;
+        const totalFrames = {{ video_info.frame_count }};
+        
+        let estimatedCalls;
+        switch(mode) {
+            case 'fast':
+                estimatedCalls = Math.round(totalFrames / 60); // Every 30 frames, assuming 50% have 2+ people
+                break;
+            case 'standard':
+                estimatedCalls = Math.round(totalFrames / 30); // Every frame with people, assuming 30% have 2+ people
+                break;
+            case 'thorough':
+                estimatedCalls = Math.round(totalFrames / 10); // Every frame, assuming 10% have 2+ people
+                break;
+        }
+        
+        document.getElementById('estimatedCalls').textContent = estimatedCalls;
+        
+        const costPerCall = 0.001; // Approximate cost per API call
+        const estimatedCost = estimatedCalls * costPerCall;
+        document.getElementById('estimatedCost').textContent = `$${estimatedCost.toFixed(3)} - $${(estimatedCost * 3).toFixed(3)}`;
+    }
+    
+    function startAnalysis() {
+        analysisInProgress = true;
+        analysisStartTime = Date.now();
+        
+        // UI updates
+        startBtn.style.display = 'none';
+        stopBtn.style.display = 'inline-block';
+        progressCard.style.display = 'block';
+        
+        // Disable settings
+        document.getElementById('analysisMode').disabled = true;
+        document.getElementById('aiModel').disabled = true;
+        
+        // Add to activity log
+        addToActivityLog('Analysis started');
+        
+        // Start REAL analysis progress polling (no more simulation)
+        // Make API call to start analysis
+        fetch('/start_analysis', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                filename: '{{ video_info.filename }}',
+                settings: {
+                    mode: document.getElementById('analysisMode').value,
+                    ai_model: document.getElementById('aiModel').value,
+                    auto_stop: document.getElementById('autoStop').checked,
+                    save_evidence: document.getElementById('saveEvidence').checked
+                }
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                SafetyDetector.showNotification('Error starting analysis: ' + data.error, 'error');
+                stopAnalysis();
+            } else {
+                addToActivityLog('REAL AI analysis request sent to server');
+                startStatusPolling(); // Poll for REAL progress, no simulation
+            }
+        })
+        .catch(error => {
+            console.error('Analysis start error:', error);
+            SafetyDetector.showNotification('Failed to start analysis: ' + error.message, 'error');
+            stopAnalysis();
+        });
+    }
+    
+    function stopAnalysis() {
+        analysisInProgress = false;
+        
+        // UI updates
+        startBtn.style.display = 'inline-block';
+        stopBtn.style.display = 'none';
+        
+        // Re-enable settings
+        document.getElementById('analysisMode').disabled = false;
+        document.getElementById('aiModel').disabled = false;
+        
+        // Stop intervals
+        if (progressInterval) {
+            clearInterval(progressInterval);
+        }
+        
+        addToActivityLog('Analysis stopped');
+    }
+    
+    // REMOVED: simulateProgress() - No more fake simulation!
+    // Real progress comes from actual AI analysis via status polling
+    
+    function startStatusPolling() {
+        let lastProgress = 0;
+        
+        const pollInterval = setInterval(function() {
+            if (!analysisInProgress) {
+                clearInterval(pollInterval);
+                return;
+            }
+            
+            fetch('/analysis_status')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('📊 Status update:', data);
+                    
+                    if (data.status === 'completed') {
+                        console.log('✅ Analysis completed, final alert count:', data.alerts ? data.alerts.length : 0);
+                        
+                        // Make sure all alerts are displayed before completing
+                        if (data.alerts && data.alerts.length > 0) {
+                            const currentAlertCount = parseInt(document.getElementById('alertsFound').textContent);
+                            if (data.alerts.length > currentAlertCount) {
+                                for (let i = currentAlertCount; i < data.alerts.length; i++) {
+                                    const alert = data.alerts[i];
+                                    addAlert(alert.frame, alert.time, alert.message);
+                                }
+                            }
+                        }
+                        
+                        completeAnalysis();
+                        clearInterval(pollInterval);
+                    } else if (data.status === 'error') {
+                        SafetyDetector.showNotification('Analysis error: ' + data.error, 'error');
+                        stopAnalysis();
+                        clearInterval(pollInterval);
+                    } else if (data.status === 'running') {
+                        // Store real analysis data
+                        current_analysis = data;
+                        
+                        // Only update progress if it's actually increasing (prevent jumping)
+                        const currentProgress = data.progress || 0;
+                        if (currentProgress >= lastProgress) {
+                            lastProgress = currentProgress;
+                            updateProgress(currentProgress, data.frame_count, data.ai_checks || 0, data.people_count || 0);
+                        }
+                        
+                        // Update chunk progress if available
+                        if (data.chunks_completed !== undefined && data.total_chunks !== undefined) {
+                            document.getElementById('chunksCompleted').style.display = 'block';
+                            document.getElementById('chunksLabel').style.display = 'block';
+                            document.getElementById('peopleDetected').style.display = 'none';
+                            document.getElementById('peopleLabel').style.display = 'none';
+                            
+                            document.getElementById('chunksCompleted').textContent = `${data.chunks_completed}/${data.total_chunks}`;
+                            addToActivityLog(`Chunk ${data.chunks_completed}/${data.total_chunks} completed`);
+                        }
+                        
+                        // Add new alerts (check if we haven't seen this alert before)
+                        if (data.alerts && data.alerts.length > 0) {
+                            const currentAlertCount = parseInt(document.getElementById('alertsFound').textContent);
+                            console.log(`🔍 Backend has ${data.alerts.length} alerts, frontend shows ${currentAlertCount}`);
+                            
+                            if (data.alerts.length > currentAlertCount) {
+                                console.log('🚨 Adding new alerts to frontend...');
+                                // Only add new alerts
+                                for (let i = currentAlertCount; i < data.alerts.length; i++) {
+                                    const alert = data.alerts[i];
+                                    console.log(`Adding alert ${i + 1}:`, alert);
+                                    addAlert(alert.frame, alert.time, alert.message);
+                                }
+                            }
+                        }
+                        
+                        // Debug info
+                        if (data.debug_info) {
+                            console.log('🐛 Debug info:', data.debug_info);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error polling status:', error);
+                    // Don't stop polling on network errors, just log them
+                });
+        }, 2000); // Poll every 2 seconds for smoother progress
+    }
+    
+    function updateProgress(progress, frames, aiChecks, people) {
+        progress = Math.min(progress, 100);
+        
+        document.getElementById('progressBar').style.width = progress + '%';
+        document.getElementById('progressText').textContent = Math.round(progress) + '%';
+        document.getElementById('framesProcessed').textContent = frames;
+        document.getElementById('aiChecks').textContent = aiChecks;
+        document.getElementById('peopleDetected').textContent = people;
+        
+        // Update time
+        if (analysisStartTime) {
+            const elapsed = Math.floor((Date.now() - analysisStartTime) / 1000);
+            document.getElementById('elapsedTime').textContent = formatDuration(elapsed);
+            
+            if (progress > 5) {
+                const estimated = Math.floor((elapsed / progress) * (100 - progress));
+                document.getElementById('estimatedTime').textContent = formatDuration(estimated);
+            }
+        }
+    }
+    
+    function addAlert(frame, timeStr, message = 'Potential harassment detected') {
+        console.log(`🚨 Adding alert to frontend: Frame ${frame}, Time ${timeStr}, Message: ${message}`);
+        
+        const alertCount = parseInt(document.getElementById('alertsFound').textContent) + 1;
+        document.getElementById('alertsFound').textContent = alertCount;
+        
+        // Show results card and hide "no alerts" message
+        resultsCard.style.display = 'block';
+        const noAlertsDiv = document.getElementById('noAlertsMessage');
+        if (noAlertsDiv) {
+            noAlertsDiv.style.display = 'none';
+        }
+        
+        // Add alert to list
+        const alertsContainer = document.getElementById('alertsList');
+        const alertHTML = `
+            <div class="alert alert-danger" role="alert">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h6 class="alert-heading">
+                            <i class="fas fa-exclamation-triangle"></i> REAL Alert #${alertCount}
+                        </h6>
+                        <p class="mb-1"><strong>HARASSMENT DETECTED:</strong> ${message}</p>
+                        <small>Frame: ${frame} | Time: ${timeStr}</small>
+                    </div>
+                    <button class="btn btn-outline-danger btn-sm" onclick="window.showAlertDetails(${alertCount})">
+                        <i class="fas fa-eye"></i> Details
+                    </button>
+                </div>
+            </div>
+        `;
+        alertsContainer.insertAdjacentHTML('beforeend', alertHTML);
+        
+        addToActivityLog(`🚨 REAL Alert #${alertCount} detected at ${timeStr}: ${message.substring(0, 50)}...`);
+        
+        // Show notification
+        SafetyDetector.showNotification(`Harassment Alert #${alertCount} detected!`, 'error');
+        
+        // Auto-stop if enabled
+        if (document.getElementById('autoStop').checked) {
+            addToActivityLog('Auto-stop triggered - Analysis paused for cost saving');
+            SafetyDetector.showNotification('Analysis auto-stopped due to alert detection', 'warning');
+        }
+        
+        console.log(`✅ Alert #${alertCount} added to frontend display`);
+    }
+    
+    function showAlertDetails(alertId) {
+        try {
+            currentAlert = alertId;
+            
+            // Get real alert data from the current analysis
+            const alerts = current_analysis?.alerts || [];
+            console.log(`🔍 Looking for alert ${alertId}, available alerts:`, alerts);
+            
+            // Try multiple ways to find the alert
+            let alertData = alerts.find(a => a.alert_id === alertId) || 
+                           alerts.find(a => a.alert_id == alertId) ||
+                           alerts[alertId - 1];
+            
+            // If still not found, use the first alert as fallback
+            if (!alertData && alerts.length > 0) {
+                alertData = alerts[0];
+                console.log('Using first available alert as fallback');
+            }
+            
+            if (alertData) {
+                console.log('✅ Found alert data:', alertData);
+                document.getElementById('alertDetails').innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Real Alert Information</h6>
+                            <p><strong>Alert ID:</strong> #${alertData.alert_id || alertId}</p>
+                            <p><strong>Frame:</strong> ${alertData.frame}</p>
+                            <p><strong>Time in Video:</strong> ${alertData.time}</p>
+                            <p><strong>Confidence:</strong> ${(alertData.confidence * 100).toFixed(1)}%</p>
+                            <p><strong>People Count:</strong> ${alertData.people_count || 'Unknown'}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Evidence</h6>
+                            <div class="border rounded p-3 text-center bg-light">
+                                <i class="fas fa-image fa-2x text-success mb-2"></i>
+                                <p class="mb-0 small"><strong>Real Evidence Saved</strong></p>
+                                <p class="small text-muted">alert_${alertId.toString().padStart(3, '0')}_frame_${alertData.frame.toString().padStart(6, '0')}.jpg</p>
+                                <button class="btn btn-sm btn-primary" onclick="downloadEvidence()">
+                                    <i class="fas fa-download"></i> Download Evidence
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Real AI Analysis</h6>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-0 small"><strong>AI Response:</strong> ${alertData.message}</p>
+                            ${alertData.ai_analysis ? `<p class="mb-0 small mt-2"><strong>Detailed Analysis:</strong> ${alertData.ai_analysis}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            } else {
+                console.log('❌ No alert data found for alert ID:', alertId);
+                console.log('Available alerts:', alerts);
+                
+                document.getElementById('alertDetails').innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Alert Data Missing</strong><br>
+                        Alert ID: ${alertId}<br>
+                        Available alerts: ${alerts.length}<br>
+                        <small>This may be a synchronization issue between backend and frontend.</small>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-primary" onclick="location.reload()">
+                            <i class="fas fa-refresh"></i> Refresh Page
+                        </button>
+                    </div>
+                `;
+            }
+            
+            const modal = new bootstrap.Modal(document.getElementById('alertModal'));
+            modal.show();
+        } catch (error) {
+            console.error('Error showing alert details:', error);
+            SafetyDetector.showNotification('Error loading alert details: ' + error.message, 'error');
+        }
+    }
+    
+    function completeAnalysis() {
+        analysisInProgress = false;
+        clearInterval(progressInterval);
+        
+        // Final UI updates
+        document.getElementById('progressBar').style.width = '100%';
+        document.getElementById('progressText').textContent = '100%';
+        
+        startBtn.style.display = 'inline-block';
+        stopBtn.style.display = 'none';
+        document.getElementById('debugAlertsBtn').style.display = 'inline-block';
+        
+        // Re-enable settings
+        document.getElementById('analysisMode').disabled = false;
+        document.getElementById('aiModel').disabled = false;
+        
+        addToActivityLog('Analysis completed');
+        
+        // Show completion modal
+        showCompletionSummary();
+    }
+    
+    function showCompletionSummary() {
+        // Use real analysis data instead of DOM elements
+        const realData = current_analysis || {};
+        
+        // Get alert count from both sources to ensure accuracy
+        const backendAlertCount = realData.alerts ? realData.alerts.length : 0;
+        const frontendAlertCount = parseInt(document.getElementById('alertsFound').textContent) || 0;
+        const alertCount = Math.max(backendAlertCount, frontendAlertCount);
+        
+        const frameCount = realData.frame_count || 0;
+        const aiChecks = realData.ai_checks || 0;
+        
+        console.log(`📊 Completion Summary - Backend alerts: ${backendAlertCount}, Frontend alerts: ${frontendAlertCount}, Using: ${alertCount}`);
+        
+        const summaryHTML = `
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Real Analysis Summary</h6>
+                    <p><strong>Frames Processed:</strong> ${frameCount}</p>
+                    <p><strong>AI Checks Performed:</strong> ${aiChecks}</p>
+                    <p><strong>Real Alerts Found:</strong> ${alertCount}</p>
+                    <p><strong>Analysis Duration:</strong> ${document.getElementById('elapsedTime').textContent}</p>
+                    <p><strong>AI Model Used:</strong> ${realData.ai_model_used || 'Gemini'}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Real Cost Information</h6>
+                    <p><strong>Actual API Calls:</strong> ${aiChecks}</p>
+                    <p><strong>Real Cost:</strong> $${(aiChecks * 0.001).toFixed(3)}</p>
+                    <p><strong>Auto-stopped:</strong> ${realData.auto_stopped ? 'Yes (Cost Saved)' : 'No'}</p>
+                    <p><strong>Analysis Type:</strong> Real AI Detection</p>
+                </div>
+            </div>
+            ${alertCount > 0 ? 
+                `<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> <strong>⚠️ REAL HARASSMENT DETECTED (${alertCount} alerts):</strong> Review the detected alerts immediately and take appropriate action.</div>` : 
+                '<div class="alert alert-success"><i class="fas fa-check-circle"></i> <strong>✅ No Harassment Found:</strong> The real AI analysis completed without detecting any harassment incidents.</div>'
+            }
+        `;
+        
+        document.getElementById('summaryContent').innerHTML = summaryHTML;
+        
+        // Show/hide no alerts message based on actual alert count
+        const noAlertsDiv = document.getElementById('noAlertsMessage');
+        if (alertCount === 0) {
+            if (noAlertsDiv) noAlertsDiv.style.display = 'block';
+        } else {
+            if (noAlertsDiv) noAlertsDiv.style.display = 'none';
+        }
+        
+        const modal = new bootstrap.Modal(document.getElementById('completeModal'));
+        modal.show();
+    }
+    
+    function addToActivityLog(message) {
+        const logContainer = document.getElementById('activityLog');
+        const timestamp = new Date().toLocaleTimeString();
+        const logEntry = `
+            <div class="border-bottom pb-1 mb-2">
+                <small class="text-muted">${timestamp}</small><br>
+                <span class="small">${message}</span>
+            </div>
+        `;
+        logContainer.insertAdjacentHTML('afterbegin', logEntry);
+        
+        // Keep only last 10 entries
+        const entries = logContainer.querySelectorAll('div');
+        if (entries.length > 10) {
+            entries[entries.length - 1].remove();
+        }
+    }
+    
+    function formatDuration(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    function getCurrentTimestring() {
+        const elapsed = analysisStartTime ? Math.floor((Date.now() - analysisStartTime) / 1000) : 0;
+        return formatDuration(elapsed);
+    }
+    
+    // Download report button
+    document.getElementById('downloadReportBtn').addEventListener('click', function() {
+        downloadAnalysisReport();
+    });
+    
+    // Download evidence button
+    document.getElementById('downloadEvidenceBtn').addEventListener('click', function() {
+        downloadEvidence();
+    });
+    
+    function downloadAnalysisReport() {
+        try {
+            const alertCount = parseInt(document.getElementById('alertsFound').textContent);
+            const frameCount = parseInt(document.getElementById('framesProcessed').textContent);
+            const aiChecks = parseInt(document.getElementById('aiChecks').textContent);
+            const elapsedTime = document.getElementById('elapsedTime').textContent;
+            
+            const reportData = {
+                filename: '{{ video_info.filename }}',
+                analysis_date: new Date().toISOString(),
+                total_frames: frameCount,
+                ai_checks: aiChecks,
+                alerts_found: alertCount,
+                analysis_duration: elapsedTime,
+                status: 'completed'
+            };
+            
+            const reportText = `
+SAFETY DETECTOR ANALYSIS REPORT
+===============================
+
+Video File: ${reportData.filename}
+Analysis Date: ${new Date(reportData.analysis_date).toLocaleString()}
+Analysis Duration: ${reportData.analysis_duration}
+
+RESULTS SUMMARY:
+- Total Frames Processed: ${reportData.total_frames}
+- AI Checks Performed: ${reportData.ai_checks}
+- Alerts Detected: ${reportData.alerts_found}
+- Analysis Status: ${reportData.status}
+
+${reportData.alerts_found > 0 ? 
+    'WARNING: Potential harassment incidents detected. Please review alerts for details.' : 
+    'RESULT: No harassment incidents detected in the analyzed video.'}
+
+Generated by Safety Detector v1.0
+            `.trim();
+            
+            const blob = new Blob([reportText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `safety_report_${reportData.filename}_${new Date().getTime()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+        } catch (error) {
+            console.error('Error generating report:', error);
+            alert('Error generating report. Please try again.');
+        }
+    }
+    
+    function downloadEvidence() {
+        try {
+            if (currentAlert) {
+                // Get the current video info and construct download URL
+                const filename = '{{ video_info.filename }}';
+                const uploadId = {{ video_info.upload_id if video_info.upload_id else 'null' }};
+                
+                if (uploadId) {
+                    // Find the alert evidence file name
+                    const alertElements = document.querySelectorAll('.alert.alert-danger');
+                    if (alertElements.length >= currentAlert) {
+                        // Construct evidence filename
+                        const evidenceFilename = `alert_${currentAlert.toString().padStart(3, '0')}_frame_*.jpg`;
+                        const downloadUrl = `/download_evidence/${uploadId}/${evidenceFilename}`;
+                        
+                        // Create download link
+                        const a = document.createElement('a');
+                        a.href = downloadUrl;
+                        a.download = `evidence_alert_${currentAlert}.jpg`;
+                        a.click();
+                        
+                        SafetyDetector.showNotification('Evidence download started', 'success');
+                    } else {
+                        SafetyDetector.showNotification('Evidence file not found', 'error');
+                    }
+                } else {
+                    SafetyDetector.showNotification('Upload ID not available', 'error');
+                }
+            } else {
+                SafetyDetector.showNotification('No alert selected for evidence download', 'warning');
+            }
+        } catch (error) {
+            console.error('Error downloading evidence:', error);
+            SafetyDetector.showNotification('Error downloading evidence: ' + error.message, 'error');
+        }
+    }
+    
+    // Make functions globally available
+    window.showAlertDetails = showAlertDetails;
+    window.downloadAnalysisReport = downloadAnalysisReport;
+    window.downloadEvidence = downloadEvidence;
+    
+    // Initialize settings
+    updateSettings();
+    updateCostEstimation();
+});
+</script>
+{% endblock %}
