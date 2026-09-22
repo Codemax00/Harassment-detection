@@ -64,6 +64,18 @@ except ImportError:
         switch_ai_model = lambda x: False
         load_person_detector = lambda: None
 
+try:
+    from helpers.guardian_matrix_adapter import GuardianMatrixLiveStreamManager
+    from src.pipeline import GuardianMatrixPipeline
+    from src.policy.safety_policy import PolicyState
+    GUARDIAN_MATRIX_AVAILABLE = True
+except Exception as gm_err:
+    print(f"⚠️ Guardian Matrix initialization notice: {gm_err}")
+    GUARDIAN_MATRIX_AVAILABLE = False
+    GuardianMatrixLiveStreamManager = None
+    GuardianMatrixPipeline = None
+    PolicyState = None
+
 app = Flask(__name__)
 # Use environment variable for secret key in production
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev_key_change_in_production_' + str(int(time.time())))
@@ -280,8 +292,18 @@ def generate_camera_frames(camera_id=0):
         if not ai_manager or not person_model:
             init_models()
         
+        gm_pipeline = None
+        if GUARDIAN_MATRIX_AVAILABLE and GuardianMatrixPipeline is not None:
+            try:
+                gm_pipeline = GuardianMatrixPipeline(video_id=f"LIVE_CAM_{camera_id}")
+                print(f"🚀 Guardian Matrix pipeline active for camera {camera_id} stream")
+            except Exception as gm_err:
+                print(f"⚠️ Guardian Matrix initialization error: {gm_err}")
+                gm_pipeline = None
+
         frame_count = 0
         last_ai_check = 0
+        stream_start_t = time.time()
         
         while camera_monitoring_active:
             success, frame = camera.read()
@@ -290,109 +312,72 @@ def generate_camera_frames(camera_id=0):
             
             frame_count += 1
             camera_analysis_data['frame_count'] = frame_count
-            
-            # Optimize performance: Person detection every 15 frames (~0.5 seconds)
-            if frame_count % 15 == 0:
+
+            # If Guardian Matrix is available, process through research pipeline
+            if gm_pipeline is not None:
+                current_time = time.time() - stream_start_t
                 try:
-                    # Import detection functions once
-                    if frame_count == 15:  # First time
-                        sys.path.append(os.path.join(parent_dir, 'helpers'))
-                        from person_detector import find_people_in_frame, draw_person_boxes
-                        from multi_ai import analyze_for_harassment
-                        # Cache imports globally
-                        globals()['find_people_in_frame'] = find_people_in_frame
-                        globals()['draw_person_boxes'] = draw_person_boxes
-                        globals()['analyze_for_harassment'] = analyze_for_harassment
-                    
-                    # Fast person detection
-                    people_found = globals()['find_people_in_frame'](person_model, frame)
-                    
-                    # Update people count with thread safety
+                    res = gm_pipeline.process_frame(
+                        frame,
+                        timestamp=current_time,
+                        frame_id=frame_count,
+                        annotate=True
+                    )
+                    if res.annotated_frame is not None:
+                        frame = res.annotated_frame
+
                     with camera_lock:
-                        camera_analysis_data['people_detected'] = len(people_found)
-                    
-                    # Draw detection boxes (lightweight operation)
-                    if len(people_found) > 0:
-                        frame = globals()['draw_person_boxes'](frame, people_found)
-                    
-                    # Optimized AI analysis: only if 2+ people AND enough time passed
-                    if len(people_found) >= 2 and (frame_count - last_ai_check) > 90:  # AI check every 3 seconds max
-                        camera_analysis_data['ai_checks'] += 1
-                        last_ai_check = frame_count
-                        
-                        print(f"🧠 AI analyzing frame {frame_count} - {len(people_found)} people detected")
-                        
-                        # Real harassment analysis (async to avoid blocking)
-                        try:
-                            is_harassment, ai_message = globals()['analyze_for_harassment'](ai_manager, frame)
-                            print(f"🤖 AI Response: {ai_message} (Harassment: {is_harassment})")
-                            
-                            # Store latest AI analysis with thread safety
-                            with camera_lock:
-                                camera_analysis_data['latest_ai_analysis'] = {
-                                    'frame': frame_count,
-                                    'people_count': len(people_found),
-                                    'ai_message': ai_message,
-                                    'is_harassment': is_harassment,
-                                    'timestamp': time.time()
-                                }
-                        except Exception as ai_error:
-                            print(f"⚠️ AI analysis error: {ai_error}")
-                            # Continue without AI analysis
-                            is_harassment = False
-                            ai_message = "AI analysis temporarily unavailable"
-                        
-                        if is_harassment:
-                            with camera_lock:  # Thread safety for alert data
-                                camera_analysis_data['alerts'] += 1
-                                alert_id = camera_analysis_data['alerts']
-                            
-                            print(f"🚨 HARASSMENT ALERT #{alert_id}: {ai_message}")
-                            
-                            # Add alert overlay
-                            cv2.putText(frame, "HARASSMENT ALERT!", (10, 30), 
-                                       cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
-                            cv2.putText(frame, ai_message[:50], (10, 70), 
-                                       cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-                            
-                            # Save evidence with organized storage
+                        camera_analysis_data['people_detected'] = len(res.tracked_people)
+                        camera_analysis_data['ai_checks'] = frame_count
+                        camera_analysis_data['latest_ai_analysis'] = {
+                            'frame': frame_count,
+                            'people_count': len(res.tracked_people),
+                            'pattern': res.classified_event.value,
+                            'policy_state': res.policy_action.state.value,
+                            'confidence': res.system1_decision.calibrated_confidence,
+                            'ai_message': f"Pattern: {res.classified_event.value} | State: {res.policy_action.state.value}",
+                            'is_harassment': (res.policy_action.state == PolicyState.ALERT if PolicyState else False),
+                            'timestamp': time.time()
+                        }
+
+                        if PolicyState and res.policy_action.state in (PolicyState.ALERT, PolicyState.REVIEW):
+                            if 'alerts_list' not in camera_analysis_data:
+                                camera_analysis_data['alerts_list'] = []
+                            camera_analysis_data['alerts'] = len(camera_analysis_data['alerts_list']) + 1
                             timestamp = time.strftime("%Y%m%d_%H%M%S")
                             evidence_filename = f"camera_alert_{timestamp}.jpg"
                             try:
                                 cv2.imwrite(evidence_filename, frame)
-                                print(f"📸 Evidence saved: {evidence_filename}")
-                            except Exception as e:
-                                print(f"❌ Failed to save evidence: {e}")
-                            
-                            # Store alert data with thread safety
-                            with camera_lock:
-                                if 'alerts_list' not in camera_analysis_data:
-                                    camera_analysis_data['alerts_list'] = []
-                                
-                                alert_data = {
-                                    'alert_id': alert_id,
-                                    'frame': frame_count,
-                                    'timestamp': timestamp,
-                                    'ai_message': ai_message,
-                                    'people_count': len(people_found),
-                                    'evidence_file': evidence_filename,
-                                    'created_at': time.time()
-                                }
-                                
-                                camera_analysis_data['alerts_list'].append(alert_data)
-                                print(f"📝 Alert #{alert_id} stored. Total alerts: {len(camera_analysis_data['alerts_list'])}")
-                        else:
-                            # Add normal behavior overlay
-                            cv2.putText(frame, "Normal Behavior", (10, 110), 
-                                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-                    
-                    # Add status overlay
-                    cv2.putText(frame, f"People: {len(people_found)}", (10, frame.shape[0] - 60), 
-                               cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                    cv2.putText(frame, f"AI Checks: {camera_analysis_data['ai_checks']}", (10, frame.shape[0] - 30), 
-                               cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                    
-                except Exception as e:
+                            except Exception:
+                                pass
+                            camera_analysis_data['alerts_list'].append({
+                                'alert_id': camera_analysis_data['alerts'],
+                                'frame': frame_count,
+                                'timestamp': timestamp,
+                                'ai_message': res.policy_action.rationale,
+                                'people_count': len(res.tracked_people),
+                                'evidence_file': evidence_filename,
+                                'created_at': time.time()
+                            })
+                except Exception as gm_proc_err:
+                    print(f"Guardian Matrix frame processing error: {gm_proc_err}")
+            else:
+                # Legacy fallback processing
+                if frame_count % 15 == 0:
+                    try:
+                        if frame_count == 15:
+                            sys.path.append(os.path.join(parent_dir, 'helpers'))
+                            from person_detector import find_people_in_frame, draw_person_boxes
+                            globals()['find_people_in_frame'] = find_people_in_frame
+                            globals()['draw_person_boxes'] = draw_person_boxes
+                        people_found = globals()['find_people_in_frame'](person_model, frame)
+                        with camera_lock:
+                            camera_analysis_data['people_detected'] = len(people_found)
+                        if len(people_found) > 0:
+                            frame = globals()['draw_person_boxes'](frame, people_found)
+                    except Exception as e:
+                        print(f"Analysis error: {e}")
+
                     print(f"Analysis error: {e}")
             
             # Encode frame to JPEG with proper compression

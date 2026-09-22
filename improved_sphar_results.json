@@ -1,0 +1,316 @@
+{
+  "timestamp": 1790064136.2123356,
+  "total_clips": 17,
+  "total_monitoring_seconds": 246.06,
+  "total_monitoring_hours": 0.0684,
+  "tp": 7,
+  "fp": 6,
+  "tn": 2,
+  "fn": 2,
+  "precision": 0.5385,
+  "recall": 0.7778,
+  "f1_score": 0.6364,
+  "accuracy": 0.5294,
+  "false_alarms_per_hour": 87.78,
+  "per_class": {
+    "hitting": {
+      "total": 3,
+      "correct": 1,
+      "accuracy": 0.333,
+      "dominant_patterns": [
+        "AGGRESSIVE_MOTION_PATTERN",
+        "PURSUIT_PATTERN",
+        "NORMAL_ACTIVITY"
+      ]
+    },
+    "kicking": {
+      "total": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "dominant_patterns": [
+        "REPEATED_CONTACT_PATTERN",
+        "AGGRESSIVE_MOTION_PATTERN",
+        "AGGRESSIVE_MOTION_PATTERN"
+      ]
+    },
+    "falling": {
+      "total": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "dominant_patterns": [
+        "AGGRESSIVE_MOTION_PATTERN",
+        "AGGRESSIVE_MOTION_PATTERN",
+        "FALL_PATTERN"
+      ]
+    },
+    "walking": {
+      "total": 3,
+      "correct": 0,
+      "accuracy": 0.0,
+      "dominant_patterns": [
+        "FALL_PATTERN",
+        "AGGRESSIVE_MOTION_PATTERN",
+        "REPEATED_CONTACT_PATTERN"
+      ]
+    },
+    "neutral": {
+      "total": 3,
+      "correct": 1,
+      "accuracy": 0.333,
+      "dominant_patterns": [
+        "NORMAL_ACTIVITY",
+        "PURSUIT_PATTERN",
+        "AGGRESSIVE_MOTION_PATTERN"
+      ]
+    },
+    "sitting": {
+      "total": 2,
+      "correct": 1,
+      "accuracy": 0.5,
+      "dominant_patterns": [
+        "NORMAL_ACTIVITY",
+        "REPEATED_CONTACT_PATTERN"
+      ]
+    }
+  },
+  "details": [
+    {
+      "video_path": "test_videos/sphar\\hitting\\bitint_box_0001.mp4",
+      "total_frames": 70,
+      "duration_seconds": 2.63,
+      "processed_fps": 4.93,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 1,
+      "is_predicted_risk": false,
+      "dominant_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "elapsed_seconds": 14.2,
+      "ground_truth_class": "hitting",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\hitting\\ucarg_person02_02_ground_boxing.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.44,
+      "processed_fps": 8.4,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 16,
+      "is_predicted_risk": true,
+      "dominant_pattern": "PURSUIT_PATTERN",
+      "elapsed_seconds": 8.33,
+      "ground_truth_class": "hitting",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\hitting\\uccrime_Arrest006_x264.mp4",
+      "total_frames": 70,
+      "duration_seconds": 103.0,
+      "processed_fps": 14.31,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 0,
+      "is_predicted_risk": false,
+      "dominant_pattern": "NORMAL_ACTIVITY",
+      "elapsed_seconds": 4.9,
+      "ground_truth_class": "hitting",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\kicking\\bitint_kick_0001.mp4",
+      "total_frames": 63,
+      "duration_seconds": 2.1,
+      "processed_fps": 8.74,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 55,
+      "is_predicted_risk": true,
+      "dominant_pattern": "REPEATED_CONTACT_PATTERN",
+      "elapsed_seconds": 7.21,
+      "ground_truth_class": "kicking",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\kicking\\bitint_kick_0041.mp4",
+      "total_frames": 41,
+      "duration_seconds": 1.37,
+      "processed_fps": 7.46,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 41,
+      "is_predicted_risk": true,
+      "dominant_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "elapsed_seconds": 5.5,
+      "ground_truth_class": "kicking",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\kicking\\uccrime_Assault032_x264.mp4",
+      "total_frames": 70,
+      "duration_seconds": 19.07,
+      "processed_fps": 9.06,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 40,
+      "is_predicted_risk": true,
+      "dominant_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "elapsed_seconds": 7.74,
+      "ground_truth_class": "kicking",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\falling\\casia_angleview_p01_faint_a1.mp4",
+      "total_frames": 70,
+      "duration_seconds": 13.64,
+      "processed_fps": 9.25,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 22,
+      "is_predicted_risk": true,
+      "dominant_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "elapsed_seconds": 7.58,
+      "ground_truth_class": "falling",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\falling\\okutama_1.1.1_Lying_2.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.21,
+      "processed_fps": 12.76,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 46,
+      "is_predicted_risk": true,
+      "dominant_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "elapsed_seconds": 5.49,
+      "ground_truth_class": "falling",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\falling\\okutama_2.1.1_Lying_1.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.21,
+      "processed_fps": 12.92,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 52,
+      "is_predicted_risk": true,
+      "dominant_pattern": "FALL_PATTERN",
+      "elapsed_seconds": 5.42,
+      "ground_truth_class": "falling",
+      "is_gt_risk": true
+    },
+    {
+      "video_path": "test_videos/sphar\\walking\\casia_angleview_p01_crouch_a1.mp4",
+      "total_frames": 70,
+      "duration_seconds": 12.24,
+      "processed_fps": 9.29,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 42,
+      "is_predicted_risk": true,
+      "dominant_pattern": "FALL_PATTERN",
+      "elapsed_seconds": 7.53,
+      "ground_truth_class": "walking",
+      "is_gt_risk": false
+    },
+    {
+      "video_path": "test_videos/sphar\\walking\\okutama_1.1.1_Walking_8.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.21,
+      "processed_fps": 11.94,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 24,
+      "is_predicted_risk": true,
+      "dominant_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "elapsed_seconds": 5.87,
+      "ground_truth_class": "walking",
+      "is_gt_risk": false
+    },
+    {
+      "video_path": "test_videos/sphar\\walking\\okutama_1.2.4_Walking_83.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.21,
+      "processed_fps": 11.06,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 4,
+      "is_predicted_risk": true,
+      "dominant_pattern": "REPEATED_CONTACT_PATTERN",
+      "elapsed_seconds": 6.33,
+      "ground_truth_class": "walking",
+      "is_gt_risk": false
+    },
+    {
+      "video_path": "test_videos/sphar\\neutral\\bitint_bend_0001.mp4",
+      "total_frames": 45,
+      "duration_seconds": 1.5,
+      "processed_fps": 9.12,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 0,
+      "is_predicted_risk": false,
+      "dominant_pattern": "NORMAL_ACTIVITY",
+      "elapsed_seconds": 4.94,
+      "ground_truth_class": "neutral",
+      "is_gt_risk": false
+    },
+    {
+      "video_path": "test_videos/sphar\\neutral\\okutama_1.1.1_Standing_87.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.21,
+      "processed_fps": 10.12,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 20,
+      "is_predicted_risk": true,
+      "dominant_pattern": "PURSUIT_PATTERN",
+      "elapsed_seconds": 6.92,
+      "ground_truth_class": "neutral",
+      "is_gt_risk": false
+    },
+    {
+      "video_path": "test_videos/sphar\\neutral\\okutama_1.2.4_Standing_25.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.21,
+      "processed_fps": 11.39,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 20,
+      "is_predicted_risk": true,
+      "dominant_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "elapsed_seconds": 6.15,
+      "ground_truth_class": "neutral",
+      "is_gt_risk": false
+    },
+    {
+      "video_path": "test_videos/sphar\\sitting\\caviar_Rest_InChair.mp4",
+      "total_frames": 70,
+      "duration_seconds": 40.6,
+      "processed_fps": 13.53,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 0,
+      "is_predicted_risk": false,
+      "dominant_pattern": "NORMAL_ACTIVITY",
+      "elapsed_seconds": 5.18,
+      "ground_truth_class": "sitting",
+      "is_gt_risk": false
+    },
+    {
+      "video_path": "test_videos/sphar\\sitting\\okutama_2.1.6_Sitting_38.mp4",
+      "total_frames": 70,
+      "duration_seconds": 6.21,
+      "processed_fps": 12.08,
+      "alerts_count": 0,
+      "risk_alerts_count": 0,
+      "review_count": 48,
+      "is_predicted_risk": true,
+      "dominant_pattern": "REPEATED_CONTACT_PATTERN",
+      "elapsed_seconds": 5.8,
+      "ground_truth_class": "sitting",
+      "is_gt_risk": false
+    }
+  ]
+}

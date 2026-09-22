@@ -1,0 +1,24 @@
+# Guardian Matrix Unified Pipeline Configuration
+
+project_name: "Guardian Matrix"
+version: "2.0.0-research"
+random_seed: 42
+
+pipeline:
+  detection: "configs/detection.yaml"
+  tracking: "configs/tracking.yaml"
+  pose: "configs/pose.yaml"
+  temporal: "configs/temporal.yaml"
+  decision: "configs/decision.yaml"
+
+outputs:
+  events_dir: "outputs/events"
+  evidence_dir: "outputs/evidence"
+  metrics_dir: "outputs/metrics"
+  snapshots_dir: "outputs/snapshots"
+
+research_logging:
+  record_git_commit: true
+  record_model_versions: true
+  record_random_seed: true
+  strict_reproducibility: true

@@ -1,0 +1,11 @@
+# Multi-Object Tracking Configuration
+# Implements ByteTrack/BoT-SORT style tracking for stable persistent IDs
+
+tracker_type: "bytetrack" # "bytetrack", "botsort", "iou_kalman"
+track_thresh: 0.5
+track_buffer: 30 # Number of frames to keep lost tracks alive
+match_thresh: 0.7
+min_box_area: 100 # Ignore bounding boxes smaller than this
+max_time_lost: 2.0 # seconds before track ID is retired
+kalman_process_noise: 0.05
+kalman_measurement_noise: 0.1

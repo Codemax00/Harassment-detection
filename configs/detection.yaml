@@ -1,0 +1,23 @@
+# Detection Configuration for Guardian Matrix
+# Evaluates modern detectors (YOLO, RT-DETR, etc.)
+
+default_detector: "yolo"
+confidence_threshold: 0.5
+nms_threshold: 0.45
+device: "cpu" # "cpu", "cuda", or "auto"
+
+detectors:
+  yolo:
+    model_name: "yolov8n.pt"
+    img_size: 640
+    classes: [0] # Person class only
+    conf: 0.5
+  rt_detr:
+    model_name: "rtdetr-l.pt"
+    img_size: 640
+    conf: 0.5
+  benchmark_candidates:
+    - "yolov8n"
+    - "yolov8s"
+    - "yolov8m"
+    - "rt-detr"

@@ -1,0 +1,88 @@
+{
+  "event_id": "GM-00006",
+  "timestamp": "2026-09-22T16:08:41.139594",
+  "video_id": "GM_STREAM",
+  "track_ids": [
+    3,
+    5
+  ],
+  "pose_model": "YOLO_Pose_Baseline",
+  "temporal_model": "ST-GCN+Transformer",
+  "decision_model": "Laya_System1",
+  "event_state": "REVIEW",
+  "confidence": 0.478,
+  "evidence": {
+    "timestamp": 0.4666666666666667,
+    "frame_id": 14,
+    "scene": {
+      "person_count": 5,
+      "tracked_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "interaction": {
+      "pair": [
+        3,
+        5
+      ],
+      "distance_m": 0.282,
+      "duration_s": 0.43,
+      "relative_velocity": 0.044,
+      "is_facing_each_other": true,
+      "hand_to_body_min_distance": 0.19,
+      "hand_contact_probability": 1.0,
+      "repeated_contact_score": 1.0,
+      "pursuit_score": 0.0,
+      "separation_score": 0.0,
+      "restraint_likelihood": 0.0
+    },
+    "motion": {
+      "rapid_approach": 0.0,
+      "rapid_separation": 0.0,
+      "repeated_contact": 0.0
+    },
+    "pose": {
+      "confidence": 0.83,
+      "num_poses": 5,
+      "has_3d_keypoints": true
+    },
+    "temporal_model": {
+      "interaction_pattern": "REPEATED_CONTACT_PATTERN",
+      "confidence": 0.477,
+      "top_probabilities": {
+        "NORMAL_ACTIVITY": 0.291,
+        "REPEATED_CONTACT_PATTERN": 0.477
+      }
+    },
+    "quality_metrics": {
+      "pose_quality": 0.8303365588188172,
+      "tracking_quality": 0.8212976932525635,
+      "temporal_consistency": 0.85,
+      "evidence_completeness": 1.0
+    }
+  },
+  "model_versions": {
+    "pose": "YOLO_Pose_Baseline",
+    "temporal": "ST-GCN+Transformer",
+    "system1": "Laya_System1"
+  },
+  "reproducibility": {
+    "git_commit": "8f9d7f4",
+    "random_seed": 42,
+    "python_version": "3.11.16",
+    "framework_versions": {
+      "python": "3.11.16",
+      "os": "Windows-10-10.0.26200-SP0",
+      "torch": "2.14.0+cpu",
+      "ultralytics": "8.0.196",
+      "cv2": "4.8.1",
+      "numpy": "1.24.3",
+      "scipy": "1.15.3"
+    },
+    "policy_rationale": "Suspicious physical pattern 'REPEATED_CONTACT_PATTERN' flagged for human verification."
+  }
+}

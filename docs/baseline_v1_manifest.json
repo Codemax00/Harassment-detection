@@ -1,0 +1,68 @@
+{
+  "version": "v1.0-baseline",
+  "date": "2026-09-22T16:18:00+05:30",
+  "detector": {
+    "name": "YOLOv8PersonDetector",
+    "version": "8.0.196",
+    "weights": "yolov8n.pt",
+    "confidence_threshold": 0.35,
+    "iou_threshold": 0.45,
+    "max_detections": 30
+  },
+  "pose": {
+    "name": "YOLOv8PoseEstimator",
+    "version": "8.0.196",
+    "weights": "yolov8n-pose.pt",
+    "confidence_threshold": 0.25,
+    "keypoint_confidence_threshold": 0.20
+  },
+  "tracker": {
+    "name": "ByteTracker",
+    "version": "custom-bytetrack",
+    "track_thresh": 0.40,
+    "match_thresh": 0.70,
+    "max_time_lost": 30
+  },
+  "thresholds": {
+    "proximity_threshold_body_heights": 0.80,
+    "contact_threshold_body_heights": 0.35,
+    "kick_distance_threshold": 0.32,
+    "horizontal_collapse_aspect_ratio": 1.35,
+    "downward_fall_velocity": 0.85,
+    "rapid_strike_hand_speed": 1.80,
+    "rapid_kick_foot_speed": 1.80,
+    "duplicate_box_iou_suppression": 0.40
+  },
+  "runtime": {
+    "python": "3.11.16",
+    "opencv": "4.8.1",
+    "torch": "2.14.0+cpu",
+    "ultralytics": "8.0.196"
+  },
+  "hardware": {
+    "platform": "Windows",
+    "cuda_available": false,
+    "device": "cpu"
+  },
+  "benchmark": {
+    "dataset": "SPHAR",
+    "metrics": {
+      "total_clips": 17,
+      "total_monitoring_seconds": 246.06,
+      "tp": 7,
+      "fp": 6,
+      "tn": 2,
+      "fn": 2,
+      "precision": 0.5385,
+      "recall": 0.7778,
+      "f1_score": 0.6364,
+      "false_alarms_per_hour": 87.78,
+      "hitting_accuracy": 0.333,
+      "kicking_accuracy": 1.0,
+      "falling_accuracy": 1.0,
+      "walking_accuracy": 0.0,
+      "neutral_accuracy": 0.333,
+      "sitting_accuracy": 0.5
+    }
+  }
+}

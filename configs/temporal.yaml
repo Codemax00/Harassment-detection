@@ -1,0 +1,32 @@
+# Temporal Motion Engine & Action Model Configuration
+
+window_duration_seconds: 2.0 # 1 to 3 seconds sliding window
+sampling_rate_hz: 15
+min_frames_for_temporal_decision: 5
+
+motion_features:
+  compute_velocity: true
+  compute_acceleration: true
+  compute_joint_angles: true
+  compute_body_orientation: true
+  joints_to_track:
+    - "left_wrist"
+    - "right_wrist"
+    - "left_elbow"
+    - "right_elbow"
+    - "left_shoulder"
+    - "right_shoulder"
+    - "nose"
+    - "torso_center"
+
+classifier:
+  architecture: "ensemble" # "st_gcn", "transformer", "ensemble"
+  st_gcn:
+    num_classes: 10
+    in_channels: 3 # x, y, confidence/z
+    num_stages: 4
+  transformer:
+    embed_dim: 128
+    num_heads: 4
+    num_layers: 2
+    dropout: 0.1

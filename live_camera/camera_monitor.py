@@ -8,11 +8,20 @@ import os
 import json
 from datetime import datetime
 
-# Add helpers folder to path so we can import our helper files
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'helpers'))
+# Add parent directories to path so we can import our modules
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, parent_dir)
+sys.path.insert(0, os.path.join(parent_dir, 'helpers'))
 
 from person_detector import load_person_detector, find_people_in_frame, draw_person_boxes
 from multi_ai import setup_ai_models, analyze_for_harassment, count_people_for_analysis, get_ai_model_info
+
+try:
+    from src.pipeline import GuardianMatrixPipeline
+    from src.policy.safety_policy import PolicyState
+    GUARDIAN_MATRIX_AVAILABLE = True
+except Exception:
+    GUARDIAN_MATRIX_AVAILABLE = False
 
 def start_camera():
     """Start the camera and return camera object"""
@@ -68,8 +77,15 @@ def main():
     total_people_detection_time = 0
     total_ai_analysis_time = 0
     total_frames_with_ai = 0
-    session_start_time = time.time()
-    
+    gm_pipeline = None
+    if GUARDIAN_MATRIX_AVAILABLE:
+        try:
+            gm_pipeline = GuardianMatrixPipeline(video_id="LIVE_CAM_MONITOR")
+            print("🚀 Guardian Matrix research pipeline enabled for live monitoring!")
+        except Exception as e:
+            print(f"⚠️ Guardian Matrix init notice: {e}")
+            gm_pipeline = None
+
     print("Starting live monitoring...")
     print("Looking for people and checking for harassment...")
     
@@ -85,17 +101,26 @@ def main():
         
         frame_count += 1
         
-        # Time people detection
-        people_detection_start = time.time()
-        people_found = find_people_in_frame(person_model, frame)
-        people_detection_time = time.time() - people_detection_start
-        total_people_detection_time += people_detection_time
-        
-        # Draw boxes around people
-        frame_with_boxes = draw_person_boxes(frame.copy(), people_found)
-        
-        # Count people
-        people_status = count_people_for_analysis(people_found)
+        if gm_pipeline is not None:
+            current_t = time.time() - session_start_time
+            res = gm_pipeline.process_frame(frame, timestamp=current_t, frame_id=frame_count, annotate=True)
+            frame_with_boxes = res.annotated_frame if res.annotated_frame is not None else frame
+            people_found = res.tracked_people
+            people_detection_time = res.processing_time_ms / 1000.0
+            total_people_detection_time += people_detection_time
+            people_status = f"People: {len(people_found)} | Pattern: {res.classified_event.value} | State: {res.policy_action.state.value}"
+        else:
+            # Time people detection
+            people_detection_start = time.time()
+            people_found = find_people_in_frame(person_model, frame)
+            people_detection_time = time.time() - people_detection_start
+            total_people_detection_time += people_detection_time
+            
+            # Draw boxes around people
+            frame_with_boxes = draw_person_boxes(frame.copy(), people_found)
+            
+            # Count people
+            people_status = count_people_for_analysis(people_found)
         
         # Calculate performance metrics
         avg_people_detection = total_people_detection_time / frame_count

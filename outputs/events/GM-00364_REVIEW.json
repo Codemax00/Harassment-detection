@@ -1,0 +1,86 @@
+{
+  "event_id": "GM-00364",
+  "timestamp": "2026-09-22T13:31:59.282454",
+  "video_id": "GM_STREAM",
+  "track_ids": [
+    45,
+    46
+  ],
+  "pose_model": "YOLO_Pose_Baseline",
+  "temporal_model": "ST-GCN+Transformer",
+  "decision_model": "Laya_System1",
+  "event_state": "REVIEW",
+  "confidence": 0.494,
+  "evidence": {
+    "timestamp": 0.06896551724137931,
+    "frame_id": 2,
+    "scene": {
+      "person_count": 3,
+      "tracked_ids": [
+        45,
+        46,
+        47
+      ]
+    },
+    "interaction": {
+      "pair": [
+        45,
+        46
+      ],
+      "distance_m": 0.0,
+      "duration_s": 0.0,
+      "relative_velocity": 0.0,
+      "is_facing_each_other": true,
+      "hand_to_body_min_distance": 0.055,
+      "hand_contact_probability": 1.0,
+      "repeated_contact_score": 0.167,
+      "pursuit_score": 0.0,
+      "separation_score": 0.0,
+      "restraint_likelihood": 0.0
+    },
+    "motion": {
+      "rapid_approach": 0.0,
+      "rapid_separation": 0.0,
+      "repeated_contact": 0.167
+    },
+    "pose": {
+      "confidence": 0.904,
+      "num_poses": 3,
+      "has_3d_keypoints": true
+    },
+    "temporal_model": {
+      "interaction_pattern": "AGGRESSIVE_MOTION_PATTERN",
+      "confidence": 0.494,
+      "top_probabilities": {
+        "NORMAL_ACTIVITY": 0.281,
+        "AGGRESSIVE_MOTION_PATTERN": 0.494
+      }
+    },
+    "quality_metrics": {
+      "pose_quality": 0.9043612877527872,
+      "tracking_quality": 0.8254486640294393,
+      "temporal_consistency": 0.85,
+      "evidence_completeness": 1.0
+    }
+  },
+  "model_versions": {
+    "pose": "YOLO_Pose_Baseline",
+    "temporal": "ST-GCN+Transformer",
+    "system1": "Laya_System1"
+  },
+  "reproducibility": {
+    "git_commit": "8f9d7f4",
+    "random_seed": 42,
+    "python_version": "3.11.16",
+    "framework_versions": {
+      "python": "3.11.16",
+      "os": "Windows-10-10.0.26200-SP0",
+      "torch": "2.14.0+cpu",
+      "ultralytics": "8.0.196",
+      "cv2": "4.8.1",
+      "numpy": "1.24.3",
+      "scipy": "1.15.3"
+    },
+    "policy_rationale": "Suspicious physical pattern 'AGGRESSIVE_MOTION_PATTERN' flagged for human verification."
+  }
+}

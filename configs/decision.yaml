@@ -1,0 +1,40 @@
+# Decision, Confidence Architecture & Safety Policy Configuration
+
+system1:
+  engine: "laya"
+  decision_classes:
+    - "NORMAL"
+    - "SUSPICIOUS"
+    - "REVIEW"
+    - "UNCERTAIN"
+  weights:
+    interaction_score: 0.35
+    temporal_pattern_score: 0.35
+    proximity_score: 0.15
+    aggressive_motion_score: 0.15
+
+confidence_quality_gates:
+  min_pose_quality: 0.60
+  min_tracking_quality: 0.60
+  min_temporal_consistency: 0.65
+  min_evidence_completeness: 0.70
+  calibration_temperature: 1.2
+
+system2_verification:
+  enabled: true
+  escalation_triggers:
+    - "UNCERTAIN"
+    - "SUSPICIOUS"
+  verification_backend: "multimodal_llm" # "multimodal_llm", "rule_verifier"
+  include_keyframes: true
+  num_keyframes: 3
+
+safety_policy:
+  states:
+    - "NORMAL"
+    - "MONITOR"
+    - "REVIEW"
+    - "ALERT"
+  auto_alert_requires_human_confirmation: true
+  log_all_events: true
+  save_evidence_snapshots: true

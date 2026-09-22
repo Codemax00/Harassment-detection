@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-09-22 11:57:51",
+  "camera": "camera_01",
+  "incident_id": "INCIDENT_1790058471",
+  "track_ids": [
+    38,
+    39
+  ],
+  "risk_score": 1.0,
+  "risk_level": "CRITICAL",
+  "duration": 7.9,
+  "evidence": [
+    "rapid approach",
+    "repeated contact pattern",
+    "persistent close interaction"
+  ],
+  "frames_count": 150,
+  "fps": 15,
+  "video_file": "event.mp4"
+}

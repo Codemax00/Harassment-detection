@@ -1,0 +1,31 @@
+# High-Precision Human Pose Layer Configuration
+# Multi-family support: YOLO Pose, Meta Sapiens, NVIDIA GEM-X, SAM 3D Body
+
+active_model: "yolo_pose" # "yolo_pose", "sapiens", "gem_x", "sam_3d_body"
+fallback_to_heuristic_3d: true
+min_pose_confidence: 0.4
+keypoint_visibility_threshold: 0.3
+
+normalization:
+  relative_to_bbox: true
+  center_at_torso: true
+  scale_by_height: true
+  enable_camera_coordinate_transform: false
+
+models:
+  yolo_pose:
+    model_name: "yolov8n-pose.pt"
+    num_keypoints: 17
+    format: "coco"
+  sapiens:
+    model_variant: "sapiens_0.3b_gvd" # sapiens-0.3b / 0.6b / 1b
+    num_keypoints: 133 # Whole-body (body, hands, face, feet)
+    repo_url: "https://github.com/facebookresearch/sapiens"
+  gem_x:
+    model_variant: "gem_x_77_joints"
+    num_keypoints: 77 # 3D monocular motion recovery
+    repo_url: "https://github.com/NVlabs/GEM-X"
+  sam_3d_body:
+    model_variant: "sam_3d_body_base"
+    mesh_recovery: true
+    repo_url: "https://github.com/facebookresearch/sam-3d-body"
