@@ -33,11 +33,19 @@ def run_video_analysis(video_path: str, max_frames: int = 150):
 
     def progress(f, total, t, summary):
         if f % 15 == 0:
-            print(f"  Frame {f:04d}/{total:04d} ({t:05.1f}s) -> "
-                  f"Pattern: {summary['pattern']:<25} | "
-                  f"State: {summary['policy_state']:<8} | "
-                  f"Conf: {summary['confidence']:.2f} | "
-                  f"{summary['processing_time_ms']:5.1f}ms")
+            act_str = summary.get('action', summary.get('pattern', 'UNKNOWN'))
+            cat_str = summary.get('category', 'NORMAL')
+            state_str = summary.get('incident_state', summary.get('policy_state', 'NORMAL'))
+            risk_val = summary.get('risk_score', summary.get('confidence', 0.0))
+            people = summary.get('people_count', 0)
+            lat = summary.get('processing_time_ms', 0.0)
+            print(f"  Frame {f:04d}/{total:04d} ({t:05.1f}s) | "
+                  f"State: {state_str:<15} | "
+                  f"Cat: {cat_str:<22} | "
+                  f"Act: {act_str:<10} | "
+                  f"Risk: {risk_val:.2f} | "
+                  f"People: {people} | "
+                  f"{lat:5.1f}ms")
 
     results = analyzer.analyze_video(
         video_path=video_path,
@@ -51,9 +59,15 @@ def run_video_analysis(video_path: str, max_frames: int = 150):
     print("-------------------------------------------------------")
     print(f"Processed Frames   : {results['total_frames']}")
     print(f"Average FPS        : {results['processed_fps']}")
-    print(f"Safety Alerts      : {results['alerts_count']}")
+    print(f"Dominant Category  : {results['predicted_category']}")
+    print(f"Incident Episodes  : {results.get('incident_episodes_count', 0)}")
+    print(f"Safety Alerts      : {results.get('safety_incidents_count', 0)}")
+    print(f"Aggressive Alerts  : {results.get('aggressive_incidents_count', 0)}")
     print(f"Human Reviews Req  : {results['review_count']}")
     print(f"Annotated Video    : {results['annotated_video']}")
+    if results.get('saved_bundles'):
+        for b in results['saved_bundles']:
+            print(f"Incident Saved     : {b}")
     print("=======================================================\n")
     return results
 

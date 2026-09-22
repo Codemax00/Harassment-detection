@@ -33,6 +33,9 @@ class InteractionFeatures:
     foot_to_body_min_distance: float = 1.0
     kick_contact_probability: float = 0.0
     aggressive_strike_score: float = 0.0
+    directional_impact_score: float = 0.0
+    directional_strike_velocity: float = 0.0
+    directional_kick_velocity: float = 0.0
     movement_synchronization: float = 0.5  # Correlation of trajectories
     proximity_duration_seconds: float = 0.0
     repeated_contact_score: float = 0.0
@@ -52,6 +55,7 @@ class PairwiseInteractionState:
     contact_events: int = 0
     consecutive_approach_frames: int = 0
     consecutive_retreat_frames: int = 0
+    limb_trajectories: Dict[int, Dict[int, Tuple[float, float, float]]] = field(default_factory=dict)
 
 
 class InteractionEngine:
@@ -87,16 +91,23 @@ class InteractionEngine:
                 if p_a.track_id == p_b.track_id:
                     continue
 
-                # Filter duplicate bounding boxes of the same person (IoU > 0.40)
+                # Filter duplicate bounding boxes of the same person (IoU, containment, center distance)
                 if p_a.bbox and p_b.bbox:
                     b1, b2 = p_a.bbox, p_b.bbox
                     ix1, iy1 = max(b1[0], b2[0]), max(b1[1], b2[1])
                     ix2, iy2 = min(b1[2], b2[2]), min(b1[3], b2[3])
                     iw, ih = max(0.0, ix2 - ix1), max(0.0, iy2 - iy1)
                     inter_a = iw * ih
-                    union_a = (b1[2]-b1[0])*(b1[3]-b1[1]) + (b2[2]-b2[0])*(b2[3]-b2[1]) - inter_a
+                    area1 = max(1.0, (b1[2]-b1[0]) * (b1[3]-b1[1]))
+                    area2 = max(1.0, (b2[2]-b2[0]) * (b2[3]-b2[1]))
+                    union_a = area1 + area2 - inter_a
                     iou = inter_a / max(1.0, union_a)
-                    if iou > 0.40:
+                    containment = inter_a / min(area1, area2)
+                    c1 = ((b1[0] + b1[2]) / 2.0, (b1[1] + b1[3]) / 2.0)
+                    c2 = ((b2[0] + b2[2]) / 2.0, (b2[1] + b2[3]) / 2.0)
+                    h_avg = ((b1[3] - b1[1]) + (b2[3] - b2[1])) / 2.0
+                    center_dist = np.hypot(c1[0] - c2[0], c1[1] - c2[1]) / max(1.0, h_avg)
+                    if iou > 0.30 or containment > 0.35 or center_dist < 0.28:
                         continue
 
                 m_a = motion_features.get(p_a.track_id)
@@ -243,7 +254,82 @@ class InteractionEngine:
         if dist < 1.2 and f2b_dist < 0.32:
             kick_contact_prob = float(np.clip(1.0 - (f2b_dist / 0.32), 0.0, 1.0))
 
-        # 5. Strike Impact Score (Kinematic Velocity Spikes during proximity)
+        # 5. Directional Impact Vector Analysis
+        # Compute exact velocity vector of striking limbs toward the opponent's body
+        trajs = state.limb_trajectories
+        if id_a not in trajs: trajs[id_a] = {}
+        if id_b not in trajs: trajs[id_b] = {}
+
+        def _get_dir_impact(curr_pt, prev_tuple, target_pt):
+            if curr_pt is None or prev_tuple is None or target_pt is None:
+                return 0.0
+            px_p, py_p, t_p = prev_tuple
+            dt = max(1e-4, timestamp - t_p)
+            if dt > 0.4:  # Keypoint is stale or frame rate dropped heavily
+                return 0.0
+            vx = (curr_pt[0] - px_p) / dt
+            vy = (curr_pt[1] - py_p) / dt
+            dx = target_pt[0] - curr_pt[0]
+            dy = target_pt[1] - curr_pt[1]
+            d_len = float(np.hypot(dx, dy))
+            if d_len < 1e-4:
+                return 0.0
+            ux = dx / d_len
+            uy = dy / d_len
+            v_impact_px = vx * ux + vy * uy
+            return float(v_impact_px / h_scale)
+
+        # Hands of A toward B torso
+        a_hand_impacts = []
+        for kidx in [KeypointName.LEFT_WRIST, KeypointName.RIGHT_WRIST]:
+            pt = pose_a.get_scene_keypoint_2d(kidx)
+            if pt is not None:
+                imp = _get_dir_impact(pt, trajs[id_a].get(kidx), pos_b)
+                a_hand_impacts.append(imp)
+                trajs[id_a][kidx] = (pt[0], pt[1], timestamp)
+
+        # Hands of B toward A torso
+        b_hand_impacts = []
+        for kidx in [KeypointName.LEFT_WRIST, KeypointName.RIGHT_WRIST]:
+            pt = pose_b.get_scene_keypoint_2d(kidx)
+            if pt is not None:
+                imp = _get_dir_impact(pt, trajs[id_b].get(kidx), pos_a)
+                b_hand_impacts.append(imp)
+                trajs[id_b][kidx] = (pt[0], pt[1], timestamp)
+
+        # Feet of A toward B body/legs
+        a_foot_impacts = []
+        for kidx in [KeypointName.LEFT_ANKLE, KeypointName.RIGHT_ANKLE]:
+            pt = pose_a.get_scene_keypoint_2d(kidx)
+            if pt is not None:
+                imp = _get_dir_impact(pt, trajs[id_a].get(kidx), pos_b)
+                a_foot_impacts.append(imp)
+                trajs[id_a][kidx] = (pt[0], pt[1], timestamp)
+
+        # Feet of B toward A body/legs
+        b_foot_impacts = []
+        for kidx in [KeypointName.LEFT_ANKLE, KeypointName.RIGHT_ANKLE]:
+            pt = pose_b.get_scene_keypoint_2d(kidx)
+            if pt is not None:
+                imp = _get_dir_impact(pt, trajs[id_b].get(kidx), pos_a)
+                b_foot_impacts.append(imp)
+                trajs[id_b][kidx] = (pt[0], pt[1], timestamp)
+
+        max_strike_v = max(a_hand_impacts + b_hand_impacts, default=0.0)
+        max_kick_v = max(a_foot_impacts + b_foot_impacts, default=0.0)
+
+        # Gated directional impact scores (only count if within physical striking proximity)
+        dir_strike_score = 0.0
+        if dist < 0.95 and max_strike_v > 0.5:
+            dir_strike_score = float(np.clip(max_strike_v / 1.6, 0.0, 1.0))
+
+        dir_kick_score = 0.0
+        if dist < 1.25 and max_kick_v > 0.5:
+            dir_kick_score = float(np.clip(max_kick_v / 1.5, 0.0, 1.0))
+
+        directional_impact_score = float(max(dir_strike_score, dir_kick_score))
+
+        # Kinematic peak speeds
         peak_hand_v = max(
             motion_a.peak_hand_speed if motion_a else 0.0,
             motion_b.peak_hand_speed if motion_b else 0.0
@@ -253,9 +339,11 @@ class InteractionEngine:
             motion_b.peak_foot_speed if motion_b else 0.0
         )
 
-        hand_strike = hand_contact_prob * min(1.0, peak_hand_v / 2.2) if (hand_contact_prob > 0.3 and peak_hand_v > 1.8) else 0.0
-        kick_strike = kick_contact_prob * min(1.0, peak_foot_v / 2.0) if (kick_contact_prob > 0.3 and peak_foot_v > 1.8) else 0.0
-        aggressive_strike_score = float(max(hand_strike, kick_strike))
+        # Aggressive strike score combines directional impact with proximity
+        # Prevents normal walking arm swing (which has directional impact <= 0) from triggering strikes
+        hand_strike = max(dir_strike_score, hand_contact_prob * min(1.0, peak_hand_v / 1.8) if (hand_contact_prob > 0.3 and peak_hand_v > 1.8 and max_strike_v > 0.2) else 0.0)
+        kick_strike = max(dir_kick_score, kick_contact_prob * min(1.0, peak_foot_v / 1.8) if (kick_contact_prob > 0.3 and peak_foot_v > 1.8 and max_kick_v > 0.2) else 0.0)
+        aggressive_strike_score = float(max(hand_strike, kick_strike, directional_impact_score))
 
         if (hand_contact_prob > 0.65 or kick_contact_prob > 0.65 or aggressive_strike_score > 0.5) and dist < 0.7:
             state.contact_events += 1
@@ -313,6 +401,9 @@ class InteractionEngine:
             foot_to_body_min_distance=f2b_dist if f2b_dist < 90 else 1.0,
             kick_contact_probability=kick_contact_prob,
             aggressive_strike_score=aggressive_strike_score,
+            directional_impact_score=directional_impact_score,
+            directional_strike_velocity=max_strike_v,
+            directional_kick_velocity=max_kick_v,
             movement_synchronization=sync_score,
             proximity_duration_seconds=float(prox_duration),
             repeated_contact_score=repeated_contact_score,

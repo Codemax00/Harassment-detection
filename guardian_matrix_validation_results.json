@@ -1,0 +1,343 @@
+{
+  "timestamp": 1790077772.5221405,
+  "total_clips": 17,
+  "total_monitoring_seconds": 246.06,
+  "total_monitoring_hours": 0.0684,
+  "total_frames_processed": 1268,
+  "performance": {
+    "average_fps": 12.33,
+    "median_fps": 11.66,
+    "mean_latency_ms": 86.23,
+    "detection_latency_seconds": 0.79
+  },
+  "operational": {
+    "total_alerts": 8,
+    "false_alerts": 3,
+    "missed_incidents": 4,
+    "alerts_per_hour": 117.04,
+    "false_alerts_per_hour": 43.89,
+    "missed_incidents_per_hour": 58.52,
+    "saved_evidence_bundles_count": 8
+  },
+  "targets_achieved": {
+    "attack_recall": 0.5,
+    "attack_recall_target_met": false,
+    "safety_recall": 0.6667,
+    "fall_to_aggression_leakage": 0,
+    "zero_fall_to_aggression_leakage": true,
+    "overall_accuracy": 0.5882
+  },
+  "confusion_matrix": {
+    "labels": [
+      "NORMAL_ACTIVITY",
+      "SAFETY_INCIDENT",
+      "AGGRESSIVE_INTERACTION"
+    ],
+    "matrix": [
+      [
+        5,
+        0,
+        3
+      ],
+      [
+        1,
+        2,
+        0
+      ],
+      [
+        3,
+        0,
+        3
+      ]
+    ],
+    "description": "Rows = Ground Truth [NORMAL, SAFETY, AGGRESSIVE], Columns = Prediction [NORMAL, SAFETY, AGGRESSIVE]"
+  },
+  "category_metrics": {
+    "NORMAL_ACTIVITY": {
+      "TP": 5,
+      "FP": 4,
+      "TN": 5,
+      "FN": 3,
+      "precision": 0.5556,
+      "recall": 0.625,
+      "f1_score": 0.5882,
+      "specificity": 0.5556,
+      "false_positive_rate": 0.4444,
+      "false_negative_rate": 0.375
+    },
+    "SAFETY_INCIDENT": {
+      "TP": 2,
+      "FP": 0,
+      "TN": 14,
+      "FN": 1,
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1_score": 0.8,
+      "specificity": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.3333
+    },
+    "AGGRESSIVE_INTERACTION": {
+      "TP": 3,
+      "FP": 3,
+      "TN": 8,
+      "FN": 3,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1_score": 0.5,
+      "specificity": 0.7273,
+      "false_positive_rate": 0.2727,
+      "false_negative_rate": 0.5
+    }
+  },
+  "per_action_metrics": {
+    "falling": {
+      "total": 3,
+      "correct": 2,
+      "accuracy": 0.667,
+      "predicted_categories": [
+        "NORMAL_ACTIVITY",
+        "SAFETY_INCIDENT",
+        "SAFETY_INCIDENT"
+      ]
+    },
+    "hitting": {
+      "total": 3,
+      "correct": 1,
+      "accuracy": 0.333,
+      "predicted_categories": [
+        "AGGRESSIVE_INTERACTION",
+        "NORMAL_ACTIVITY",
+        "NORMAL_ACTIVITY"
+      ]
+    },
+    "kicking": {
+      "total": 3,
+      "correct": 2,
+      "accuracy": 0.667,
+      "predicted_categories": [
+        "AGGRESSIVE_INTERACTION",
+        "AGGRESSIVE_INTERACTION",
+        "NORMAL_ACTIVITY"
+      ]
+    },
+    "neutral": {
+      "total": 3,
+      "correct": 2,
+      "accuracy": 0.667,
+      "predicted_categories": [
+        "AGGRESSIVE_INTERACTION",
+        "NORMAL_ACTIVITY",
+        "NORMAL_ACTIVITY"
+      ]
+    },
+    "sitting": {
+      "total": 2,
+      "correct": 1,
+      "accuracy": 0.5,
+      "predicted_categories": [
+        "NORMAL_ACTIVITY",
+        "AGGRESSIVE_INTERACTION"
+      ]
+    },
+    "walking": {
+      "total": 3,
+      "correct": 2,
+      "accuracy": 0.667,
+      "predicted_categories": [
+        "NORMAL_ACTIVITY",
+        "AGGRESSIVE_INTERACTION",
+        "NORMAL_ACTIVITY"
+      ]
+    }
+  },
+  "details": [
+    {
+      "video": "casia_angleview_p01_faint_a1.mp4",
+      "ground_truth_class": "falling",
+      "ground_truth_category": "SAFETY_INCIDENT",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 14,
+      "fps": 7.89,
+      "duration": 13.64,
+      "correct": false
+    },
+    {
+      "video": "okutama_1.1.1_Lying_2.mp4",
+      "ground_truth_class": "falling",
+      "ground_truth_category": "SAFETY_INCIDENT",
+      "predicted_category": "SAFETY_INCIDENT",
+      "active_incidents": 11,
+      "review_count": 21,
+      "fps": 17.1,
+      "duration": 6.21,
+      "correct": true
+    },
+    {
+      "video": "okutama_2.1.1_Lying_1.mp4",
+      "ground_truth_class": "falling",
+      "ground_truth_category": "SAFETY_INCIDENT",
+      "predicted_category": "SAFETY_INCIDENT",
+      "active_incidents": 74,
+      "review_count": 6,
+      "fps": 13.4,
+      "duration": 6.21,
+      "correct": true
+    },
+    {
+      "video": "bitint_box_0001.mp4",
+      "ground_truth_class": "hitting",
+      "ground_truth_category": "AGGRESSIVE_INTERACTION",
+      "predicted_category": "AGGRESSIVE_INTERACTION",
+      "active_incidents": 65,
+      "review_count": 6,
+      "fps": 9.49,
+      "duration": 2.63,
+      "correct": true
+    },
+    {
+      "video": "ucarg_person02_02_ground_boxing.mp4",
+      "ground_truth_class": "hitting",
+      "ground_truth_category": "AGGRESSIVE_INTERACTION",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 0,
+      "fps": 11.1,
+      "duration": 6.44,
+      "correct": false
+    },
+    {
+      "video": "uccrime_Arrest006_x264.mp4",
+      "ground_truth_class": "hitting",
+      "ground_truth_category": "AGGRESSIVE_INTERACTION",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 0,
+      "fps": 21.45,
+      "duration": 103.0,
+      "correct": false
+    },
+    {
+      "video": "bitint_kick_0001.mp4",
+      "ground_truth_class": "kicking",
+      "ground_truth_category": "AGGRESSIVE_INTERACTION",
+      "predicted_category": "AGGRESSIVE_INTERACTION",
+      "active_incidents": 52,
+      "review_count": 6,
+      "fps": 8.82,
+      "duration": 2.1,
+      "correct": true
+    },
+    {
+      "video": "bitint_kick_0041.mp4",
+      "ground_truth_class": "kicking",
+      "ground_truth_category": "AGGRESSIVE_INTERACTION",
+      "predicted_category": "AGGRESSIVE_INTERACTION",
+      "active_incidents": 30,
+      "review_count": 0,
+      "fps": 8.63,
+      "duration": 1.37,
+      "correct": true
+    },
+    {
+      "video": "uccrime_Assault032_x264.mp4",
+      "ground_truth_class": "kicking",
+      "ground_truth_category": "AGGRESSIVE_INTERACTION",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 0,
+      "fps": 10.28,
+      "duration": 19.07,
+      "correct": false
+    },
+    {
+      "video": "bitint_bend_0001.mp4",
+      "ground_truth_class": "neutral",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "AGGRESSIVE_INTERACTION",
+      "active_incidents": 27,
+      "review_count": 7,
+      "fps": 9.67,
+      "duration": 1.5,
+      "correct": false
+    },
+    {
+      "video": "okutama_1.1.1_Standing_87.mp4",
+      "ground_truth_class": "neutral",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 67,
+      "fps": 10.62,
+      "duration": 6.21,
+      "correct": true
+    },
+    {
+      "video": "okutama_1.2.4_Standing_25.mp4",
+      "ground_truth_class": "neutral",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 0,
+      "fps": 11.83,
+      "duration": 6.21,
+      "correct": true
+    },
+    {
+      "video": "caviar_Rest_InChair.mp4",
+      "ground_truth_class": "sitting",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 0,
+      "fps": 20.52,
+      "duration": 40.6,
+      "correct": true
+    },
+    {
+      "video": "okutama_2.1.6_Sitting_38.mp4",
+      "ground_truth_class": "sitting",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "AGGRESSIVE_INTERACTION",
+      "active_incidents": 63,
+      "review_count": 6,
+      "fps": 11.66,
+      "duration": 6.21,
+      "correct": false
+    },
+    {
+      "video": "casia_angleview_p01_crouch_a1.mp4",
+      "ground_truth_class": "walking",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 0,
+      "fps": 11.81,
+      "duration": 12.24,
+      "correct": true
+    },
+    {
+      "video": "okutama_1.1.1_Walking_8.mp4",
+      "ground_truth_class": "walking",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "AGGRESSIVE_INTERACTION",
+      "active_incidents": 4,
+      "review_count": 6,
+      "fps": 13.15,
+      "duration": 6.21,
+      "correct": false
+    },
+    {
+      "video": "okutama_1.2.4_Walking_83.mp4",
+      "ground_truth_class": "walking",
+      "ground_truth_category": "NORMAL_ACTIVITY",
+      "predicted_category": "NORMAL_ACTIVITY",
+      "active_incidents": 0,
+      "review_count": 0,
+      "fps": 12.27,
+      "duration": 6.21,
+      "correct": true
+    }
+  ]
+}

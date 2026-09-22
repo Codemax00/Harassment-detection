@@ -105,14 +105,9 @@ class LayaSystem1Engine:
 
         # Apply Decision Logic
         if not gate_passed:
-            if is_risk and calibrated_conf >= self.suspicious_threshold:
-                decision = DecisionState.SUSPICIOUS
-                escalate = True
-                rationale = f"Observable physical risk pattern '{pattern.value}' detected under degraded surveillance conditions."
-            else:
-                decision = DecisionState.UNCERTAIN
-                escalate = is_risk or (calibrated_conf >= self.suspicious_threshold)
-                rationale = "Quality gate criteria not fully met; degraded pose/tracking/temporal consistency."
+            decision = DecisionState.UNCERTAIN
+            escalate = is_risk or (calibrated_conf >= self.suspicious_threshold)
+            rationale = "Quality gate criteria not fully met; degraded pose/tracking/temporal consistency."
         else:
             if pattern == EventLabel.NORMAL_ACTIVITY:
                 decision = DecisionState.NORMAL

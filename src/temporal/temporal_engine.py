@@ -131,7 +131,8 @@ class TemporalMotionEngine:
             box_w = max(1.0, curr_box[2] - curr_box[0])
             box_h = max(1.0, curr_box[3] - curr_box[1])
         else:
-            box_w, box_h = 50.0, 100.0
+            box_w = 0.5 if curr.is_normalized else 50.0
+            box_h = 1.0 if curr.is_normalized else 100.0
 
         # Extract scene torso centers across the sliding window
         torso_positions = [p.get_scene_torso_center() for p in window]
