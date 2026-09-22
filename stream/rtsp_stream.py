@@ -242,10 +242,10 @@ class RTSPStream:
 
     def release(self):
         """Cleanly releases all resources and stops background thread."""
-        self.status = "STOPPED"
         self._stop_event.set()
         if self._thread and self._thread.is_alive():
             self._thread.join(timeout=2.0)
+        self.status = "STOPPED"
         if self._cap is not None:
             try:
                 self._cap.release()
