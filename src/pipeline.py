@@ -38,6 +38,16 @@ from .policy.safety_policy import SafetyPolicy, PolicyState, PolicyAction
 from .policy.incident_state_machine import IncidentStateMachine, StateMachineResult
 from .logging.event_logger import EventLogger, EventRecord
 
+try:
+    from config.settings import settings
+except ImportError:
+    import sys
+    from pathlib import Path
+    _proj_root = str(Path(__file__).resolve().parent.parent)
+    if _proj_root not in sys.path:
+        sys.path.insert(0, _proj_root)
+    from config.settings import settings
+
 
 @dataclass
 class PipelineFrameResult:
@@ -114,9 +124,19 @@ class GuardianMatrixPipeline:
         video_id: str = "GM_STREAM"
     ):
         self.video_id = video_id
-        self.detector = detector or load_detector("yolo")
-        self.tracker = tracker or load_tracker("bytetrack")
-        self.pose_estimator = pose_estimator or load_pose_estimator("yolo_pose")
+        self.detector = detector or load_detector("yolo", config={
+            "model_path": settings.model_path,
+            "conf_threshold": settings.detection_confidence,
+            "device": settings.device
+        })
+        self.tracker = tracker or load_tracker("bytetrack", config={
+            "track_buffer": max(15, int(settings.target_fps * 2))
+        })
+        self.pose_estimator = pose_estimator or load_pose_estimator("yolo_pose", config={
+            "model_path": settings.pose_model_path,
+            "conf_threshold": settings.pose_confidence,
+            "device": settings.device
+        })
         self.temporal_engine = temporal_engine or TemporalMotionEngine(window_seconds=2.0)
         self.temporal_classifier = temporal_classifier or load_temporal_classifier("ensemble")
         self.interaction_engine = interaction_engine or InteractionEngine()
@@ -135,7 +155,9 @@ class GuardianMatrixPipeline:
         """Resets all internal states for a fresh video or stream session."""
         self.pose_history.clear()
         self.frame_counter = 0
-        self.tracker = load_tracker("bytetrack")
+        self.tracker = load_tracker("bytetrack", config={
+            "track_buffer": max(15, int(settings.target_fps * 2))
+        })
         self.temporal_engine = TemporalMotionEngine(window_seconds=2.0)
         self.interaction_engine = InteractionEngine()
         self.temporal_decision_engine = TemporalDecisionEngine()
@@ -160,13 +182,18 @@ class GuardianMatrixPipeline:
         # Stage 1: Person Detection
         detections = self.detector.detect(frame, frame_id=current_fid)
 
-        # Stage 2: Multi-Object Persistent Tracking
-        tracked_people = self.tracker.update(detections, timestamp=timestamp, frame_id=current_fid)
+        # Stage 2: Multi-Object Persistent Tracking with Visual Appearance Re-ID
+        tracked_people = self.tracker.update(detections, timestamp=timestamp, frame_id=current_fid, frame=frame)
 
         # Stage 3: High-Precision Pose Estimation & Normalization
         poses = self.pose_estimator.estimate(frame, tracked_people, timestamp=timestamp, frame_id=current_fid)
 
-        # Maintain temporal pose sequences
+        # Maintain temporal pose sequences and prune dead tracks to prevent memory leak
+        active_tids = {p.track_id for p in tracked_people}
+        dead_tracks = [tid for tid in self.pose_history if tid not in active_tids]
+        for tid in dead_tracks:
+            del self.pose_history[tid]
+
         for p in poses:
             if p.track_id not in self.pose_history:
                 self.pose_history[p.track_id] = []
@@ -407,7 +434,7 @@ class GuardianMatrixPipeline:
         )
         cv2.putText(
             img,
-            f"Active IDs: {state_result.active_track_ids} | Dwell: {state_result.state_dwell_seconds:.1f}s",
+            f"People: {len(tracked_people)} | IDs: {state_result.active_track_ids} | Dwell: {state_result.state_dwell_seconds:.1f}s",
             (20, 72),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.38,

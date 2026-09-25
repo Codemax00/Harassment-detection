@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}Incident Dossier: {{ incident.folder_name }} — Guardian Matrix{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-4">
+    <div class="col-md-8">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <a href="{{ url_for('incidents_page') }}" class="btn-matrix btn-matrix-outline btn-sm">
+                <i class="fas fa-arrow-left"></i> All Incidents
+            </a>
+            <span class="badge-status {% if incident.action == 'STRIKE' %}badge-incident{% elif incident.action == 'FALL' %}badge-suspected{% else %}badge-observing{% endif %}">
+                <span class="status-dot {% if incident.action == 'STRIKE' %}bg-danger pulse{% else %}bg-warning{% endif %}"></span>
+                {{ incident.action }}
+            </span>
+            <span class="text-muted small font-mono">ID: {{ incident.folder_name }}</span>
+        </div>
+        <h2 class="mb-0">Forensic Incident Dossier</h2>
+    </div>
+    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <button onclick="navigator.clipboard.writeText(JSON.stringify({{ metadata_raw|tojson }}, null, 2)); alert('Incident metadata copied to clipboard!');" class="btn-matrix btn-matrix-outline">
+            <i class="fas fa-copy"></i> Copy JSON Telemetry
+        </button>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Left Column: Video & Keyframe Inspection -->
+    <div class="col-lg-8">
+        <!-- Video Evidence Player -->
+        <div class="card-matrix mb-4">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-film text-primary"></i> Streaming Video Evidence (clip.mp4)</h5>
+                <span class="font-mono text-muted small">Duration: {{ "%.2f"|format(incident.duration) }}s</span>
+            </div>
+            <div class="card-matrix-body">
+                {% if incident.has_clip %}
+                    <div class="video-preview-wrapper">
+                        <video controls autoplay loop muted style="width: 100%; border-radius: 8px;">
+                            <source src="{{ url_for('serve_incident_file', incident_id=incident.folder_name, filename='clip.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                {% else %}
+                    <div class="p-4 text-center text-muted">
+                        <i class="fas fa-video-slash fa-2x mb-2"></i>
+                        <div>No MP4 clip recorded for this incident.</div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Forensic Keyframes Side-by-Side -->
+        <div class="card-matrix mb-4">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-images text-info"></i> Forensic Keyframe Comparison</h5>
+                <span class="text-muted small">Annotated Skeleton vs. Pristine Court-Admissible Raw</span>
+            </div>
+            <div class="card-matrix-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="keyframe-item">
+                            {% if incident.has_annotated_keyframe %}
+                                <img src="{{ url_for('serve_incident_file', incident_id=incident.folder_name, filename='keyframe_annotated.jpg') }}" alt="Annotated Frame">
+                            {% elif incident.has_keyframe %}
+                                <img src="{{ url_for('serve_incident_file', incident_id=incident.folder_name, filename='keyframe.jpg') }}" alt="Keyframe">
+                            {% else %}
+                                <div class="p-4 text-center text-muted">No annotated keyframe</div>
+                            {% endif %}
+                            <div class="label">HUD & Skeleton Pose Annotation</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="keyframe-item">
+                            {% if incident.has_raw_keyframe %}
+                                <img src="{{ url_for('serve_incident_file', incident_id=incident.folder_name, filename='keyframe_raw.jpg') }}" alt="Raw Frame">
+                                <div class="label" style="background: rgba(16, 185, 129, 0.85);">Pristine Raw Keyframe</div>
+                            {% else %}
+                                <div class="p-4 text-center text-muted">No raw keyframe saved</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- State Transitions Timeline -->
+        {% if metadata.state_transitions %}
+        <div class="card-matrix mb-4">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-timeline text-warning"></i> Hysteresis State Machine Progression</h5>
+                <span class="font-mono text-muted small">{{ metadata.state_transitions|length }} Transitions Logged</span>
+            </div>
+            <div class="card-matrix-body p-0">
+                <div class="table-responsive">
+                    <table class="table-matrix">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Machine State</th>
+                                <th>Risk Score</th>
+                                <th>Confirmation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for st in metadata.state_transitions %}
+                            <tr>
+                                <td class="font-mono">{{ "%.3f"|format(st.timestamp) }}s</td>
+                                <td>
+                                    <span class="badge-status {% if st.state == 'ACTIVE_INCIDENT' %}badge-incident{% elif st.state == 'SUSPECTED' %}badge-suspected{% elif st.state == 'OBSERVING' %}badge-observing{% else %}badge-normal{% endif %}">
+                                        {{ st.state }}
+                                    </span>
+                                </td>
+                                <td class="font-mono fw-bold {% if st.risk > 0.75 %}text-danger{% elif st.risk > 0.3 %}text-warning{% else %}text-success{% endif %}">
+                                    {{ "%.2f"|format(st.risk) }}
+                                </td>
+                                <td class="small text-secondary">
+                                    {% if st.state == 'ACTIVE_INCIDENT' %}
+                                        <i class="fas fa-circle-check text-danger me-1"></i> Confirmed Across Window
+                                    {% elif st.state == 'SUSPECTED' %}
+                                        <i class="fas fa-hourglass-half text-warning me-1"></i> Hysteresis Verification
+                                    {% else %}
+                                        <i class="fas fa-eye text-info me-1"></i> Baseline Surveillance
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Right Column: Metadata & Evidence Breakdown -->
+    <div class="col-lg-4">
+        <!-- Core Telemetry Card -->
+        <div class="card-matrix mb-4">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-gauge-high text-primary"></i> Decision Telemetry</h5>
+            </div>
+            <div class="card-matrix-body">
+                <div class="mb-3 pb-3 border-bottom border-secondary border-opacity-25">
+                    <div class="text-muted small">Peak Calibrated Risk</div>
+                    <div class="d-flex align-items-baseline gap-2">
+                        <span class="kpi-value text-danger">{{ "%.2f"|format(incident.peak_risk) }}</span>
+                        <span class="badge-status badge-incident">CRITICAL</span>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <div class="p-2 bg-dark rounded border border-secondary border-opacity-25">
+                            <div class="text-muted small">Category</div>
+                            <div class="fw-bold text-light small">{{ incident.category }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-2 bg-dark rounded border border-secondary border-opacity-25">
+                            <div class="text-muted small">Primary Action</div>
+                            <div class="fw-bold text-warning small">{{ incident.action }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quality Gating Scores -->
+                {% if metadata.quality %}
+                <div class="mb-3">
+                    <div class="text-muted small mb-2">Quality Gating Metrics</div>
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span class="text-secondary">Pose Estimation Confidence</span>
+                            <span class="font-mono text-success">{{ "%.1f"|format(metadata.quality.get('pose_quality', 0) * 100) }}%</span>
+                        </div>
+                        <div class="progress" style="height: 6px; background: rgba(255,255,255,0.06);">
+                            <div class="progress-bar bg-success" style="width: {{ metadata.quality.get('pose_quality', 0) * 100 }}%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span class="text-secondary">Kalman Tracking Stability</span>
+                            <span class="font-mono text-info">{{ "%.1f"|format(metadata.quality.get('tracking_quality', 0) * 100) }}%</span>
+                        </div>
+                        <div class="progress" style="height: 6px; background: rgba(255,255,255,0.06);">
+                            <div class="progress-bar bg-info" style="width: {{ metadata.quality.get('tracking_quality', 0) * 100 }}%"></div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Involved Tracks -->
+                {% if incident.track_ids %}
+                <div class="mb-3">
+                    <div class="text-muted small mb-1">Involved Tracking IDs</div>
+                    <div class="d-flex gap-2">
+                        {% for tid in incident.track_ids %}
+                            <span class="badge bg-secondary font-mono px-3 py-2">PERSON #{{ tid }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Raw JSON Inspector -->
+        <div class="card-matrix">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-code text-secondary"></i> Metadata Telemetry JSON</h5>
+            </div>
+            <div class="card-matrix-body p-2">
+                <pre class="code-viewer mb-0"><code>{{ metadata_json }}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

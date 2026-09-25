@@ -111,6 +111,11 @@
                            class="btn btn-primary">
                             <i class="fas fa-play"></i> Start Analysis
                         </a>
+                    {% elif upload.analysis_status in ['error', 'completed'] %}
+                        <a href="{{ url_for('analyze_video', filename=upload.filename) }}" 
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-redo"></i> Re-run Analysis
+                        </a>
                     {% endif %}
                     
                     {% if upload.analysis_status == 'completed' %}

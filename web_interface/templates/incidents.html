@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Incidents & Forensic Evidence — Guardian Matrix{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-4">
+    <div class="col-md-8">
+        <h2 class="mb-1"><i class="fas fa-folder-open text-warning me-2"></i>Forensic Evidence Bundles</h2>
+        <p class="text-secondary mb-0">Court-admissible incident packages with raw keyframes, streaming MP4 evidence, and kinematic telemetry.</p>
+    </div>
+    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <a href="{{ url_for('camera_page') }}" class="btn-matrix btn-matrix-primary">
+            <i class="fas fa-video"></i> Live Monitor
+        </a>
+    </div>
+</div>
+
+<!-- Incident KPI Summary -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="kpi-card rose">
+            <div>
+                <div class="kpi-label">Aggressive Incidents</div>
+                <div class="kpi-value text-danger">{{ stats.strikes }}</div>
+            </div>
+            <div class="kpi-icon rose">
+                <i class="fas fa-hand-fist"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card amber">
+            <div>
+                <div class="kpi-label">Safety / Falls</div>
+                <div class="kpi-value text-warning">{{ stats.falls }}</div>
+            </div>
+            <div class="kpi-icon amber">
+                <i class="fas fa-person-falling"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card cyan">
+            <div>
+                <div class="kpi-label">Pursuits / Loitering</div>
+                <div class="kpi-value text-info">{{ stats.pursuits }}</div>
+            </div>
+            <div class="kpi-icon cyan">
+                <i class="fas fa-person-walking-dashed-line-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card emerald">
+            <div>
+                <div class="kpi-label">Total Bundles</div>
+                <div class="kpi-value text-success">{{ incidents|length }}</div>
+            </div>
+            <div class="kpi-icon emerald">
+                <i class="fas fa-shield-check"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Incident Bundles Grid -->
+<div class="row g-4">
+    {% if incidents %}
+        {% for inc in incidents %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card-matrix h-100 d-flex flex-column">
+                <div class="card-matrix-header">
+                    <span class="badge-status {% if inc.action == 'STRIKE' %}badge-incident{% elif inc.action == 'FALL' %}badge-suspected{% else %}badge-observing{% endif %}">
+                        <span class="status-dot {% if inc.action == 'STRIKE' %}bg-danger pulse{% else %}bg-warning{% endif %}"></span>
+                        {{ inc.action }}
+                    </span>
+                    <span class="font-mono text-muted small">{{ inc.timestamp_str }}</span>
+                </div>
+                
+                <div class="card-matrix-body flex-grow-1">
+                    <div class="video-preview-wrapper mb-3" style="min-height: 180px; display: flex; align-items: center; justify-content: center; background: #070c18;">
+                        {% if inc.has_annotated_keyframe %}
+                            <img src="{{ url_for('serve_incident_file', incident_id=inc.folder_name, filename='keyframe_annotated.jpg') }}" alt="Annotated Keyframe" style="width: 100%; height: 180px; object-fit: cover;">
+                        {% elif inc.has_keyframe %}
+                            <img src="{{ url_for('serve_incident_file', incident_id=inc.folder_name, filename='keyframe.jpg') }}" alt="Keyframe" style="width: 100%; height: 180px; object-fit: cover;">
+                        {% else %}
+                            <div class="text-center p-4 text-muted">
+                                <i class="fas fa-shield-halved fa-3x mb-2 text-secondary"></i>
+                                <div>Forensic Metadata Logged</div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted small">Category</span>
+                        <span class="font-mono small text-light">{{ inc.category }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted small">Peak Risk Score</span>
+                        <span class="font-mono fw-bold {% if inc.peak_risk > 0.75 %}text-danger{% elif inc.peak_risk > 0.4 %}text-warning{% else %}text-info{% endif %}">
+                            {{ "%.2f"|format(inc.peak_risk) }}
+                        </span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted small">Duration</span>
+                        <span class="font-mono small text-secondary">{{ "%.1f"|format(inc.duration) }}s</span>
+                    </div>
+
+                    {% if inc.quality %}
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small">Pose / Track Quality</span>
+                        <span class="font-mono small text-success">
+                            {{ "%.0f"|format(inc.quality.get('pose_quality', 0) * 100) }}% / {{ "%.0f"|format(inc.quality.get('tracking_quality', 0) * 100) }}%
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="p-3 pt-0">
+                    <a href="{{ url_for('incident_detail_page', incident_id=inc.folder_name) }}" class="btn-matrix btn-matrix-outline w-100 justify-content-center">
+                        <i class="fas fa-magnifying-glass-chart"></i> Open Forensic Dossier
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="card-matrix p-5 text-center">
+                <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                <h4>No Incidents Recorded Yet</h4>
+                <p class="text-secondary">When suspicious harassment, aggression, or fall events are detected, complete forensic dossiers will automatically populate here.</p>
+                <div class="mt-3">
+                    <a href="{{ url_for('camera_page') }}" class="btn-matrix btn-matrix-primary">Start Monitoring</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

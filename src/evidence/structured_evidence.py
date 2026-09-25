@@ -106,10 +106,12 @@ def build_structured_evidence(
     }
 
     # 4. Pose quality
-    avg_pose_conf = float(np.mean([p.pose_confidence for p in poses])) if poses else 0.0
+    real_poses = [p for p in poses if not getattr(p, "is_heuristic", False)]
+    avg_pose_conf = float(np.mean([p.pose_confidence for p in real_poses])) if real_poses else 0.0
     pose_data = {
         "confidence": round(avg_pose_conf, 3),
         "num_poses": len(poses),
+        "num_real_poses": len(real_poses),
         "has_3d_keypoints": any(p.keypoints_3d is not None for p in poses)
     }
 
@@ -121,12 +123,38 @@ def build_structured_evidence(
     }
 
     # 6. Quality gating metrics
-    tracking_qual = float(np.mean([p.detection_confidence for p in tracked_people])) if tracked_people else 0.0
+    if tracked_people:
+        tracking_qual = float(np.mean([
+            (1.0 - min(1.0, getattr(p, "time_since_update", 0) / 30.0)) * p.detection_confidence
+            for p in tracked_people
+        ]))
+    else:
+        tracking_qual = 0.0
+
+    # Temporal consistency: proportion of active tracks with ongoing temporal motion features
+    if tracked_people:
+        active_tids = {p.track_id for p in tracked_people}
+        valid_motion_count = sum(1 for tid in active_tids if tid in motion_features)
+        temp_consistency = float(valid_motion_count / len(active_tids))
+    elif motion_features:
+        temp_consistency = 0.85
+    else:
+        temp_consistency = 0.0
+
+    # Evidence completeness: verifies presence of detection, real pose, motion, and interaction
+    completeness_signals = [
+        len(tracked_people) > 0,
+        len(real_poses) > 0,
+        len(motion_features) > 0,
+        (len(interactions) > 0 if len(tracked_people) >= 2 else True)
+    ]
+    evidence_completeness = float(sum(completeness_signals) / len(completeness_signals))
+
     quality_metrics = {
-        "pose_quality": avg_pose_conf,
-        "tracking_quality": tracking_qual,
-        "temporal_consistency": 0.85 if motion_features else 0.50,
-        "evidence_completeness": 1.0 if (poses and interactions and motion_features) else 0.6
+        "pose_quality": round(avg_pose_conf, 4),
+        "tracking_quality": round(tracking_qual, 4),
+        "temporal_consistency": round(temp_consistency, 4),
+        "evidence_completeness": round(evidence_completeness, 4)
     }
 
     return StructuredEvidence(

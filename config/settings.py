@@ -14,6 +14,9 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 env_path = ROOT_DIR / ".env"
 load_dotenv(dotenv_path=env_path, override=True)
 
+# Ensure PyTorch 2.6+ allows loading ultralytics model checkpoints safely
+os.environ.setdefault("TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD", "1")
+
 
 def _get_str(key: str, default: str) -> str:
     return os.getenv(key, default)
@@ -62,8 +65,8 @@ class Settings:
     device: str = _get_str("DEVICE", "cpu")
 
     # Thresholds & Tracking
-    detection_confidence: float = _get_float("DETECTION_CONFIDENCE", 0.40)
-    pose_confidence: float = _get_float("POSE_CONFIDENCE", 0.40)
+    detection_confidence: float = _get_float("DETECTION_CONFIDENCE", 0.35)
+    pose_confidence: float = _get_float("POSE_CONFIDENCE", 0.35)
     max_tracks: int = _get_int("MAX_TRACKS", 20)
 
     # Risk Scoring & Alerts

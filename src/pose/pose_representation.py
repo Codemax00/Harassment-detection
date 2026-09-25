@@ -46,6 +46,7 @@ class PoseFrame:
     frame_id: int = 0
     bbox: Optional[Tuple[float, float, float, float]] = None
     is_normalized: bool = False
+    is_heuristic: bool = False
     scene_keypoints_2d: Optional[np.ndarray] = None  # Exact pixel coordinates in image frame
     metadata: Dict[str, Any] = field(default_factory=dict)
 
@@ -184,6 +185,7 @@ def normalize_pose(
         frame_id=pose.frame_id,
         bbox=box,
         is_normalized=True,
+        is_heuristic=pose.is_heuristic,
         scene_keypoints_2d=raw_scene_kps,
         metadata=dict(pose.metadata)
     )

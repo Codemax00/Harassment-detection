@@ -276,26 +276,32 @@ document.addEventListener('DOMContentLoaded', function() {
             if (xhr.status === 200) {
                 try {
                     const data = JSON.parse(xhr.responseText);
-                    
                     if (data.success) {
-                        SafetyDetector.showNotification(data.message, 'success');
+                        try {
+                            if (window.SafetyDetector && SafetyDetector.showNotification) {
+                                SafetyDetector.showNotification(data.message, 'success');
+                            }
+                        } catch (_) {}
                         
-                        // Redirect to analysis page
+                        // Redirect to analysis page immediately
                         if (data.analysis_url) {
                             window.location.href = data.analysis_url;
+                            return;
                         } else {
                             location.reload();
+                            return;
                         }
                     } else {
-                        SafetyDetector.showNotification('Upload failed: ' + data.error, 'error');
+                        alert('Upload failed: ' + (data.error || 'Server error'));
                         resetUploadForm();
                     }
                 } catch (e) {
-                    SafetyDetector.showNotification('Upload failed: Invalid response from server', 'error');
+                    console.error('Error parsing response:', e);
+                    alert('Upload response error: ' + e.message);
                     resetUploadForm();
                 }
             } else {
-                SafetyDetector.showNotification('Upload failed: ' + xhr.statusText, 'error');
+                alert('Upload failed with status ' + xhr.status + ': ' + xhr.statusText);
                 resetUploadForm();
             }
         });

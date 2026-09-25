@@ -3,6 +3,7 @@ from .temporal_action_classifier import (
     BaseTemporalClassifier,
     STGCNClassifier,
     TemporalTransformerClassifier,
+    KinematicActionClassifier,
     EnsembleTemporalClassifier,
     load_temporal_classifier
 )
@@ -14,6 +15,7 @@ __all__ = [
     "BaseTemporalClassifier",
     "STGCNClassifier",
     "TemporalTransformerClassifier",
+    "KinematicActionClassifier",
     "EnsembleTemporalClassifier",
     "load_temporal_classifier"
 ]

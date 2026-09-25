@@ -77,7 +77,19 @@ class InteractionEngine:
     ) -> List[InteractionFeatures]:
         """Compute pairwise interaction features for all pairs present in the frame."""
         if len(poses) < 2:
+            # Prune all pair states if fewer than 2 people present
+            if len(poses) <= 1 and self.pair_states:
+                self.pair_states.clear()
             return []
+
+        # Prune stale pair states (not seen in active tracks or older than 5.0 seconds)
+        current_tids = {p.track_id for p in poses}
+        stale_keys = [
+            k for k, s in self.pair_states.items()
+            if (k[0] not in current_tids or k[1] not in current_tids) or (timestamp > 0 and timestamp - s.last_seen > 5.0)
+        ]
+        for k in stale_keys:
+            del self.pair_states[k]
 
         # Sort poses by track_id for deterministic pairing
         sorted_poses = sorted(poses, key=lambda p: p.track_id)
@@ -344,6 +356,15 @@ class InteractionEngine:
         hand_strike = max(dir_strike_score, hand_contact_prob * min(1.0, peak_hand_v / 1.8) if (hand_contact_prob > 0.3 and peak_hand_v > 1.8 and max_strike_v > 0.2) else 0.0)
         kick_strike = max(dir_kick_score, kick_contact_prob * min(1.0, peak_foot_v / 1.8) if (kick_contact_prob > 0.3 and peak_foot_v > 1.8 and max_kick_v > 0.2) else 0.0)
         aggressive_strike_score = float(max(hand_strike, kick_strike, directional_impact_score))
+
+        # If either person has only heuristic/synthetic pose, zero out limb contact and strike scores
+        if getattr(pose_a, 'is_heuristic', False) or getattr(pose_b, 'is_heuristic', False):
+            hand_contact_prob = 0.0
+            kick_contact_prob = 0.0
+            dir_strike_score = 0.0
+            dir_kick_score = 0.0
+            directional_impact_score = 0.0
+            aggressive_strike_score = 0.0
 
         if (hand_contact_prob > 0.65 or kick_contact_prob > 0.65 or aggressive_strike_score > 0.5) and dist < 0.7:
             state.contact_events += 1

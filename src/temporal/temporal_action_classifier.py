@@ -191,15 +191,17 @@ class TemporalTransformerClassifier(BaseTemporalClassifier):
         return self.labels[best_idx], float(probs[best_idx]), prob_dict
 
 
-class EnsembleTemporalClassifier(BaseTemporalClassifier):
+class KinematicActionClassifier(BaseTemporalClassifier):
     """
-    Ensemble Classifier combining Neural Temporal Models (ST-GCN + Transformer)
-    with Physical Kinematic Interaction Rules for grounded, interpretable evidence.
+    Physical Kinematic Interaction Classifier.
+    Evaluates observable geometric, spatial, and motion dynamics
+    (contact, pursuit, separation, restraint, strikes, falls) to produce
+    grounded, auditable event classification.
     """
 
     def __init__(self):
-        self.st_gcn = STGCNClassifier()
-        self.transformer = TemporalTransformerClassifier()
+        # Deterministic kinematic rule engine without fake/untrained neural weights
+        pass
 
     def classify(
         self,
@@ -261,10 +263,14 @@ class EnsembleTemporalClassifier(BaseTemporalClassifier):
         return best_label, confidence, norm_probs
 
 
+# Backward-compatibility alias
+EnsembleTemporalClassifier = KinematicActionClassifier
+
+
 def load_temporal_classifier(arch: str = "ensemble") -> BaseTemporalClassifier:
     a = arch.lower()
     if a == "st_gcn":
         return STGCNClassifier()
     elif a == "transformer":
         return TemporalTransformerClassifier()
-    return EnsembleTemporalClassifier()
+    return KinematicActionClassifier()

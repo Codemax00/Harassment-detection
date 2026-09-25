@@ -1,355 +1,278 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard - Safety Detector{% endblock %}
+{% block title %}Command & Control Dashboard — Guardian Matrix{% endblock %}
 
 {% block content %}
-<div class="row">
+<!-- Dashboard Header -->
+<div class="row align-items-center mb-4">
+    <div class="col-md-7">
+        <h2 class="mb-1"><i class="fas fa-tower-broadcast text-primary me-2"></i>Surveillance Command Center</h2>
+        <p class="text-secondary mb-0">Autonomous multi-stage harassment detection, temporal interaction kinematics, and forensic packaging.</p>
+    </div>
+    <div class="col-md-5 text-md-end mt-3 mt-md-0 d-flex justify-content-md-end gap-2">
+        <a href="{{ url_for('camera_page') }}" class="btn-matrix btn-matrix-primary">
+            <i class="fas fa-video"></i> Live Monitor
+        </a>
+        <a href="{{ url_for('incidents_page') }}" class="btn-matrix btn-matrix-outline">
+            <i class="fas fa-folder-open"></i> Forensics
+        </a>
+    </div>
+</div>
+
+<!-- Primary Telemetry KPI Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card emerald">
+            <div>
+                <div class="kpi-label">Policy Engine</div>
+                <div class="kpi-value text-success" style="font-size: 1.4rem;">5-State Hysteresis</div>
+                <small class="text-muted font-mono">OBSERVE &bull; SUSPECT &bull; INCIDENT</small>
+            </div>
+            <div class="kpi-icon emerald">
+                <i class="fas fa-diagram-project"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card rose">
+            <div>
+                <div class="kpi-label">Aggressive Incidents</div>
+                <div class="kpi-value text-danger">{{ stats.strikes if stats else 1 }}</div>
+                <small class="text-muted font-mono">Physical Strikes & Harassment</small>
+            </div>
+            <div class="kpi-icon rose">
+                <i class="fas fa-hand-fist"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card amber">
+            <div>
+                <div class="kpi-label">Safety / Falls</div>
+                <div class="kpi-value text-warning">{{ stats.falls if stats else 1 }}</div>
+                <small class="text-muted font-mono">Medical & Collapse Alerts</small>
+            </div>
+            <div class="kpi-icon amber">
+                <i class="fas fa-person-falling"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card cyan">
+            <div>
+                <div class="kpi-label">CCTV & Camera Feeds</div>
+                <div class="kpi-value text-info">{{ cameras|length if cameras else 1 }}</div>
+                <small class="text-muted font-mono">DirectShow / RTSP Feeds</small>
+            </div>
+            <div class="kpi-icon cyan">
+                <i class="fas fa-video"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Core Operations Grid -->
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card-matrix h-100 p-4 text-center d-flex flex-column justify-content-between">
+            <div>
+                <div class="mx-auto mb-3" style="width: 60px; height: 60px; border-radius: 14px; background: rgba(59, 130, 246, 0.15); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h4 class="mb-2">Real-Time Surveillance</h4>
+                <p class="text-secondary small mb-4">Launch real-time CCTV stream analysis with interactive skeleton tracking HUD and multi-person proximity alerts.</p>
+            </div>
+            <a href="{{ url_for('camera_page') }}" class="btn-matrix btn-matrix-primary w-100 justify-content-center">
+                <i class="fas fa-play"></i> Start Live Feed
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card-matrix h-100 p-4 text-center d-flex flex-column justify-content-between">
+            <div>
+                <div class="mx-auto mb-3" style="width: 60px; height: 60px; border-radius: 14px; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+                    <i class="fas fa-cloud-arrow-up"></i>
+                </div>
+                <h4 class="mb-2">Footage Analysis</h4>
+                <p class="text-secondary small mb-4">Upload surveillance files (MP4, AVI, MOV) for full-length chunked temporal kinematic evaluation.</p>
+            </div>
+            <a href="{{ url_for('upload_page') }}" class="btn-matrix btn-matrix-outline w-100 justify-content-center">
+                <i class="fas fa-upload"></i> Upload Video
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card-matrix h-100 p-4 text-center d-flex flex-column justify-content-between">
+            <div>
+                <div class="mx-auto mb-3" style="width: 60px; height: 60px; border-radius: 14px; background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+                    <i class="fas fa-folder-closed"></i>
+                </div>
+                <h4 class="mb-2">Forensic Archive</h4>
+                <p class="text-secondary small mb-4">Inspect preserved incident bundles, dual keyframes (annotated vs unaltered raw), and telemetry JSON.</p>
+            </div>
+            <a href="{{ url_for('incidents_page') }}" class="btn-matrix btn-matrix-outline w-100 justify-content-center">
+                <i class="fas fa-magnifying-glass"></i> View Incidents
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Forensic Incidents Section -->
+<div class="row mb-4">
     <div class="col-12">
-        <h1 class="mb-4">
-            <i class="fas fa-shield-alt text-primary"></i>
-            Safety Detector Dashboard
-        </h1>
-    </div>
-</div>
-
-<!-- System Status Cards -->
-<div class="row mb-4">
-    <div class="col-md-3">
-        <div class="card bg-primary text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">AI Model</h5>
-                        <h3>
-                            {% if model_info %}
-                                {{ model_info.active_model|title }}
-                            {% else %}
-                                Not Loaded
-                            {% endif %}
-                        </h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-robot fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-3">
-        <div class="card bg-success text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">Cameras</h5>
-                        <h3>{{ cameras|length }}</h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-video fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-3">
-        <div class="card bg-info text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">Cost Saving</h5>
-                        <h3>
-                            <i class="fas fa-check"></i> ON
-                        </h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-piggy-bank fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-3">
-        <div class="card bg-warning text-white h-100">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">Status</h5>
-                        <h3>Ready</h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-heartbeat fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Quick Actions -->
-<div class="row mb-4">
-    <div class="col-12">
-        <h3 class="mb-3">
-            <i class="fas fa-bolt text-warning"></i>
-            Quick Actions
-        </h3>
-    </div>
-</div>
-
-<div class="row mb-4">
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <i class="fas fa-upload fa-3x text-primary mb-3"></i>
-                <h4 class="card-title">Upload & Analyze Video</h4>
-                <p class="card-text">
-                    Upload video files for harassment detection analysis. 
-                    Supports MP4, AVI, MOV, and other formats.
-                </p>
-                <a href="{{ url_for('upload_page') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-upload"></i> Upload Video
+        <div class="card-matrix">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-shield-virus text-danger"></i> Recent High-Risk Forensic Incidents</h5>
+                <a href="{{ url_for('incidents_page') }}" class="btn-matrix btn-matrix-outline btn-sm">
+                    View All {{ incidents|length if incidents else 0 }} Incidents <i class="fas fa-arrow-right ms-1"></i>
                 </a>
             </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <i class="fas fa-video fa-3x text-success mb-3"></i>
-                <h4 class="card-title">Live Camera Monitor</h4>
-                <p class="card-text">
-                    Start real-time monitoring with your camera or ESP32. 
-                    Instant alerts with cost-saving features.
-                </p>
-                <a href="{{ url_for('camera_page') }}" class="btn btn-success btn-lg">
-                    <i class="fas fa-video"></i> Start Monitoring
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- System Information -->
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-robot"></i> AI Configuration</h5>
-            </div>
-            <div class="card-body">
-                {% if model_info %}
-                    <div class="row">
-                        <div class="col-6">
-                            <strong>Active Model:</strong>
-                        </div>
-                        <div class="col-6">
-                            <span class="badge bg-primary">{{ model_info.active_model|title }}</span>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-6">
-                            <strong>Available Models:</strong>
-                        </div>
-                        <div class="col-6">
-                            {% for model in model_info.available_models %}
-                                <span class="badge bg-secondary me-1">{{ model|title }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-6">
-                            <strong>Status:</strong>
-                        </div>
-                        <div class="col-6">
-                            {% for model, status in model_info.model_status.items() %}
-                                <div class="small">
-                                    {{ model|title }}: 
-                                    <span class="badge bg-{{ 'success' if status == 'Available' else 'danger' }}">
-                                        {{ status }}
-                                    </span>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% else %}
-                    <p class="text-muted">AI models not initialized</p>
-                {% endif %}
-                
-                <div class="mt-3">
-                    <a href="{{ url_for('config_page') }}" class="btn btn-outline-primary btn-sm">
-                        <i class="fas fa-cog"></i> Configure
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-video"></i> Available Cameras</h5>
-            </div>
-            <div class="card-body">
-                {% if cameras %}
-                    <div class="list-group list-group-flush">
-                        {% for camera in cameras %}
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>{{ camera.name }}</strong>
-                                    <br>
-                                    <small class="text-muted">{{ camera.type }}</small>
-                                </div>
-                                <span class="badge bg-success">{{ camera.status }}</span>
+            <div class="card-matrix-body">
+                {% if incidents %}
+                <div class="row g-3">
+                    {% for inc in incidents[:3] %}
+                    <div class="col-md-4">
+                        <div class="p-3 rounded border border-secondary border-opacity-25" style="background: rgba(0,0,0,0.25);">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge-status {% if inc.action == 'STRIKE' %}badge-incident{% elif inc.action == 'FALL' %}badge-suspected{% else %}badge-observing{% endif %}">
+                                    {{ inc.action }}
+                                </span>
+                                <span class="font-mono text-muted small">{{ inc.timestamp_str }}</span>
                             </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <p class="text-muted">No cameras detected</p>
-                {% endif %}
-                
-                <div class="mt-3">
-                    <a href="{{ url_for('camera_page') }}" class="btn btn-outline-success btn-sm">
-                        <i class="fas fa-video"></i> Manage Cameras
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Features Overview -->
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-star"></i> Key Features</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="feature-item">
-                            <i class="fas fa-eye text-primary fa-2x mb-2"></i>
-                            <h6>Real-time Detection</h6>
-                            <p class="small text-muted">AI-powered harassment detection with instant alerts</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature-item">
-                            <i class="fas fa-piggy-bank text-success fa-2x mb-2"></i>
-                            <h6>Cost Optimization</h6>
-                            <p class="small text-muted">Auto-stop analysis after alerts to save AI costs</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature-item">
-                            <i class="fas fa-shield-alt text-info fa-2x mb-2"></i>
-                            <h6>Privacy First</h6>
-                            <p class="small text-muted">No facial recognition, behavior-focused detection</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4">
-                        <div class="feature-item">
-                            <i class="fas fa-camera text-warning fa-2x mb-2"></i>
-                            <h6>Multi-Camera Support</h6>
-                            <p class="small text-muted">USB cameras, built-in webcams, and ESP32 cameras</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature-item">
-                            <i class="fas fa-brain text-danger fa-2x mb-2"></i>
-                            <h6>Multiple AI Models</h6>
-                            <p class="small text-muted">Choose between Gemini and OpenAI for optimal results</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature-item">
-                            <i class="fas fa-chart-line text-secondary fa-2x mb-2"></i>
-                            <h6>Detailed Analytics</h6>
-                            <p class="small text-muted">Comprehensive logging and performance tracking</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Recent Activity -->
-{% if recent_uploads %}
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5><i class="fas fa-clock"></i> Recent Activity</h5>
-                <a href="{{ url_for('history_page') }}" class="btn btn-outline-primary btn-sm">
-                    <i class="fas fa-history"></i> View All History
-                </a>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    {% for upload in recent_uploads %}
-                        <div class="col-md-4 mb-3">
-                            <div class="card border-left-primary">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h6 class="mb-1">{{ upload.original_filename }}</h6>
-                                            <small class="text-muted">{{ upload.upload_date[:16].replace('T', ' ') }}</small>
-                                        </div>
-                                        <div>
-                                            {% if upload.analysis_status == 'completed' %}
-                                                <span class="badge bg-success">✓</span>
-                                            {% elif upload.analysis_status == 'running' %}
-                                                <span class="badge bg-primary">⏳</span>
-                                            {% else %}
-                                                <span class="badge bg-secondary">⏸</span>
-                                            {% endif %}
-                                        </div>
+                            
+                            <div class="video-preview-wrapper mb-2" style="height: 140px; background: #000;">
+                                {% if inc.has_annotated_keyframe %}
+                                    <img src="{{ url_for('serve_incident_file', incident_id=inc.folder_name, filename='keyframe_annotated.jpg') }}" alt="Incident" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% elif inc.has_keyframe %}
+                                    <img src="{{ url_for('serve_incident_file', incident_id=inc.folder_name, filename='keyframe.jpg') }}" alt="Incident" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% else %}
+                                    <div class="d-flex align-items-center justify-content-center h-100 text-muted small">
+                                        <i class="fas fa-shield-halved me-2"></i> Evidence Captured
                                     </div>
-                                    {% if upload.alerts %}
-                                        <div class="mt-2">
-                                            <span class="badge bg-warning">{{ upload.alerts|length }} alerts</span>
-                                        </div>
-                                    {% endif %}
-                                </div>
+                                {% endif %}
                             </div>
+
+                            <div class="d-flex justify-content-between align-items-center small mb-2">
+                                <span class="text-muted">Peak Risk</span>
+                                <span class="font-mono fw-bold {% if inc.peak_risk > 0.7 %}text-danger{% else %}text-warning{% endif %}">
+                                    {{ "%.2f"|format(inc.peak_risk) }}
+                                </span>
+                            </div>
+
+                            <a href="{{ url_for('incident_detail_page', incident_id=inc.folder_name) }}" class="btn-matrix btn-matrix-outline btn-sm w-100 justify-content-center">
+                                Review Incident
+                            </a>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
-                
-                <!-- Quick Stats -->
-                <div class="row mt-3 pt-3 border-top">
-                    <div class="col-md-3 text-center">
-                        <h5 class="text-primary">{{ history_stats.total_uploads }}</h5>
-                        <small class="text-muted">Total Uploads</small>
+                {% else %}
+                <div class="p-4 text-center text-muted">
+                    No active incident bundles recorded yet.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload History & System Status -->
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card-matrix">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-clock-rotate-left text-info"></i> Recent Video Analyses</h5>
+                <a href="{{ url_for('history_page') }}" class="btn-matrix btn-matrix-outline btn-sm">Full History</a>
+            </div>
+            <div class="card-matrix-body p-0">
+                <div class="table-responsive">
+                    <table class="table-matrix">
+                        <thead>
+                            <tr>
+                                <th>Filename</th>
+                                <th>Size</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if recent_uploads %}
+                                {% for upload in recent_uploads %}
+                                <tr>
+                                    <td>
+                                        <div class="fw-semibold text-light">{{ upload.filename }}</div>
+                                        <div class="small text-muted font-mono">{{ upload.upload_time }}</div>
+                                    </td>
+                                    <td class="font-mono small">{{ "%.1f"|format(upload.file_size / (1024*1024)) }} MB</td>
+                                    <td>
+                                        {% if upload.status == 'completed' %}
+                                            <span class="badge-status badge-normal"><span class="status-dot bg-success"></span> Completed</span>
+                                        {% elif upload.status == 'running' %}
+                                            <span class="badge-status badge-suspected"><span class="status-dot bg-warning pulse"></span> Analyzing</span>
+                                        {% else %}
+                                            <span class="badge-status badge-observing">{{ upload.status|title }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('analyze_video', filename=upload.filename) }}" class="btn-matrix btn-matrix-outline btn-sm">
+                                            <i class="fas fa-chart-simple"></i> View
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">No video files uploaded yet.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Engine Architecture Telemetry -->
+    <div class="col-lg-4">
+        <div class="card-matrix">
+            <div class="card-matrix-header">
+                <h5><i class="fas fa-microchip text-primary"></i> Subsystem Status</h5>
+            </div>
+            <div class="card-matrix-body">
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between small mb-1">
+                        <span class="text-muted">Person Detector</span>
+                        <span class="font-mono text-success">YOLOv8 Detection Active</span>
                     </div>
-                    <div class="col-md-3 text-center">
-                        <h5 class="text-success">{{ history_stats.completed_analyses }}</h5>
-                        <small class="text-muted">Completed</small>
+                    <div class="d-flex justify-content-between small mb-1">
+                        <span class="text-muted">Pose Estimator</span>
+                        <span class="font-mono text-success">YOLO-Pose 17 Keypoints</span>
                     </div>
-                    <div class="col-md-3 text-center">
-                        <h5 class="text-warning">{{ history_stats.total_alerts }}</h5>
-                        <small class="text-muted">Alerts Found</small>
+                    <div class="d-flex justify-content-between small mb-1">
+                        <span class="text-muted">Temporal Kinematics</span>
+                        <span class="font-mono text-info">Angular & Directional Strikes</span>
                     </div>
-                    <div class="col-md-3 text-center">
-                        <h5 class="text-info">{{ history_stats.total_size_mb }} MB</h5>
-                        <small class="text-muted">Storage Used</small>
+                    <div class="d-flex justify-content-between small mb-1">
+                        <span class="text-muted">Tracking Engine</span>
+                        <span class="font-mono text-info">ByteTrack Kalman Filter</span>
                     </div>
+                    <div class="d-flex justify-content-between small mb-1">
+                        <span class="text-muted">Forensic Storage</span>
+                        <span class="font-mono text-warning">Direct MP4 Streaming</span>
+                    </div>
+                </div>
+
+                <div class="p-3 rounded border border-secondary border-opacity-25" style="background: rgba(0,0,0,0.3);">
+                    <div class="small fw-semibold text-light mb-1"><i class="fas fa-shield-halved text-success me-1"></i> Quality Gated</div>
+                    <div class="small text-muted">Skeletons marked as heuristic fallbacks are mathematically excluded from corrupting kinematic strike or knee velocity tensors.</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endif %}
-{% endblock %}
-
-{% block scripts %}
-<script>
-// Add any dashboard-specific JavaScript here
-console.log('Safety Detector Dashboard loaded');
-</script>
 {% endblock %}

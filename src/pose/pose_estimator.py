@@ -53,23 +53,24 @@ class YOLOPoseEstimator(BasePoseEstimator):
 
     def _load_model(self):
         try:
-            import torch
+            os.environ.setdefault("TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD", "1")
             from ultralytics import YOLO
-            original_load = torch.load
-            try:
-                torch.load = lambda *args, **kwargs: original_load(*args, **kwargs, weights_only=False)
-                candidates = [
-                    self._model_name,
-                    os.path.join(os.getcwd(), self._model_name),
-                    os.path.join(os.path.dirname(__file__), "..", "..", self._model_name),
-                ]
-                found = next((p for p in candidates if os.path.exists(p)), self._model_name)
-                self.model = YOLO(found)
-            finally:
-                torch.load = original_load
+            candidates = [
+                self._model_name,
+                os.path.join(os.getcwd(), self._model_name),
+                os.path.join(os.path.dirname(__file__), "..", "..", self._model_name),
+            ]
+            found = next((p for p in candidates if os.path.exists(p)), None)
+            if found is None:
+                raise FileNotFoundError(
+                    f"YOLO Pose model weights file '{self._model_name}' not found. "
+                    f"Searched in: {candidates}"
+                )
+            self.model = YOLO(found)
         except Exception as e:
-            # Fallback to simulated estimation if weights aren't downloaded
-            self.model = None
+            import logging
+            logging.getLogger(__name__).error(f"Failed to load YOLO Pose model '{self._model_name}': {e}")
+            raise RuntimeError(f"Failed to load YOLO Pose model '{self._model_name}': {e}") from e
 
     @property
     def model_name(self) -> str:
@@ -132,28 +133,31 @@ class YOLOPoseEstimator(BasePoseEstimator):
                                 pose_confidence=avg_conf,
                                 frame_id=frame_id,
                                 bbox=person.bbox,
+                                is_heuristic=False,
                                 metadata={"model": "yolo_pose"}
                             )
                             pose_frames.append(normalize_pose(raw_pose, person.bbox))
                             continue
             except Exception as e:
-                pass
+                import logging
+                logging.getLogger(__name__).warning(f"Error during YOLO pose inference: {e}")
 
         already_estimated_ids = {p.track_id for p in pose_frames}
-        # Robust heuristic fallback for any person not matched by pose model
+        # Heuristic fallback for any person not matched by pose model - flagged explicitly
         for person in tracked_people:
             if person.track_id in already_estimated_ids:
                 continue
             kps_2d = self._generate_heuristic_skeleton(person.bbox)
-            vis = np.ones(17, dtype=np.float32) * person.detection_confidence
+            vis = np.ones(17, dtype=np.float32) * 0.10
             raw_pose = PoseFrame(
                 track_id=person.track_id,
                 timestamp=timestamp,
                 keypoints_2d=kps_2d,
                 visibility=vis,
-                pose_confidence=float(person.detection_confidence),
+                pose_confidence=0.10,
                 frame_id=frame_id,
                 bbox=person.bbox,
+                is_heuristic=True,
                 metadata={"model": "heuristic_baseline"}
             )
             pose_frames.append(normalize_pose(raw_pose, person.bbox))
@@ -190,7 +194,8 @@ class YOLOPoseEstimator(BasePoseEstimator):
 
 class SapiensPoseEstimator(BasePoseEstimator):
     """
-    Meta Sapiens Whole-Body 133-Keypoint Pose Model Adapter (Section 7.2).
+    Meta Sapiens Whole-Body 133-Keypoint Pose Model Adapter (Upgrade_Plan.md Section 7.2).
+    Requires downstream integration of Meta Sapiens torchscript/onnx weights.
     """
 
     def __init__(self, variant: str = "sapiens_0.3b_gvd", conf_threshold: float = 0.4):
@@ -213,37 +218,16 @@ class SapiensPoseEstimator(BasePoseEstimator):
         timestamp: float = 0.0,
         frame_id: int = 0
     ) -> List[PoseFrame]:
-        # Evaluates 133 whole-body keypoints (body, face, hands, feet)
-        yolo_fallback = YOLOPoseEstimator()
-        base_frames = yolo_fallback.estimate(frame, tracked_people, timestamp, frame_id)
-        sapiens_frames: List[PoseFrame] = []
-        for bf in base_frames:
-            # Expand 17 keypoints to 133 high-resolution landmarks
-            extended_2d = np.zeros((133, 2), dtype=np.float32)
-            extended_2d[:17] = bf.keypoints_2d[:17]
-            # Interpolate hand and facial keypoints around wrists and nose
-            for i in range(17, 133):
-                extended_2d[i] = bf.keypoints_2d[i % 17] + np.random.uniform(-0.02, 0.02, 2).astype(np.float32)
-
-            vis = np.ones(133, dtype=np.float32) * bf.pose_confidence
-            pose = PoseFrame(
-                track_id=bf.track_id,
-                timestamp=timestamp,
-                keypoints_2d=extended_2d,
-                visibility=vis,
-                pose_confidence=bf.pose_confidence,
-                frame_id=frame_id,
-                bbox=bf.bbox,
-                is_normalized=bf.is_normalized,
-                metadata={"model": self.model_name, "num_joints": 133}
-            )
-            sapiens_frames.append(pose)
-        return sapiens_frames
+        raise NotImplementedError(
+            f"Meta Sapiens Whole-Body 133-Keypoint model ({self._variant}) is not yet integrated. "
+            "Please use YOLOPoseEstimator for real, validated keypoint extraction."
+        )
 
 
 class GEMXPoseEstimator(BasePoseEstimator):
     """
-    NVIDIA GEM-X 77-Joint Monocular 3D Human Motion Recovery Adapter (Section 7.1).
+    NVIDIA GEM-X 77-Joint Monocular 3D Human Motion Recovery Adapter (Upgrade_Plan.md Section 7.1).
+    Requires downstream integration of NVIDIA GEM-X model weights.
     """
 
     def __init__(self, conf_threshold: float = 0.4):
@@ -265,38 +249,16 @@ class GEMXPoseEstimator(BasePoseEstimator):
         timestamp: float = 0.0,
         frame_id: int = 0
     ) -> List[PoseFrame]:
-        # Recovers 77-joint whole-body 3D representation
-        yolo_fallback = YOLOPoseEstimator()
-        base_frames = yolo_fallback.estimate(frame, tracked_people, timestamp, frame_id)
-        gemx_frames: List[PoseFrame] = []
-        for bf in base_frames:
-            kps_3d = np.zeros((77, 3), dtype=np.float32)
-            # Map core 17 joints into 3D space
-            kps_3d[:17, :2] = bf.keypoints_2d[:17]
-            kps_3d[:17, 2] = np.sin(np.linspace(0, np.pi, 17)).astype(np.float32) * 0.1
-            for j in range(17, 77):
-                kps_3d[j] = kps_3d[j % 17] + np.random.uniform(-0.03, 0.03, 3).astype(np.float32)
-
-            vis = np.ones(77, dtype=np.float32) * bf.pose_confidence
-            pose = PoseFrame(
-                track_id=bf.track_id,
-                timestamp=timestamp,
-                keypoints_2d=kps_3d[:, :2],
-                keypoints_3d=kps_3d,
-                visibility=vis,
-                pose_confidence=bf.pose_confidence,
-                frame_id=frame_id,
-                bbox=bf.bbox,
-                is_normalized=True,
-                metadata={"model": self.model_name, "num_joints": 77, "has_3d": True}
-            )
-            gemx_frames.append(pose)
-        return gemx_frames
+        raise NotImplementedError(
+            "NVIDIA GEM-X 77-joint 3D human motion recovery model is not yet integrated. "
+            "Please use YOLOPoseEstimator for real, validated keypoint extraction."
+        )
 
 
 class SAM3DBodyEstimator(BasePoseEstimator):
     """
-    SAM 3D Body Reconstruction Model Adapter (Section 7.3).
+    SAM 3D Body Reconstruction Model Adapter (Upgrade_Plan.md Section 7.3).
+    Requires downstream integration of SAM 3D Body foundation weights.
     """
 
     def __init__(self, conf_threshold: float = 0.4):
@@ -317,14 +279,16 @@ class SAM3DBodyEstimator(BasePoseEstimator):
         timestamp: float = 0.0,
         frame_id: int = 0
     ) -> List[PoseFrame]:
-        gemx = GEMXPoseEstimator()
-        return gemx.estimate(frame, tracked_people, timestamp, frame_id)
+        raise NotImplementedError(
+            "SAM 3D Body estimator is not yet integrated. "
+            "Please use YOLOPoseEstimator for real, validated keypoint extraction."
+        )
 
 
 class PoseBenchmarkRunner:
     """
     Executes formal pose benchmark as specified in Upgrade_Plan.md Section 8:
-    Compares YOLO Pose, Sapiens, GEM-X, SAM 3D Body across:
+    Compares available pose estimators across:
     - Keypoint quality
     - Occlusion robustness
     - Latency (ms)
@@ -333,9 +297,7 @@ class PoseBenchmarkRunner:
 
     def __init__(self, estimators: Optional[List[BasePoseEstimator]] = None):
         self.estimators = estimators or [
-            YOLOPoseEstimator(),
-            SapiensPoseEstimator(),
-            GEMXPoseEstimator()
+            YOLOPoseEstimator()
         ]
 
     def run_benchmark(self, sample_frames: List[np.ndarray], sample_tracks: List[List[TrackedPerson]]) -> Dict[str, Any]:
@@ -348,28 +310,37 @@ class PoseBenchmarkRunner:
 
             for frame, tracks in zip(sample_frames, sample_tracks):
                 t0 = time.perf_counter()
-                poses = estimator.estimate(frame, tracks)
+                try:
+                    poses = estimator.estimate(frame, tracks)
+                except NotImplementedError as e:
+                    results[name] = {"status": "not_implemented", "error": str(e)}
+                    break
                 t1 = time.perf_counter()
                 latencies.append((t1 - t0) * 1000.0)
                 if poses:
                     keypoint_counts.append(len(poses[0].keypoints_2d))
                     confidence_scores.append(poses[0].pose_confidence)
-
-            results[name] = {
-                "avg_latency_ms": float(np.mean(latencies)) if latencies else 0.0,
-                "num_joints": estimator.num_keypoints,
-                "avg_pose_confidence": float(np.mean(confidence_scores)) if confidence_scores else 0.0,
-                "frames_evaluated": len(sample_frames)
-            }
+            else:
+                results[name] = {
+                    "avg_latency_ms": float(np.mean(latencies)) if latencies else 0.0,
+                    "num_joints": estimator.num_keypoints,
+                    "avg_pose_confidence": float(np.mean(confidence_scores)) if confidence_scores else 0.0,
+                    "frames_evaluated": len(sample_frames)
+                }
         return results
 
 
 def load_pose_estimator(model_type: str = "yolo_pose", config: Optional[Dict[str, Any]] = None) -> BasePoseEstimator:
     m = model_type.lower()
+    cfg = config or {}
+    model_name = cfg.get("model_path", cfg.get("model_name", "yolov8n-pose.pt"))
+    conf = cfg.get("conf_threshold", cfg.get("conf", 0.35))
+    device = cfg.get("device", "cpu")
+
     if "sapiens" in m:
-        return SapiensPoseEstimator()
+        return SapiensPoseEstimator(conf_threshold=conf)
     elif "gem" in m:
-        return GEMXPoseEstimator()
+        return GEMXPoseEstimator(conf_threshold=conf)
     elif "sam" in m:
-        return SAM3DBodyEstimator()
-    return YOLOPoseEstimator()
+        return SAM3DBodyEstimator(conf_threshold=conf)
+    return YOLOPoseEstimator(model_name=model_name, conf_threshold=conf, device=device)

@@ -9,31 +9,32 @@ from pathlib import Path
 from file_manager import SafetyDetectorFileManager
 
 class UploadHistoryManager:
-    def __init__(self, history_file="upload_history.json", uploads_dir="uploads"):
-        self.history_file = history_file
-        self.uploads_dir = uploads_dir
-        self.file_manager = SafetyDetectorFileManager()
+    def __init__(self, history_file=None, uploads_dir=None):
+        base_dir = Path(__file__).resolve().parent
+        self.history_file = Path(history_file) if history_file else base_dir / "upload_history.json"
+        self.uploads_dir = Path(uploads_dir) if uploads_dir else base_dir / "storage" / "uploads"
+        self.file_manager = SafetyDetectorFileManager(base_dir=base_dir / "storage")
         self.history_data = self._load_history()
     
     def _load_history(self):
         """Load history from JSON file"""
         try:
-            if os.path.exists(self.history_file):
-                with open(self.history_file, 'r') as f:
+            if os.path.exists(self.history_file) and os.path.getsize(self.history_file) > 0:
+                with open(self.history_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
             return {"uploads": []}
         except Exception as e:
-            print(f"Error loading history: {e}")
+            print(f"Error loading history from {self.history_file}: {e}")
             return {"uploads": []}
     
     def _save_history(self):
         """Save history to JSON file"""
         try:
-            with open(self.history_file, 'w') as f:
+            with open(self.history_file, 'w', encoding='utf-8') as f:
                 json.dump(self.history_data, f, indent=2)
             return True
         except Exception as e:
-            print(f"Error saving history: {e}")
+            print(f"Error saving history to {self.history_file}: {e}")
             return False
     
     def add_upload(self, filename, file_size, file_data=None, analysis_status="pending"):

@@ -88,7 +88,7 @@ class EvidenceStore:
         self.active_incident_id: Optional[str] = None
         self.current_incident_dir: Optional[str] = None
         self.incident_timeline: List[Dict[str, Any]] = []
-        self.incident_frames: List[Tuple[float, int, np.ndarray]] = []
+        self.clip_writer: Optional[cv2.VideoWriter] = None
         self.peak_frame: Optional[np.ndarray] = None
         self.peak_risk: float = 0.0
         self.peak_timestamp: float = 0.0
@@ -128,6 +128,8 @@ class EvidenceStore:
             if not self.active_incident_id:
                 # Start recording new incident
                 self._start_new_incident(state_result, timestamp, frame_id, frame)
+            elif self.clip_writer is not None:
+                self.clip_writer.write(frame)
 
             # Record frame into incident timeline
             self.incident_timeline.append({
@@ -138,7 +140,6 @@ class EvidenceStore:
                 "action": state_result.action.value,
                 "category": state_result.category.value
             })
-            self.incident_frames.append((timestamp, frame_id, frame.copy()))
             self.involved_tracks.update(state_result.active_track_ids)
 
             # Check for peak frame
@@ -161,7 +162,8 @@ class EvidenceStore:
 
         # Case 3: Capturing post-event context frames
         if self.pending_save:
-            self.incident_frames.append((timestamp, frame_id, frame.copy()))
+            if self.clip_writer is not None:
+                self.clip_writer.write(frame)
             self.incident_timeline.append({
                 "timestamp": round(timestamp, 3),
                 "frame_id": frame_id,
@@ -191,11 +193,12 @@ class EvidenceStore:
         """Initializes a new incident directory and buffers pre-event context."""
         t_str = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime(timestamp if timestamp > 100000 else time.time()))
         action_name = state_result.action.value
-        inc_dir_name = f"{t_str}_{action_name}"
+        safe_action = "".join(c for c in action_name if c.isalnum() or c in ("_", "-"))
+        inc_dir_name = f"{t_str}_{safe_action}"
         self.current_incident_dir = os.path.join(self.config.base_incidents_dir, inc_dir_name)
         os.makedirs(self.current_incident_dir, exist_ok=True)
 
-        self.active_incident_id = state_result.incident_id or f"INC-{t_str}_{action_name}"
+        self.active_incident_id = state_result.incident_id or f"INC-{t_str}_{safe_action}"
         self.incident_start_time = timestamp
         self.incident_category = state_result.category
         self.incident_action = state_result.action
@@ -207,20 +210,29 @@ class EvidenceStore:
         self.involved_tracks = set(state_result.active_track_ids)
         self.pending_save = False
 
-        # Prepend pre-event buffer frames
+        # Prepend pre-event buffer frames and open streaming video writer
         pre_frames = self.video_buffer.get_pre_event_frames(timestamp)
-        self.incident_frames = list(pre_frames)
         self.incident_timeline = [
             {
                 "timestamp": round(f[0], 3),
                 "frame_id": f[1],
                 "state": EvidenceState.OBSERVING.value,
-                "risk": 0.30,
+                "risk": 0.0,
                 "action": ActionType.WALKING.value,
                 "category": EventCategory.NORMAL_ACTIVITY.value
             }
             for f in pre_frames
         ]
+
+        if self.config.save_video_clips and frame is not None:
+            clip_path = os.path.join(self.current_incident_dir, "clip.mp4")
+            h, w = frame.shape[:2]
+            fps = max(5.0, self.video_buffer.fps)
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            self.clip_writer = cv2.VideoWriter(clip_path, fourcc, fps, (w, h))
+            for _, _, pf_img in pre_frames:
+                self.clip_writer.write(pf_img)
+            self.clip_writer.write(frame)
 
     def _finalize_incident_bundle(
         self,
@@ -276,8 +288,11 @@ class EvidenceStore:
         with open(os.path.join(out_dir, "timeline.json"), "w", encoding="utf-8") as f:
             json.dump(self.incident_timeline, f, indent=2)
 
-        # 3. Save keyframe.jpg
+        # 3. Save keyframe.jpg (standard + raw forensic + annotated)
         if self.peak_frame is not None:
+            # Pristine untouched keyframe for forensic provenance
+            cv2.imwrite(os.path.join(out_dir, "keyframe_raw.jpg"), self.peak_frame)
+
             annotated_keyframe = self.peak_frame.copy()
             # Overlay audit stamp
             h, w = annotated_keyframe.shape[:2]
@@ -300,28 +315,24 @@ class EvidenceStore:
                 (255, 255, 255),
                 1
             )
+            cv2.imwrite(os.path.join(out_dir, "keyframe_annotated.jpg"), annotated_keyframe)
             cv2.imwrite(os.path.join(out_dir, "keyframe.jpg"), annotated_keyframe)
 
-        # 4. Save clip.mp4
-        if self.config.save_video_clips and self.incident_frames:
-            clip_path = os.path.join(out_dir, "clip.mp4")
-            first_f = self.incident_frames[0][2]
-            h, w = first_f.shape[:2]
-            fps = max(5.0, self.video_buffer.fps)
-            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-            writer = cv2.VideoWriter(clip_path, fourcc, fps, (w, h))
-            for _, _, f_img in self.incident_frames:
-                writer.write(f_img)
-            writer.release()
+        # 4. Finalize clip.mp4
+        if self.clip_writer is not None:
+            self.clip_writer.release()
+            self.clip_writer = None
 
         return out_dir
 
     def _reset_incident_state(self):
         """Clears active incident tracking after bundle write."""
+        if self.clip_writer is not None:
+            self.clip_writer.release()
+            self.clip_writer = None
         self.active_incident_id = None
         self.current_incident_dir = None
         self.incident_timeline.clear()
-        self.incident_frames.clear()
         self.peak_frame = None
         self.peak_risk = 0.0
         self.involved_tracks.clear()

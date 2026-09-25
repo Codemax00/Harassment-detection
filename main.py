@@ -30,9 +30,10 @@ from alerts.alert_manager import AlertManager
 from recording.incident_recorder import IncidentRecorder
 
 
-class GuardianMatrixPipeline:
+class LegacyCCTVPipeline:
     """
-    Unified end-to-end execution pipeline for live CCTV and multi-source video feeds.
+    Unified end-to-end execution pipeline for live CCTV and multi-source video feeds (Legacy streaming runtime).
+    For the research-grade 5-state hysteresis pipeline, see src.pipeline.GuardianMatrixPipeline.
     """
 
     def __init__(
@@ -411,13 +412,17 @@ def main():
             print("[ERROR] --source video requires --file <path_to_video.mp4>")
             sys.exit(1)
 
-    pipeline = GuardianMatrixPipeline(
+    pipeline = LegacyCCTVPipeline(
         source_type=args.source,
         source_path=source_path,
         headless=args.headless,
         device=args.device,
     )
     pipeline.run(max_frames=args.max_frames)
+
+
+# Backward compatibility alias
+GuardianMatrixPipeline = LegacyCCTVPipeline
 
 
 if __name__ == "__main__":

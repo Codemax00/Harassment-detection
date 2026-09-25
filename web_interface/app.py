@@ -4,6 +4,10 @@
 # CRITICAL: Suppress OpenCV warnings BEFORE any imports
 import os
 import sys
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 os.environ['OPENCV_LOG_LEVEL'] = 'ERROR'
 os.environ['OPENCV_VIDEOIO_DEBUG'] = '0'
 
@@ -11,7 +15,7 @@ import cv2
 # Suppress OpenCV logging immediately
 cv2.setLogLevel(0)
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_file
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_file, send_from_directory
 
 # CSRF protection intentionally disabled for API compatibility
 CSRF_AVAILABLE = False
@@ -79,7 +83,8 @@ except Exception as gm_err:
 app = Flask(__name__)
 # Use environment variable for secret key in production
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev_key_change_in_production_' + str(int(time.time())))
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = os.path.join(current_dir, 'storage', 'uploads')
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB max file size
 
 # CSRF protection disabled for API compatibility
@@ -99,6 +104,7 @@ camera_monitoring_active = False
 parallel_analyzer = None
 video_chunker = None
 selected_camera_id = 0  # Track which camera is being used
+cctv_tiling_mode = False  # Long-range CCTV small-object slicing mode
 
 # Thread-safe global state
 analysis_lock = threading.Lock()
@@ -249,44 +255,54 @@ def generate_camera_frames(camera_id=0):
         return
     
     try:
-        # Initialize camera with optimized settings
-        print(f"🎥 Initializing camera {camera_id} for video stream...")
+        # Initialize camera or video source with optimized settings
+        print(f"🎥 Initializing stream source: {camera_id}...")
         
-        # Use DirectShow backend on Windows for better compatibility
-        if os.name == 'nt':  # Windows
-            camera = cv2.VideoCapture(camera_id, cv2.CAP_DSHOW)
+        is_video_source = False
+        cam_str = str(camera_id).strip()
+        
+        if cam_str.startswith("http") or cam_str.startswith("rtsp") or cam_str.endswith(".mp4") or "/" in cam_str or "\\" in cam_str:
+            is_video_source = True
+            resolved_source = cam_str
+            if not cam_str.startswith("http") and not cam_str.startswith("rtsp") and not os.path.isabs(cam_str):
+                repo_root = os.path.abspath(os.path.join(current_dir, ".."))
+                resolved_source = os.path.join(repo_root, cam_str)
+            print(f"   Opening video file / public stream: {resolved_source}")
+            camera = cv2.VideoCapture(resolved_source)
         else:
-            camera = cv2.VideoCapture(camera_id)
+            cam_idx = int(cam_str) if cam_str.isdigit() else 0
+            if os.name == 'nt':
+                camera = cv2.VideoCapture(cam_idx, cv2.CAP_DSHOW)
+            else:
+                camera = cv2.VideoCapture(cam_idx)
             
-        # Wait for camera to initialize
-        time.sleep(0.5)
+        # Wait for camera/video to initialize
+        time.sleep(0.3)
         
         if not camera.isOpened():
-            print(f"❌ Camera {camera_id} could not be opened for streaming")
-            yield b'--frame\r\nContent-Type: text/plain\r\n\r\nCamera not available for streaming\r\n'
+            print(f"❌ Source {camera_id} could not be opened for streaming")
+            yield b'--frame\r\nContent-Type: text/plain\r\n\r\nStream source not available\r\n'
             return
         
         # Test frame reading
         test_ret, test_frame = camera.read()
         if not test_ret or test_frame is None:
-            print(f"❌ Camera {camera_id} cannot read frames for streaming")
+            print(f"❌ Source {camera_id} cannot read frames for streaming")
             camera.release()
-            yield b'--frame\r\nContent-Type: text/plain\r\n\r\nCamera cannot read frames\r\n'
+            yield b'--frame\r\nContent-Type: text/plain\r\n\r\nCannot read frames from source\r\n'
             return
         
-        # Set optimal camera settings for streaming
-        camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-        camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-        camera.set(cv2.CAP_PROP_FPS, 15)
-        camera.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+        if not is_video_source:
+            camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+            camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+            camera.set(cv2.CAP_PROP_FPS, 15)
+            camera.set(cv2.CAP_PROP_BUFFERSIZE, 1)
         
-        print(f"✅ Camera {camera_id} initialized successfully for streaming")
+        print(f"✅ Source {camera_id} initialized successfully for streaming")
         
         active_camera = camera
         camera_monitoring_active = True
         camera_analysis_data['session_start'] = time.time()
-        
-        print("📹 Camera optimized: 640x480 @ 15 FPS, buffer=1")
         
         # Initialize AI models if not already done
         if not ai_manager or not person_model:
@@ -295,8 +311,15 @@ def generate_camera_frames(camera_id=0):
         gm_pipeline = None
         if GUARDIAN_MATRIX_AVAILABLE and GuardianMatrixPipeline is not None:
             try:
-                gm_pipeline = GuardianMatrixPipeline(video_id=f"LIVE_CAM_{camera_id}")
-                print(f"🚀 Guardian Matrix pipeline active for camera {camera_id} stream")
+                from src.detection.detector import load_detector
+                cctv_detector = load_detector("yolo", config={
+                    "conf_threshold": 0.20,
+                    "enable_tiling": cctv_tiling_mode,
+                    "tile_size": 240,
+                    "tile_overlap": 0.30
+                })
+                gm_pipeline = GuardianMatrixPipeline(detector=cctv_detector, video_id=f"LIVE_{camera_id}")
+                print(f"🚀 Guardian Matrix pipeline active for {camera_id} stream (small_object_tiling={cctv_tiling_mode})")
             except Exception as gm_err:
                 print(f"⚠️ Guardian Matrix initialization error: {gm_err}")
                 gm_pipeline = None
@@ -308,7 +331,14 @@ def generate_camera_frames(camera_id=0):
         while camera_monitoring_active:
             success, frame = camera.read()
             if not success:
-                break
+                if is_video_source:
+                    # Seamlessly loop public footage
+                    camera.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                    success, frame = camera.read()
+                    if not success:
+                        break
+                else:
+                    break
             
             frame_count += 1
             camera_analysis_data['frame_count'] = frame_count
@@ -520,6 +550,65 @@ def test_esp32_camera(ip_address):
     except Exception as e:
         return False, str(e)
 
+def get_saved_incidents():
+    """Retrieve all structured forensic incident bundles from disk"""
+    incidents_dir = os.path.abspath(os.path.join(current_dir, "..", "incidents"))
+    if not os.path.exists(incidents_dir):
+        return [], {"strikes": 0, "falls": 0, "pursuits": 0, "total": 0}
+    
+    incidents = []
+    stats = {"strikes": 0, "falls": 0, "pursuits": 0, "total": 0}
+    
+    for d in sorted(os.listdir(incidents_dir), reverse=True):
+        full_p = os.path.join(incidents_dir, d)
+        if not os.path.isdir(full_p):
+            continue
+            
+        action = d.split("_")[-1] if "_" in d else "INCIDENT"
+        meta_file = os.path.join(full_p, "metadata.json")
+        
+        item = {
+            "id": d,
+            "folder_name": d,
+            "has_clip": os.path.exists(os.path.join(full_p, "clip.mp4")),
+            "has_raw_keyframe": os.path.exists(os.path.join(full_p, "keyframe_raw.jpg")),
+            "has_annotated_keyframe": os.path.exists(os.path.join(full_p, "keyframe_annotated.jpg")),
+            "has_keyframe": os.path.exists(os.path.join(full_p, "keyframe.jpg")),
+            "action": action,
+            "timestamp_str": d.rsplit("_", 1)[0] if "_" in d else d,
+            "peak_risk": 0.0,
+            "category": "AGGRESSIVE_INTERACTION",
+            "duration": 0.0,
+            "quality": {},
+            "track_ids": []
+        }
+        
+        if os.path.exists(meta_file):
+            try:
+                with open(meta_file, "r") as mf:
+                    data = json.load(mf)
+                    item["category"] = data.get("category", item["category"])
+                    item["action"] = data.get("action", item["action"])
+                    item["urgency"] = data.get("urgency", "ALERT")
+                    item["peak_risk"] = float(data.get("peak_risk", 0.0))
+                    item["duration"] = float(data.get("duration_seconds", 0.0))
+                    item["quality"] = data.get("quality", {})
+                    item["track_ids"] = data.get("track_ids", [])
+            except Exception:
+                pass
+                
+        if item["action"] == "STRIKE":
+            stats["strikes"] += 1
+        elif item["action"] == "FALL":
+            stats["falls"] += 1
+        elif item["action"] == "PURSUIT":
+            stats["pursuits"] += 1
+        stats["total"] += 1
+        
+        incidents.append(item)
+        
+    return incidents, stats
+
 @app.route('/')
 def index():
     """Main dashboard"""
@@ -536,12 +625,17 @@ def index():
         recent_uploads = history_manager.get_all_uploads()[-3:]  # Last 3 uploads
         recent_uploads.reverse()  # Show newest first
         
+        # Get forensic incidents and statistics
+        incidents, inc_stats = get_saved_incidents()
+        
         return render_template('index.html', 
                              model_info=model_info,
                              cameras=cameras,
                              config=config,
                              history_stats=history_stats,
-                             recent_uploads=recent_uploads)
+                             recent_uploads=recent_uploads,
+                             incidents=incidents,
+                             stats=inc_stats)
     except Exception as e:
         print(f"Dashboard error: {e}")
         flash('Error loading dashboard. Please refresh the page.', 'error')
@@ -549,6 +643,62 @@ def index():
                              error_code=500,
                              error_message="Dashboard Error",
                              error_description="Could not load dashboard data."), 500
+
+@app.route('/incidents')
+def incidents_page():
+    """Forensic evidence bundles page"""
+    incidents, stats = get_saved_incidents()
+    return render_template('incidents.html', incidents=incidents, stats=stats)
+
+@app.route('/incidents/<incident_id>')
+def incident_detail_page(incident_id):
+    """Forensic evidence detail dossier"""
+    incident_id = secure_filename(incident_id)
+    incidents_dir = os.path.abspath(os.path.join(current_dir, "..", "incidents"))
+    target_dir = os.path.join(incidents_dir, incident_id)
+    
+    if not os.path.exists(target_dir):
+        flash('Incident folder not found', 'error')
+        return redirect(url_for('incidents_page'))
+        
+    meta_file = os.path.join(target_dir, "metadata.json")
+    metadata = {}
+    if os.path.exists(meta_file):
+        try:
+            with open(meta_file, "r") as mf:
+                metadata = json.load(mf)
+        except Exception as e:
+            print(f"Error loading incident metadata: {e}")
+            
+    incident_info = {
+        "folder_name": incident_id,
+        "has_clip": os.path.exists(os.path.join(target_dir, "clip.mp4")),
+        "has_raw_keyframe": os.path.exists(os.path.join(target_dir, "keyframe_raw.jpg")),
+        "has_annotated_keyframe": os.path.exists(os.path.join(target_dir, "keyframe_annotated.jpg")),
+        "has_keyframe": os.path.exists(os.path.join(target_dir, "keyframe.jpg")),
+        "action": metadata.get("action", incident_id.split("_")[-1] if "_" in incident_id else "INCIDENT"),
+        "category": metadata.get("category", "AGGRESSIVE_INTERACTION"),
+        "peak_risk": float(metadata.get("peak_risk", 0.0)),
+        "duration": float(metadata.get("duration_seconds", 0.0)),
+        "track_ids": metadata.get("track_ids", [])
+    }
+    
+    return render_template(
+        'incident_detail.html',
+        incident=incident_info,
+        metadata=metadata,
+        metadata_raw=metadata,
+        metadata_json=json.dumps(metadata, indent=2)
+    )
+
+@app.route('/incident_file/<incident_id>/<filename>')
+def serve_incident_file(incident_id, filename):
+    """Serve incident clips and keyframes securely"""
+    incident_id = secure_filename(incident_id)
+    filename = secure_filename(filename)
+    incidents_dir = os.path.abspath(os.path.join(current_dir, "..", "incidents"))
+    target_dir = os.path.join(incidents_dir, incident_id)
+    return send_from_directory(target_dir, filename)
 
 @app.route('/upload')
 def upload_page():
@@ -619,6 +769,41 @@ def upload_video():
             'error': f'Upload failed: {str(e)}'
         }), 500
 
+def _resolve_video_file(upload, filename):
+    """Reliably find video file on disk across CWD, web_interface storage, and test dirs"""
+    candidates = []
+    if upload and upload.get('video_path'):
+        vp = upload['video_path']
+        candidates.extend([
+            vp,
+            os.path.join(current_dir, vp),
+            os.path.join(parent_dir, vp),
+            os.path.join(current_dir, 'storage', 'uploads', os.path.basename(vp)),
+            os.path.join(parent_dir, 'storage', 'uploads', os.path.basename(vp))
+        ])
+    if filename:
+        candidates.extend([
+            os.path.join(app.config['UPLOAD_FOLDER'], filename),
+            os.path.join(current_dir, app.config['UPLOAD_FOLDER'], filename),
+            os.path.join(current_dir, 'storage', 'uploads', filename),
+            os.path.join(parent_dir, 'test_videos', filename),
+            os.path.join(parent_dir, 'test_videos', 'sphar', 'hitting', filename),
+            os.path.join(parent_dir, 'test_videos', 'sphar', 'falling', filename),
+            os.path.join(parent_dir, 'test_videos', 'sphar', 'normal_walking', filename)
+        ])
+    uploads_dir = os.path.join(current_dir, 'storage', 'uploads')
+    if os.path.isdir(uploads_dir):
+        base_match = filename or (os.path.basename(upload.get('video_path', '')) if upload else '')
+        if base_match:
+            for item in os.listdir(uploads_dir):
+                if item.endswith(base_match) or base_match.endswith(item) or (len(base_match) > 10 and base_match[-15:] in item):
+                    candidates.append(os.path.join(uploads_dir, item))
+
+    for c in candidates:
+        if c and os.path.exists(c):
+            return os.path.abspath(c)
+    return None
+
 @app.route('/analyze/<filename>')
 def analyze_video(filename):
     """Video analysis page"""
@@ -634,13 +819,10 @@ def analyze_video(filename):
         return redirect(url_for('upload_page'))
     
     # Get the actual video file path from organized storage
-    file_path = upload.get('video_path')
+    file_path = _resolve_video_file(upload, filename)
     if not file_path or not os.path.exists(file_path):
-        # Try backup location
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        if not os.path.exists(file_path):
-            flash('Video file not found in storage', 'error')
-            return redirect(url_for('upload_page'))
+        flash('Video file not found in storage', 'error')
+        return redirect(url_for('upload_page'))
     
     # Get video info
     cap = cv2.VideoCapture(file_path)
@@ -696,12 +878,9 @@ def start_analysis():
         return jsonify({'error': 'Upload record not found'}), 404
     
     # Get the actual video file path
-    file_path = upload.get('video_path')
+    file_path = _resolve_video_file(upload, filename)
     if not file_path or not os.path.exists(file_path):
-        # Try backup location
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        if not os.path.exists(file_path):
-            return jsonify({'error': 'Video file not found in storage'}), 404
+        return jsonify({'error': 'Video file not found in storage'}), 404
     
     # Get analysis settings from request
     settings = request.json.get('settings', {})
@@ -712,10 +891,15 @@ def start_analysis():
     
     # Store settings in current_analysis for the background thread
     current_analysis = {
-        'status': 'starting',
+        'status': 'running',
+        'progress': 0,
         'filename': filename,
         'upload_id': upload['id'],
         'settings': settings,
+        'frame_count': 0,
+        'ai_checks': 0,
+        'people_count': 0,
+        'alerts': [],
         'start_time': datetime.now().isoformat()
     }
     
@@ -752,6 +936,7 @@ def analysis_status():
         return jsonify(status_data)
 
 @app.route('/camera')
+@app.route('/live_stream')
 def camera_page():
     """Camera selection and monitoring page"""
     try:
@@ -804,24 +989,21 @@ def start_camera_monitoring():
         # Try to get parameters from JSON if available
         try:
             if request.is_json and request.json:
-                camera_id = int(request.json.get('camera_id', 0))
+                camera_id = request.json.get('source', request.json.get('camera_id', 0))
                 camera_type = request.json.get('camera_type', 'local')
-                print(f"   Using JSON params: camera_id={camera_id}, camera_type={camera_type}")
+                print(f"   Using params: source={camera_id}, camera_type={camera_type}")
             else:
                 print(f"   Using defaults: camera_id={camera_id}, camera_type={camera_type}")
         except:
             print(f"   JSON parse failed, using defaults")
         
-        # Simple camera validation
-        if camera_id < 0 or camera_id > 5:
-            camera_id = 0  # Reset to safe default
-        
-        print(f"🚀 Starting camera monitoring with camera {camera_id}")
+        print(f"🚀 Starting monitoring with source {camera_id}")
         
         # Store the selected camera globally for video stream
-        global selected_camera_id, camera_monitoring_active
+        global selected_camera_id, camera_monitoring_active, cctv_tiling_mode
         with camera_lock:
             selected_camera_id = camera_id
+            cctv_tiling_mode = bool(request.json.get('enable_tiling', False) or request.json.get('cctv_mode', False)) if request.is_json and request.json else False
             camera_monitoring_active = True
             # Reset camera analysis data for new session
             camera_analysis_data['frame_count'] = 0
@@ -987,8 +1169,14 @@ def camera_status():
                         'people_count': latest.get('people_count', 0),
                         'ai_message': latest.get('ai_message', ''),
                         'is_harassment': latest.get('is_harassment', False),
+                        'policy_state': latest.get('policy_state', 'NORMAL'),
+                        'pattern': latest.get('pattern', 'NORMAL_ACTIVITY'),
+                        'confidence': round(float(latest.get('confidence', 0.0)), 2),
                         'timestamp': latest.get('timestamp', 0)
                     }
+                    status_data['policy_state'] = latest.get('policy_state', 'NORMAL')
+                    status_data['pattern'] = latest.get('pattern', 'NORMAL_ACTIVITY')
+                    status_data['confidence'] = round(float(latest.get('confidence', 0.0)), 2)
                 
                 # Add alerts list if available (ensure it's a list)
                 alerts_list = camera_analysis_data.get('alerts_list', [])
@@ -1261,7 +1449,7 @@ def get_video_path(filename):
         if not upload:
             return jsonify({'error': 'Upload not found'}), 404
         
-        file_path = upload.get('video_path')
+        file_path = _resolve_video_file(upload, filename)
         if not file_path or not os.path.exists(file_path):
             return jsonify({'error': 'Video file not found in storage'}), 404
         
@@ -1331,8 +1519,8 @@ def save_config(config):
         return False
 
 def run_video_analysis(file_path, filename, upload_id):
-    """Run PARALLEL AI-powered video analysis in background"""
-    global current_analysis, parallel_analyzer
+    """Run AI-powered video analysis in background using Guardian Matrix or fallback"""
+    global current_analysis, parallel_analyzer, person_model, ai_manager, video_chunker
     
     try:
         current_analysis = {
@@ -1347,7 +1535,70 @@ def run_video_analysis(file_path, filename, upload_id):
             'parallel_enabled': parallel_analyzer.enabled if parallel_analyzer else False
         }
         
-        # Log analysis start
+        # 1. Primary Engine: Guardian Matrix Multi-Stage Pipeline
+        if GUARDIAN_MATRIX_AVAILABLE:
+            try:
+                from helpers.guardian_matrix_adapter import GuardianMatrixVideoAnalyzer
+                history_manager.add_log_entry(upload_id, 'info', f'Guardian Matrix 10-stage AI analysis started for {filename}')
+                print(f"🚀 Running Guardian Matrix Video Analyzer on {filename}...")
+                
+                analyzer = GuardianMatrixVideoAnalyzer()
+                out_video = os.path.join(app.config['UPLOAD_FOLDER'], f"annotated_{filename}")
+                
+                def progress_cb(f, total, t, summary):
+                    pct = int((f / total) * 100) if total > 0 else 0
+                    current_analysis.update({
+                        'status': 'running',
+                        'progress': pct,
+                        'frame_count': f,
+                        'ai_checks': f,
+                        'people_count': summary.get('people_count', 0),
+                        'total_frames': total
+                    })
+                    history_manager.update_upload_status(upload_id, 'running', {
+                        'frames_processed': f,
+                        'total_frames': total,
+                        'completion_percentage': pct
+                    })
+                    
+                res = analyzer.analyze_video(
+                    video_path=file_path,
+                    output_annotated_path=out_video,
+                    progress_callback=progress_cb
+                )
+                
+                # Record detected alerts to history
+                for alert in res.get('alerts', []):
+                    alert_data = {
+                        'frame': alert.get('frame_id', 0),
+                        'time': f"{alert.get('timestamp', 0):.2f}s",
+                        'confidence': alert.get('confidence', 0.8),
+                        'message': f"{alert.get('action', 'INCIDENT')} ({alert.get('category', 'ALERT')})",
+                        'people_count': 2
+                    }
+                    history_manager.add_alert(upload_id, alert_data)
+                    current_analysis['alerts'].append(alert_data)
+                
+                history_manager.update_upload_status(upload_id, 'completed', {
+                    'frames_processed': res['total_frames'],
+                    'total_frames': res['total_frames'],
+                    'completion_percentage': 100,
+                    'category': res.get('predicted_category', 'NORMAL'),
+                    'saved_bundles': res.get('saved_bundles', [])
+                })
+                history_manager.add_log_entry(upload_id, 'info', f"Guardian Matrix analysis completed: {res['total_frames']} frames, Dominant: {res.get('predicted_category')}")
+                current_analysis['status'] = 'completed'
+                current_analysis['progress'] = 100
+                print(f"✅ Video analysis completed successfully: {res['total_frames']} frames")
+                return
+            except Exception as gm_err:
+                print(f"⚠️ Guardian Matrix direct analysis notice: {gm_err}. Falling back to chunked/sequential.")
+                history_manager.add_log_entry(upload_id, 'warning', f'Guardian Matrix direct notice: {str(gm_err)}. Using fallback.')
+
+        # 2. Fallback Engine: Ensure models are loaded
+        if person_model is None or ai_manager is None:
+            init_models()
+
         history_manager.add_log_entry(upload_id, 'info', f'CHUNKED PARALLEL AI analysis started for {filename}')
         
         # Check if video chunking is enabled

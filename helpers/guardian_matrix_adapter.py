@@ -299,7 +299,8 @@ class GuardianMatrixLiveStreamManager:
                 "policy_state": "NORMAL",
                 "alerts_count": len(self.alert_history),
                 "fps": 0.0,
-                "latency_ms": 0.0
+                "latency_ms": 0.0,
+                "processing_time_ms": 0.0
             }
         proc_fps = getattr(self.processor, 'fps', getattr(self.processor, 'target_fps', 15.0))
         if not self.processor.latest_result:
@@ -313,7 +314,8 @@ class GuardianMatrixLiveStreamManager:
                 "policy_state": "NORMAL",
                 "alerts_count": len(self.alert_history),
                 "fps": round(float(proc_fps), 1),
-                "latency_ms": 0.0
+                "latency_ms": 0.0,
+                "processing_time_ms": 0.0
             }
         res: PipelineFrameResult = self.processor.latest_result
         state_res = res.state_machine_result
@@ -334,6 +336,7 @@ class GuardianMatrixLiveStreamManager:
             "alerts_count": len(self.alert_history),
             "fps": round(float(proc_fps), 1),
             "latency_ms": round(res.processing_time_ms, 1),
+            "processing_time_ms": round(res.processing_time_ms, 1),
             "pose_quality": round(float(temp_out.quality_metrics.get("pose_quality", 0.0)), 2) if temp_out else 0.0,
             "tracking_quality": round(float(temp_out.quality_metrics.get("tracking_quality", 0.0)), 2) if temp_out else 0.0
         }

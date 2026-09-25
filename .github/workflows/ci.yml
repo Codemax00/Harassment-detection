@@ -1,0 +1,108 @@
+name: Guardian Matrix CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-validate:
+    name: Lint & Static Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Linting Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      - name: Check Python Syntax & Critical Flakes
+        run: |
+          # Stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=.venv,venv,build,dist,__pycache__
+
+  test-suite:
+    name: Test Suite (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    needs: lint-and-validate
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11"]
+
+    env:
+      TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD: "1"
+      OPENCV_LOG_LEVEL: "ERROR"
+      PYTHONPATH: "."
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install System Dependencies for OpenCV & Headless Display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libgl1 libglib2.0-0 ffmpeg
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Cache PyTorch Wheel
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-torch-${{ matrix.python-version }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-torch-${{ matrix.python-version }}-
+
+      - name: Install CPU PyTorch & Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: Verify Architecture Imports & Core Pipeline
+        run: |
+          python -c "
+          import torch, torchvision, cv2, numpy, ultralytics
+          print('PyTorch Version:', torch.__version__)
+          print('OpenCV Version:', cv2.__version__)
+          print('Ultralytics Version:', ultralytics.__version__)
+          "
+
+      - name: Run Full Unit & Integration Test Suite
+        run: |
+          python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Validate Web Interface Health & Routing
+        run: |
+          python -c "
+          import sys
+          sys.path.insert(0, 'web_interface')
+          from app import app
+          client = app.test_client()
+          res = client.get('/')
+          assert res.status_code == 200, f'Index returned {res.status_code}'
+          res_live = client.get('/live_stream')
+          assert res_live.status_code == 200, f'Live stream returned {res_live.status_code}'
+          res_upload = client.get('/upload')
+          assert res_upload.status_code == 200, f'Upload returned {res_upload.status_code}'
+          print('All Web Interface Endpoints Healthy & Responsive (200 OK)')
+          "

@@ -9,7 +9,9 @@ from pathlib import Path
 import cv2
 
 class SafetyDetectorFileManager:
-    def __init__(self, base_dir="storage"):
+    def __init__(self, base_dir=None):
+        if base_dir is None:
+            base_dir = Path(__file__).resolve().parent / "storage"
         self.base_dir = Path(base_dir)
         self.uploads_dir = self.base_dir / "uploads"
         self.analysis_dir = self.base_dir / "analysis"

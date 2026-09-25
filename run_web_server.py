@@ -4,6 +4,10 @@
 # CRITICAL: Suppress OpenCV warnings BEFORE any other imports
 import os
 import sys
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 os.environ['OPENCV_LOG_LEVEL'] = 'ERROR'
 os.environ['OPENCV_VIDEOIO_DEBUG'] = '0'
 

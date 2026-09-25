@@ -121,12 +121,13 @@ def run_live_stream(source, max_frames: Optional[int] = None, show_gui: bool = F
             if current_fid > frame_count:
                 frame_count = current_fid
                 if frame_count % 15 == 0:
+                    lat = status.get('processing_time_ms', status.get('latency_ms', 0.0))
                     print(f"  Live Frame {frame_count:05d} | "
-                          f"People: {status['people_detected']} | "
-                          f"Pattern: {status['pattern']:<25} | "
-                          f"State: {status['policy_state']:<8} | "
-                          f"Conf: {status['confidence']:.2f} | "
-                          f"{status['processing_time_ms']:5.1f}ms")
+                          f"People: {status.get('people_detected', 0)} | "
+                          f"Pattern: {status.get('pattern', 'UNKNOWN'):<25} | "
+                          f"State: {status.get('policy_state', 'NORMAL'):<8} | "
+                          f"Conf: {status.get('confidence', 0.0):.2f} | "
+                          f"{lat:5.1f}ms")
 
                 # If recording requested
                 if record_path:

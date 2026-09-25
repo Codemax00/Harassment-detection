@@ -161,36 +161,42 @@ class TemporalMotionEngine:
         else:
             ax, ay, peak_acc = 0.0, 0.0, 0.0
 
+        # Check if latest frame is heuristic
+        curr_is_heuristic = getattr(curr, 'is_heuristic', False)
+
         # Hand velocities (body heights / sec)
         lh_speeds, rh_speeds = [], []
         # Foot velocities (body heights / sec)
         lf_speeds, rf_speeds = [], []
 
-        for i in range(1, num_frames):
-            dt = max(1e-4, window[i].timestamp - window[i-1].timestamp)
-            p_prev, p_curr = window[i-1], window[i]
+        if not curr_is_heuristic:
+            for i in range(1, num_frames):
+                if getattr(window[i], 'is_heuristic', False) or getattr(window[i-1], 'is_heuristic', False):
+                    continue
+                dt = max(1e-4, window[i].timestamp - window[i-1].timestamp)
+                p_prev, p_curr = window[i-1], window[i]
 
-            # Left & right wrists
-            lw_prev = p_prev.get_scene_keypoint_2d(KeypointName.LEFT_WRIST)
-            lw_curr = p_curr.get_scene_keypoint_2d(KeypointName.LEFT_WRIST)
-            if lw_prev and lw_curr:
-                lh_speeds.append((np.hypot(lw_curr[0] - lw_prev[0], lw_curr[1] - lw_prev[1]) / box_h) / dt)
+                # Left & right wrists
+                lw_prev = p_prev.get_scene_keypoint_2d(KeypointName.LEFT_WRIST)
+                lw_curr = p_curr.get_scene_keypoint_2d(KeypointName.LEFT_WRIST)
+                if lw_prev and lw_curr:
+                    lh_speeds.append((np.hypot(lw_curr[0] - lw_prev[0], lw_curr[1] - lw_prev[1]) / box_h) / dt)
 
-            rw_prev = p_prev.get_scene_keypoint_2d(KeypointName.RIGHT_WRIST)
-            rw_curr = p_curr.get_scene_keypoint_2d(KeypointName.RIGHT_WRIST)
-            if rw_prev and rw_curr:
-                rh_speeds.append((np.hypot(rw_curr[0] - rw_prev[0], rw_curr[1] - rw_prev[1]) / box_h) / dt)
+                rw_prev = p_prev.get_scene_keypoint_2d(KeypointName.RIGHT_WRIST)
+                rw_curr = p_curr.get_scene_keypoint_2d(KeypointName.RIGHT_WRIST)
+                if rw_prev and rw_curr:
+                    rh_speeds.append((np.hypot(rw_curr[0] - rw_prev[0], rw_curr[1] - rw_prev[1]) / box_h) / dt)
 
-            # Left & right ankles
-            la_prev = p_prev.get_scene_keypoint_2d(KeypointName.LEFT_ANKLE)
-            la_curr = p_curr.get_scene_keypoint_2d(KeypointName.LEFT_ANKLE)
-            if la_prev and la_curr:
-                lf_speeds.append((np.hypot(la_curr[0] - la_prev[0], la_curr[1] - la_prev[1]) / box_h) / dt)
+                # Left & right ankles
+                la_prev = p_prev.get_scene_keypoint_2d(KeypointName.LEFT_ANKLE)
+                la_curr = p_curr.get_scene_keypoint_2d(KeypointName.LEFT_ANKLE)
+                if la_prev and la_curr:
+                    lf_speeds.append((np.hypot(la_curr[0] - la_prev[0], la_curr[1] - la_prev[1]) / box_h) / dt)
 
-            ra_prev = p_prev.get_scene_keypoint_2d(KeypointName.RIGHT_ANKLE)
-            ra_curr = p_curr.get_scene_keypoint_2d(KeypointName.RIGHT_ANKLE)
-            if ra_prev and ra_curr:
-                rf_speeds.append((np.hypot(ra_curr[0] - ra_prev[0], ra_curr[1] - ra_prev[1]) / box_h) / dt)
+                ra_prev = p_prev.get_scene_keypoint_2d(KeypointName.RIGHT_ANKLE)
+                ra_curr = p_curr.get_scene_keypoint_2d(KeypointName.RIGHT_ANKLE)
+                if ra_prev and ra_curr:
+                    rf_speeds.append((np.hypot(ra_curr[0] - ra_prev[0], ra_curr[1] - ra_prev[1]) / box_h) / dt)
 
         mean_lh_vel = float(np.mean(lh_speeds)) if lh_speeds else 0.0
         mean_rh_vel = float(np.mean(rh_speeds)) if rh_speeds else 0.0
@@ -206,26 +212,32 @@ class TemporalMotionEngine:
             float(np.max(rf_speeds)) if rf_speeds else 0.0
         )
 
-        # Joint angles at latest frame
-        ls = curr.get_scene_keypoint_2d(KeypointName.LEFT_SHOULDER)
-        le = curr.get_scene_keypoint_2d(KeypointName.LEFT_ELBOW)
-        lw = curr.get_scene_keypoint_2d(KeypointName.LEFT_WRIST)
-        left_elbow_angle = compute_angle_3points(ls, le, lw) if (ls and le and lw) else 180.0
+        ls = rs = lh = rh = None
+        if not curr_is_heuristic:
+            ls = curr.get_scene_keypoint_2d(KeypointName.LEFT_SHOULDER)
+            le = curr.get_scene_keypoint_2d(KeypointName.LEFT_ELBOW)
+            lw = curr.get_scene_keypoint_2d(KeypointName.LEFT_WRIST)
+            left_elbow_angle = compute_angle_3points(ls, le, lw) if (ls and le and lw) else 180.0
 
-        rs = curr.get_scene_keypoint_2d(KeypointName.RIGHT_SHOULDER)
-        re = curr.get_scene_keypoint_2d(KeypointName.RIGHT_ELBOW)
-        rw = curr.get_scene_keypoint_2d(KeypointName.RIGHT_WRIST)
-        right_elbow_angle = compute_angle_3points(rs, re, rw) if (rs and re and rw) else 180.0
+            rs = curr.get_scene_keypoint_2d(KeypointName.RIGHT_SHOULDER)
+            re = curr.get_scene_keypoint_2d(KeypointName.RIGHT_ELBOW)
+            rw = curr.get_scene_keypoint_2d(KeypointName.RIGHT_WRIST)
+            right_elbow_angle = compute_angle_3points(rs, re, rw) if (rs and re and rw) else 180.0
 
-        lh = curr.get_scene_keypoint_2d(KeypointName.LEFT_HIP)
-        lk = curr.get_scene_keypoint_2d(KeypointName.LEFT_KNEE)
-        la = curr.get_scene_keypoint_2d(KeypointName.LEFT_ANKLE)
-        left_knee_angle = compute_angle_3points(lh, lk, la) if (lh and lk and la) else 180.0
+            lh = curr.get_scene_keypoint_2d(KeypointName.LEFT_HIP)
+            lk = curr.get_scene_keypoint_2d(KeypointName.LEFT_KNEE)
+            la = curr.get_scene_keypoint_2d(KeypointName.LEFT_ANKLE)
+            left_knee_angle = compute_angle_3points(lh, lk, la) if (lh and lk and la) else 180.0
 
-        rh = curr.get_scene_keypoint_2d(KeypointName.RIGHT_HIP)
-        rk = curr.get_scene_keypoint_2d(KeypointName.RIGHT_KNEE)
-        ra = curr.get_scene_keypoint_2d(KeypointName.RIGHT_ANKLE)
-        right_knee_angle = compute_angle_3points(rh, rk, ra) if (rh and rk and ra) else 180.0
+            rh = curr.get_scene_keypoint_2d(KeypointName.RIGHT_HIP)
+            rk = curr.get_scene_keypoint_2d(KeypointName.RIGHT_KNEE)
+            ra = curr.get_scene_keypoint_2d(KeypointName.RIGHT_ANKLE)
+            right_knee_angle = compute_angle_3points(rh, rk, ra) if (rh and rk and ra) else 180.0
+        else:
+            left_elbow_angle = 180.0
+            right_elbow_angle = 180.0
+            left_knee_angle = 180.0
+            right_knee_angle = 180.0
 
         # Torso tilt
         torso_tilt = 0.0
