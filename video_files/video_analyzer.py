@@ -148,6 +148,7 @@ def analyze_video_file(video_path):
                 }
                 analysis_session['alerts'].append(alert_data)
                 
+                progress = (frame_count / total_frames * 100) if total_frames > 0 else 0.0
                 # AUTO-STOP FEATURE: Ask user whether to continue after alert
                 print()
                 print("🚨 HARASSMENT ALERT DETECTED! 🚨")

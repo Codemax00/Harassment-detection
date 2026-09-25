@@ -237,7 +237,7 @@ def init_models():
 
 def generate_camera_frames(camera_id=0):
     """Generate real-time camera frames with AI analysis"""
-    global active_camera, camera_monitoring_active, camera_analysis_data
+    global active_camera, camera_monitoring_active
     
     print(f"🎥 Video stream requested for camera {camera_id}")
     
@@ -408,7 +408,6 @@ def generate_camera_frames(camera_id=0):
                     except Exception as e:
                         print(f"Analysis error: {e}")
 
-                    print(f"Analysis error: {e}")
             
             # Encode frame to JPEG with proper compression
             encode_params = [cv2.IMWRITE_JPEG_QUALITY, 80]  # Good quality for streaming
@@ -913,8 +912,6 @@ def start_analysis():
 @app.route('/analysis_status')
 def analysis_status():
     """Get current analysis status"""
-    global current_analysis
-    
     with analysis_lock:
         if current_analysis is None:
             return jsonify({'status': 'idle'})
@@ -1100,8 +1097,6 @@ def video_stream():
     def generate():
         try:
             # Use the selected camera ID instead of hardcoded 0
-            global selected_camera_id, camera_monitoring_active
-            
             with camera_lock:
                 camera_id = selected_camera_id
                 monitoring_active = camera_monitoring_active
@@ -1144,8 +1139,6 @@ def video_stream():
 @app.route('/camera_status')
 def camera_status():
     """Get real-time camera monitoring status"""
-    global camera_analysis_data, camera_monitoring_active
-    
     with camera_lock:  # Thread safety for camera data
         try:
             if camera_monitoring_active and camera_analysis_data.get('session_start'):
@@ -1520,7 +1513,7 @@ def save_config(config):
 
 def run_video_analysis(file_path, filename, upload_id):
     """Run AI-powered video analysis in background using Guardian Matrix or fallback"""
-    global current_analysis, parallel_analyzer, person_model, ai_manager, video_chunker
+    global current_analysis, person_model, ai_manager, parallel_analyzer, video_chunker
     
     try:
         current_analysis = {

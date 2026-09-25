@@ -86,6 +86,7 @@ def main():
             print(f"⚠️ Guardian Matrix init notice: {e}")
             gm_pipeline = None
 
+    session_start_time = time.time()
     print("Starting live monitoring...")
     print("Looking for people and checking for harassment...")
     
